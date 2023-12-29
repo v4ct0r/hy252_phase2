@@ -12,7 +12,7 @@ public class Backround extends JFrame{
     JLayeredPane background;
     JButton ReceiveCard;
     public Backround(Controller controller){
-        super("Sorry The Board Game");
+        super("SORRY!");
 
         ImageIcon imageIcon = new ImageIcon("src\\_background\\background.png");
         JLabel label = new JLabel(imageIcon);

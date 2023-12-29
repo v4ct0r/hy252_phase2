@@ -52,6 +52,8 @@ public class BoardUI extends JPanel {
         yellowPaw2.setIcon(new ImageIcon("src\\_pawns\\yellowPawn2.png"));
         yellowPaw2.setBounds(yellowPaw2Home);
         this.add(yellowPaw2);
+        DisablenotCurrentPlayerPawns(controller, redPaw1, redPaw2, yellowPaw1, yellowPaw2);
+
 
         redPaw1.addActionListener(e -> {
 
@@ -190,7 +192,7 @@ public class BoardUI extends JPanel {
 
     }
 
-    private void change_turn(Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
+    private void DisablenotCurrentPlayerPawns(Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
         if(controller.getCurrent_player().getColor().equals("red")) {
             redPaw1.setEnabled(true);
             redPaw2.setEnabled(true);
