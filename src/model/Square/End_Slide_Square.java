@@ -1,10 +1,8 @@
 package model.Square;
 
 public class End_Slide_Square extends Slide_Square{
-    int endPosition ;
 
-    public End_Slide_Square(Position position, String color, int endPosition) {
-        super(position, color, "End_Slide");
-        this.endPosition = endPosition;
+    public End_Slide_Square(int position, String color) {
+        super(position,color, "End_Slide");
     }
 }

@@ -1,13 +1,19 @@
 package view;
 
+import controller.Controller;
+import model.card.*;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.Objects;
 
 public class Backround extends JFrame{
     JLayeredPane backround;
 
-    public Backround(){
+    public Backround(Controller controller){
+        super("Sorry The Board Game");
+
         ImageIcon imageIcon = new ImageIcon("src\\_background\\background.png");
         JLabel label = new JLabel(imageIcon);
 
@@ -22,39 +28,97 @@ public class Backround extends JFrame{
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //side bar
-
         JButton ReceiveCard = new JButton();
         ReceiveCard.setIcon(new ImageIcon("src\\_cards\\backCard.png"));
         ReceiveCard.setBounds(820, 180, 180, 270);
         backround.add(ReceiveCard, JLayeredPane.PALETTE_LAYER);
 
-      //  JTable ReceiveCardLabel = new JTable();
-      //  ReceiveCardLabel.setBounds(820, 230, 184, 280);
-      //  backround.add(ReceiveCardLabel, JLayeredPane.PALETTE_LAYER);
-
+        JLabel ReceiveCardLabel = new JLabel("Receive Card");
+        ReceiveCardLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        ReceiveCardLabel.setBounds(850, 445, 180, 50);//under the button
+        backround.add(ReceiveCardLabel, JLayeredPane.PALETTE_LAYER);
 
         ImageIcon CurrentCard = new ImageIcon("src\\_cards\\backCard.png");
         JLabel CurrentCardLabel = new JLabel(CurrentCard);
-        CurrentCardLabel.setBounds(1030, 180, 184, 280);
+        CurrentCardLabel.setBounds(1030, 180, 170, 260);
         backround.add(CurrentCardLabel, JLayeredPane.PALETTE_LAYER);
         CurrentCardLabel.setVisible(false);
 
-        ReceiveCard.addActionListener(e -> {
-            CurrentCardLabel.setVisible(true);
-        });
+        JLabel CurrentCardLabel2 = new JLabel("Current Card");
+        CurrentCardLabel2.setFont(new Font("Arial", Font.BOLD, 20));
+        CurrentCardLabel2.setBounds(1050, 445, 180, 50);
+        backround.add(CurrentCardLabel2, JLayeredPane.PALETTE_LAYER);
+        CurrentCardLabel2.setVisible(false);
 
-     //   CurrentCard.setImage(new ImageIcon("src\\_cards\\card1.png").getImage());
+
+
+        JButton Fold = new JButton("FOLD");
+        Fold.setFont(new Font("Arial", Font.BOLD, 20));
+        Fold.setBounds(820, 500, 394, 50);
+        Fold.setBackground(Color.RED);
+        Fold.setForeground(Color.BLACK);
+        Fold.setBorder(new LineBorder(Color.BLACK));
+        backround.add(Fold, JLayeredPane.PALETTE_LAYER);
+
 
         JTextArea InfoBox = new JTextArea();
-        InfoBox.setBounds(820, 600, 394, 200);
+        InfoBox.setBounds(820, 600, 394, 150);
         InfoBox.setEditable(false);
         InfoBox.setBackground(Color.WHITE);
         InfoBox.setBorder(new LineBorder(Color.BLACK));
-        InfoBox.setFont(new Font("Serif", Font.BOLD, 20));
+        InfoBox.setFont(new Font("Arial", Font.BOLD, 20));
         backround.add(InfoBox, JLayeredPane.PALETTE_LAYER);
-        InfoBox.append("Welcome to Sorry! \n");
+        if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
+            InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
+        else
+            InfoBox.setText("Info Box\n\nTurn: Player 2 (Yellow)\n");
+
+        ReceiveCard.addActionListener(e -> {
+            card current_card = controller.Draw_card();
+            controller.setCurrent_card(current_card);
+            CurrentCardLabel.setIcon(new ImageIcon(card_path(current_card)));
+            if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
+                InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
+            else
+                InfoBox.setText("Info Box\n\nTurn: Player 2 (Yellow)\n");
+            InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n"); //print the number of cards left
+
+            CurrentCardLabel.setVisible(true);
+            CurrentCardLabel2.setVisible(true);
+            ReceiveCard.setEnabled(false);
+        });
+
+
     }
+
+    private String card_path(card s) {
+        if (s instanceof Number_OneCard)
+            return "src\\_cards\\card1(Custom).png";
+        else if (s instanceof Number_TwoCard)
+             return "src\\_cards\\card2(Custom).png";
+        else if (s instanceof Simple_Number_Card && ((Simple_Number_Card) s).getValue() == 3)
+            return "src\\_cards\\card3(Custom).png";
+        else if (s instanceof Number_FourCard)
+            return "src\\_cards\\card4(Custom).png";
+        else if (s instanceof Simple_Number_Card && ((Simple_Number_Card) s).getValue() == 5)
+            return "src\\_cards\\card5(Custom).png";
+        else if (s instanceof Number_SevenCard)
+            return "src\\_cards\\card7(Custom).png";
+        else if (s instanceof Simple_Number_Card && ((Simple_Number_Card) s).getValue() == 8)
+            return "src\\_cards\\card8(Custom).png";
+        else if (s instanceof Number_TenCard)
+            return "src\\_cards\\card10(Custom).png";
+        else if (s instanceof Number_ElevenCard)
+            return "src\\_cards\\card11(Custom).png";
+        else if (s instanceof Simple_Number_Card && ((Simple_Number_Card) s).getValue() == 12)
+            return "src\\_cards\\card12(Custom).png";
+        else if (s instanceof Sorry_Card)
+            return "src\\_cards\\cardSorry(Custom).png";
+        else
+            return "src\\_cards\\backCard.png";
+    }
+
+
     public JLayeredPane getLayeredPane() {
         return backround;
     }

@@ -4,8 +4,8 @@ import model.player.Pawn;
 
 public class Internal_Slide_Square extends Slide_Square{
 
-    public Internal_Slide_Square(Position position, String color) {
-        super(position, color, "Internal_Slide");
+    public Internal_Slide_Square(int position,String color) {
+        super(position,color, "Internal_Slide");
     }
 
     /**
@@ -13,6 +13,7 @@ public class Internal_Slide_Square extends Slide_Square{
      * post-condition: p go to the Start of its color
      * @param p
      */
-    void go_to_Start(Pawn p){
+    void go_to_Start(Pawn p , int start_slide_index){
+        //TODO
     }
 }

@@ -1,17 +1,13 @@
 package model.Square;
 
 public abstract class Square {
-    private Position position;
     private String id ;
+    int position ;
 
 
-    public Square(Position position , String id) {
+    public Square(int position,String id) {
         this.position = position;
         this.id = id ;
-    }
-
-    public Position getPosition() {
-        return position;
     }
 
     public String getId() {

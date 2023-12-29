@@ -39,11 +39,11 @@ public class BoardUI extends JPanel {
         //init yellow pawns
         JButton yellowPaw1 = new JButton();
         yellowPaw1.setIcon(new ImageIcon("src\\_pawns\\yellowPawn1.png"));
-        yellowPaw1.setBounds(685, 675, 50, 50);
+        yellowPaw1.setBounds(627, 675, 50, 50);
         this.add(yellowPaw1);
         JButton yellowPaw2 = new JButton();
         yellowPaw2.setIcon(new ImageIcon("src\\_pawns\\yellowPawn2.png"));
-        yellowPaw2.setBounds(740, 675, 50, 50);
+        yellowPaw2.setBounds(682, 675, 50, 50);
         this.add(yellowPaw2);
 
 
@@ -113,14 +113,14 @@ public class BoardUI extends JPanel {
            squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
            squares.get(i).setBounds(900, 50 + (i - 22) * 50, 50, 50); //right edge
            this.add(squares.get(i));
-       }
+        }
         k= 0;
-        for (int i = 37; i < 59; i++) {
-            if(i==37 || i==39 || i==38 || i==46 || i==51 || i==52 || i==53 || i==54 || i==55){
-                if(i==37 || i==51) {
+        for (int i = 37; i < 58; i++) {
+            if(i==37 || i==38 || i==45 ||i==46 || i>=50 && i<=55){
+                if(i==37 || i==50) {
                     squares.get(i).setIcon(new ImageIcon("src\\_slides\\YellowSlideStart.png"));
                 }
-                else if(i==38 || i==39 || i==52 || i==53 || i==54  ) {
+                else if(i==38 || i==45 || i==51 || i==52 || i==53 || i==54  ) {
                     squares.get(i).setIcon(new ImageIcon("src\\_slides\\YellowSlideMedium.png"));
                 }
                 else {
@@ -132,20 +132,20 @@ public class BoardUI extends JPanel {
                 k++;
             }
             else {
-                if(i==40 || i==41 || i==42 || i==43 || i==44){ //safe zone
+                if(i>38 && i<44){ //safe zone
                     squares.get(i).setText(" " + (i) + " ");
                     squares.get(i).setBackground(Color.YELLOW);
                     squares.get(i).setOpaque(true);
                     squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
-                    squares.get(i).setBounds(800, 700 - (i-40) * 50, 50, 50);
+                    squares.get(i).setBounds(800, 700 - (i-39) * 50, 50, 50);
                     this.add(squares.get(i));
-                }else if(i==45){
+                }else if(i==44){
                     squares.get(i).setText("HOME");
                     squares.get(i).setFont(new Font("Garamond", Font.BOLD, 20));
                     squares.get(i).setBackground(Color.WHITE);
                     squares.get(i).setOpaque(true);
                     squares.get(i).setBorder(new LineBorder(Color.YELLOW, 7));
-                    squares.get(i).setBounds(775, 650 - (i-40) * 50, 100, 100);
+                    squares.get(i).setBounds(775, 650 - (i-39) * 50, 100, 100);
                     this.add(squares.get(i));
                 }
                 else {
@@ -165,7 +165,7 @@ public class BoardUI extends JPanel {
         YellowStart.setBackground(Color.WHITE);
         YellowStart.setOpaque(true);
         YellowStart.setBorder(new LineBorder(Color.YELLOW, 7));
-        YellowStart.setBounds(675, 625, 125, 125);
+        YellowStart.setBounds(617, 625, 125, 125);
         this.add(YellowStart);
 
         for (int i = 58; i < 72; i++) {

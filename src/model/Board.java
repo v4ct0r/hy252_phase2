@@ -1,50 +1,47 @@
 package model;
 
-import model.Square.Position;
-import model.Square.Simple_Square;
-import model.Square.Square;
+import model.Square.*;
 
 public class Board {
-    Square [][] squares = new Square[16][16];
+    Square [] squares = new Square[72];
 
     public Board(){
-        for(int i=0;i<16;i++){
-            for(int j=0;j<16;j++){
-                if(i==0||i==15 || j==0 || j==15)
-                    squares[i][j]=new Simple_Square(new Position(i,j));
-                else
-                    squares[i][j] = null;
-            }
-        }
-        initializeSlides(squares);
-        initializeSafetyZones(squares);
-        initializeHomeZones(squares);
+        initializeSquares(squares);
     }
 
-    /**
-     * @param squares
-     * pre-condition: no slides in the board
-     * post-condition: slides are initialized
-     */
-    private void initializeSlides(Square[][] squares) {
-        //TODO
+    private void initializeSquares(Square[] squares) {
+        for(int i=0;i<72;i++) {
+
+            //SLIDES RED
+            if (i == 1)
+                squares[i] = new Start_Slide_Square(i, "red", 10);
+            else if (i ==16)
+                squares[i] = new Start_Slide_Square(i, "red", 20);
+            else if (i == 2 || i == 9 || i > 15 && i < 20)
+                squares[i] = new Internal_Slide_Square(i, "red");
+            else if (i == 10 || i == 20)
+                squares[i] = new End_Slide_Square(i, "red");
+            //Safety Zone Red
+            else if (i > 2 && i<8)
+                squares[i] = new Safety_Zone_Square(i, "red");
+            //Home Red
+            else if (i ==8)
+                squares[i] = new Home_Square(i, "red");
+            //SLIDES YELLOW
+            else if (i == 37)
+                squares[i] = new Start_Slide_Square(i, "yellow", 46);
+            else if (i == 50)
+                squares[i] = new Start_Slide_Square(i, "yellow", 55);
+            else if (i == 38 || i == 45 || i > 50 && i < 55)
+                squares[i] = new Internal_Slide_Square(i, "yellow");
+            else if (i == 46 || i == 55)
+                squares[i] = new End_Slide_Square(i, "yellow");
+            else
+                squares[i] = new Simple_Square(i);
+        }
     }
-    /**
-     * @param squares
-     * pre-condition: no safety zones in the board
-     * post-condition: safety zones are initialized
-     */
-    private void initializeSafetyZones(Square[][] squares) {
-        //TODO
-    }
-    /**
-     * @param squares
-     * pre-condition: no home zones in the board
-     * post-condition: home zones are initialized
-     */
-    private void initializeHomeZones(Square[][] squares) {
-        //TODO
-    }
+
+
 
 }
 

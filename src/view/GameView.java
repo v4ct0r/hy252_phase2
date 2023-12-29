@@ -1,12 +1,16 @@
 package view;
 
+import controller.Controller;
+
 import javax.swing.*;
 
 public class GameView {
 
 
-    public GameView() {
-        Backround backround = new Backround();
+    public GameView(Controller controller) {
+
+
+        Backround backround = new Backround(controller);
         Menu menu = new Menu();
 
         // Add the toolbar to the Backround

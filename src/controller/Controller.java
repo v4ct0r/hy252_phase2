@@ -2,41 +2,75 @@ package controller;
 
 import model.Board;
 import model.Square.Home_Square;
-import model.Square.Position;
-import model.Square.Safety_Zone_Square;
-import model.Square.Start_Square;
+import model.card.card;
 import model.player.Pawn;
 import model.player.Player;
 import model.turn.Deck;
 
 public class Controller {
-    private Player player1, player2;
-    private Home_Square red_home= new Home_Square(new Position(6,2),"red");
-    private Home_Square yellow_home= new Home_Square(new Position(9,13),"yellow");
-    private Start_Square red_start = new Start_Square(new Position(1,4),"red",new Position(0,4));
-    private Start_Square yellow_start = new Start_Square(new Position(14,11),"yellow",new Position(15,11));
-    private Safety_Zone_Square[] red_safety_zone = new Safety_Zone_Square[5];
-{
-    for(int i=0;i<5;i++)
-        red_safety_zone[i] = new Safety_Zone_Square(new Position(i+1, 2), "red");
-}
-private Safety_Zone_Square[] yellow_safety_zone = new Safety_Zone_Square[5];
-{
-    for(int i=0;i<5;i++)
-        yellow_safety_zone[i] = new Safety_Zone_Square(new Position(14-i, 13), "yellow");
-}
+    public Deck deck ;
+    public Player current_player ;
+    public Player player1 ;
+    public Player player2 ;
+    public card current_card ;
 
-    private Pawn red_pawn1, red_pawn2;
-    private Pawn Yellow_pawn1, Yellow_pawn2 ;
+    public card getCurrent_card() {
+        return current_card;
+    }
+
+    public void setCurrent_card(card current_card) {
+        this.current_card = current_card;
+    }
+
+    public Player getCurrent_player() {
+        return current_player;
+    }
+
+    public void setCurrent_player(Player current_player) {
+        this.current_player = current_player;
+    }
+
     public Controller() {
         Board board = new Board();
-        Deck deck = new Deck();
-        red_pawn1 = new Pawn(red_home.getPosition(), "red");
-        red_pawn2 = new Pawn(red_home.getPosition(), "red");
-        Yellow_pawn1 = new Pawn(yellow_home.getPosition(), "yellow");
-        Yellow_pawn2 = new Pawn(yellow_home.getPosition(), "yellow");
-        player1 = new Player("red",new Position(0,2) ,red_home.getPosition() ,red_start.getPosition() ,red_pawn1 ,red_pawn2);
-        player2 = new Player("yellow",new Position(15,13) ,yellow_home.getPosition(), yellow_start.getPosition() ,Yellow_pawn1 ,Yellow_pawn2);
+        deck = new Deck();
+        Pawn red_pawn1 = new Pawn(-1, "red");
+        Pawn red_pawn2 = new Pawn(-1, "red");
+        Pawn Yellow_pawn1 = new Pawn(-2, "yellow");
+        Pawn Yellow_pawn2 = new Pawn(-2, "yellow");
+        player1 = new Player("red",3 ,8,-1 ,red_pawn1 ,red_pawn2);
+        player2 = new Player("yellow",39 ,44,-2 ,Yellow_pawn1 ,Yellow_pawn2);
+        //randomly choose who plays first
+        current_player = pick_first_player(player1, player2);
+    }
+
+    private Player pick_first_player(Player player1, Player player2) {
+        //doit
+        int random = (int) (Math.random() * 2);
+        if (random == 0) {
+            player1.setTurn(true);
+            player2.setTurn(false);
+            return player1;
+        } else {
+            player1.setTurn(false);
+            player2.setTurn(true);
+            return player2;
+        }
+    }
+
+    public void switch_current_player(Player player1, Player player2){
+        if (player1.getTurn() == true) {
+            player1.setTurn(false);
+            player2.setTurn(true);
+            current_player = player2;
+        } else {
+            player1.setTurn(true);
+            player2.setTurn(false);
+            current_player = player1;
+        }
+    }
+
+    public String Current_card(card current) {
+        return current.getId();
     }
 
     public boolean game_has_finished(Board board ,Pawn red_pawn1, Pawn red_pawn2, Pawn Yellow_pawn1, Pawn Yellow_pawn2 , Home_Square red_home, Home_Square yellow_home) {
@@ -55,4 +89,13 @@ private Safety_Zone_Square[] yellow_safety_zone = new Safety_Zone_Square[5];
     public void play(Pawn p){
         //TODO
     }
+
+    public card Draw_card(){
+        return deck.draw();
+    }
+
+    public card[] getCard(Deck deck){
+        return deck.getCards();
+    }
+
 }

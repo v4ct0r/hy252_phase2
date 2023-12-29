@@ -1,12 +1,11 @@
 package model.player;
 
-import model.Square.Position;
 
 public class Player {
     private String color;
-    private Position homePosition;
-    private Position SafetyZoneStartPosition;
-    private Position startPosition;
+    private int homePosition;
+    private int SafetyZoneStartPosition;
+    private int startPosition;
     private boolean turn;
 
     public boolean getTurn(){
@@ -27,28 +26,28 @@ public class Player {
         this.color = color;
     }
 
-    public Position getHomePosition() {
+    public int getHomePosition() {
         return homePosition;
     }
 
-    public void setHomePosition(Position homePosition) {
+    public void setHomePosition(int homePosition) {
         this.homePosition = homePosition;
     }
 
-    public Position getStartPosition() {
+    public int getStartPosition() {
         return startPosition;
     }
 
-    public void setStartPosition(Position startPosition) {
+    public void setStartPosition(int startPosition) {
         this.startPosition = startPosition;
     }
 
-    public Player(String color,  Position safetyZoneStartPosition ,Position homePosition, Position startPosition, Pawn pawn1, Pawn pawn2) {
+    public Player(String color,  int safetyZoneStartPosition ,int homePosition, int startPosition, Pawn pawn1, Pawn pawn2) {
         this.color = color;
         this.homePosition = homePosition;
-        SafetyZoneStartPosition = safetyZoneStartPosition;
+        this.SafetyZoneStartPosition = safetyZoneStartPosition;
         this.startPosition = startPosition;
-        Pawn1 = pawn1;
-        Pawn2 = pawn2;
+        this.Pawn1 = pawn1;
+        this.Pawn2 = pawn2;
     }
 }

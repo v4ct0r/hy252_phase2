@@ -4,7 +4,7 @@ import model.player.Pawn;
 
 public class Number_OneCard extends Number_Card{
     public Number_OneCard() {
-        super(1, "One");
+        super(1, "one");
     }
 
     /**

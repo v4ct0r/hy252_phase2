@@ -1,34 +1,93 @@
 package model.turn;
+import java.util.Random;
+
+import model.card.*;
 
 import javax.smartcardio.Card;
 
+import static java.lang.System.exit;
+
 public class Deck {
     private int cardsLeft=44;
-    Card[] cards= new Card[44];
+    card[] cards= new card[44];
+
+
+    public card[] getCards() {
+        return cards;
+    }
+
+    public void setCards(card[] cards) {
+        this.cards = cards;
+    }
 
     public Deck() {
-        inistializeDeck(cards);
+        initializeDeck(cards);
         shuffle(cards);
     }
 
     /**
      * Initialize the deck with the cards
-     * @param cards
-     * return: the deck with the cards(4 cards of each type)
+     *
+     * @param cards return: the deck with the cards(4 cards of each type)
      */
-    Card[] inistializeDeck(Card[] cards) {
-        // TODO
-        return null;
+    void initializeDeck(card[] cards) {
+        //4 cards of each kind
+        for (int i = 0; i < 4; i++) {
+            cards[i] = new Number_OneCard();
+        }
+        for (int i = 4; i < 8; i++) {
+            cards[i] = new Number_TwoCard();
+        }
+        for (int i = 8; i < 12; i++) {
+            cards[i] = new Simple_Number_Card(3);
+        }
+        for (int i = 12; i < 16; i++) {
+            cards[i] = new Number_FourCard();
+        }
+        for (int i = 16; i < 20; i++) {
+            cards[i] = new Simple_Number_Card(5);
+        }
+        for (int i = 20; i < 24; i++) {
+            cards[i] = new Number_SevenCard();
+        }
+        for (int i = 24; i < 28; i++) {
+            cards[i] = new Simple_Number_Card(8);
+        }
+        for (int i = 28; i < 32; i++) {
+            cards[i] = new Number_TenCard();
+        }
+        for (int i = 32; i < 36; i++) {
+            cards[i] = new Number_ElevenCard();
+        }
+        for (int i = 36; i < 40; i++) {
+            cards[i] = new Simple_Number_Card(12);
+        }
+        for (int i = 40; i < 44; i++) {
+            cards[i] = new Sorry_Card();
+        }
     }
 
 
 
-    public void shuffle(Card[] cards) {
-    }
 
-    public Card draw() {
+public void shuffle(card[] cards) {
+    Random rand = new Random();
+    for (int i = cards.length - 1; i > 0; i--) {
+        int j = rand.nextInt(i + 1);
+        card temp = cards[i];
+        cards[i] = cards[j];
+        cards[j] = temp;
+    }
+}
+
+    public card draw() {
+        if (cardsLeft == 0) {
+            initializeDeck(cards);
+            shuffle(cards);
+            cardsLeft = 44;
+        }
         cardsLeft--;
-        return null;
+        return cards[cardsLeft];
     }
 
     public int getCardsLeft() {
