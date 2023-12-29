@@ -1,11 +1,13 @@
 package view;
 
+import controller.Controller;
+
 import javax.swing.*;
 
 public class Menu {
     JToolBar toolBar;
 
-    public Menu(){
+    public Menu(Backround backround){
         toolBar = new JToolBar("Menu");
         toolBar.setFloatable(false); // this will make the toolbar non-floating
 
@@ -13,7 +15,11 @@ public class Menu {
         JButton newGame = new JButton("New Game");
         //add action to the button
         newGame.addActionListener(e -> {
-            //TODO
+            //shut down the current game
+            //start a new game
+            backround.dispose();
+            Controller controller = new Controller();
+            GameView game = new GameView(controller);
         });
         toolBar.add(newGame);
         JButton Save_Game = new JButton("Save Game");

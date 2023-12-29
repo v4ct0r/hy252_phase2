@@ -11,7 +11,7 @@ public class GameView {
 
 
         Backround backround = new Backround(controller);
-        Menu menu = new Menu();
+        Menu menu = new Menu(backround);
 
         // Add the toolbar to the Backround
         backround.getLayeredPane().add(menu.getToolBar(), JLayeredPane.PALETTE_LAYER);

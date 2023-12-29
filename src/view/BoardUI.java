@@ -27,23 +27,28 @@ public class BoardUI extends JPanel {
         this.add(LogoLabel);
 
         //init red pawns
+        Rectangle redPaw1Home = new Rectangle(335, 75, 50, 50);
         JButton redPaw1 = new JButton();
         redPaw1.setIcon(new ImageIcon("src\\_pawns\\redPawn1.png"));
-        redPaw1.setBounds(335, 75, 50, 50);
+        redPaw1.setBounds(redPaw1Home);
         this.add(redPaw1);
+
+        Rectangle redPaw2Home = new Rectangle(390, 75, 50, 50);
         JButton redPaw2 = new JButton();
         redPaw2.setIcon(new ImageIcon("src\\_pawns\\redPawn2.png"));
-        redPaw2.setBounds(390, 75, 50, 50);
+        redPaw2.setBounds(redPaw2Home);
         this.add(redPaw2);
 
         //init yellow pawns
+        Rectangle yellowPaw1Home = new Rectangle(627, 675, 50, 50);
         JButton yellowPaw1 = new JButton();
         yellowPaw1.setIcon(new ImageIcon("src\\_pawns\\yellowPawn1.png"));
-        yellowPaw1.setBounds(627, 675, 50, 50);
+        yellowPaw1.setBounds(yellowPaw1Home);
         this.add(yellowPaw1);
+        Rectangle yellowPaw2Home = new Rectangle(682, 675, 50, 50);
         JButton yellowPaw2 = new JButton();
         yellowPaw2.setIcon(new ImageIcon("src\\_pawns\\yellowPawn2.png"));
-        yellowPaw2.setBounds(682, 675, 50, 50);
+        yellowPaw2.setBounds(yellowPaw2Home);
         this.add(yellowPaw2);
 
 
