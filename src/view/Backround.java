@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Backround extends JFrame{
     JLayeredPane background;
     JButton ReceiveCard;
+    JButton Fold;
     public Backround(Controller controller){
         super("SORRY!");
 
@@ -52,7 +53,7 @@ public class Backround extends JFrame{
 
 
 
-        JButton Fold = new JButton("FOLD");
+        Fold = new JButton("FOLD");
         Fold.setFont(new Font("Arial", Font.BOLD, 20));
         Fold.setBounds(820, 500, 394, 50);
         Fold.setBackground(Color.RED);

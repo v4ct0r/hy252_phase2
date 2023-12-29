@@ -54,6 +54,7 @@ public class BoardUI extends JPanel {
         this.add(yellowPaw2);
         DisablenotCurrentPlayerPawns(controller, redPaw1, redPaw2, yellowPaw1, yellowPaw2);
 
+        ActionListener_FoldButton(backround, controller, redPaw1, redPaw2, yellowPaw1, yellowPaw2);
 
         redPaw1.addActionListener(e -> {
 
@@ -190,6 +191,13 @@ public class BoardUI extends JPanel {
             this.add(squares.get(i));
         }
 
+    }
+
+    private void ActionListener_FoldButton(Backround backround, Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
+        backround.Fold.addActionListener(e -> {
+            controller.switch_current_player(controller.player1, controller.player2);
+            DisablenotCurrentPlayerPawns(controller, redPaw1, redPaw2, yellowPaw1, yellowPaw2);
+        });
     }
 
     private void DisablenotCurrentPlayerPawns(Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
