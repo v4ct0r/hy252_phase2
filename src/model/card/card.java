@@ -1,0 +1,12 @@
+package model.card;
+public abstract class card {
+    private String id ;
+
+    public card(String id) {;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+}
