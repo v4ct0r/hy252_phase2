@@ -15,10 +15,8 @@ public class Menu {
         JButton newGame = new JButton("New Game");
         //add action to the button
         newGame.addActionListener(e -> {
-            //shut down the current game
-            //start a new game
-            backround.dispose();
-            Controller controller = new Controller();
+            backround.dispose();//shut down the current game
+            Controller controller = new Controller();//start a new game
             GameView game = new GameView(controller);
         });
         toolBar.add(newGame);

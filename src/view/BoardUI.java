@@ -1,8 +1,9 @@
 package view;
 
+import controller.Controller;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class BoardUI extends JPanel {
     private JButton Cards;
 
 
-    public BoardUI() {
+    public BoardUI(Controller controller, Backround backround) {
         //set the logo in the middle of the screen
         this.setLayout(null);
         this.setPreferredSize(new Dimension(200, 200));
@@ -45,11 +46,16 @@ public class BoardUI extends JPanel {
         yellowPaw1.setIcon(new ImageIcon("src\\_pawns\\yellowPawn1.png"));
         yellowPaw1.setBounds(yellowPaw1Home);
         this.add(yellowPaw1);
+
         Rectangle yellowPaw2Home = new Rectangle(682, 675, 50, 50);
         JButton yellowPaw2 = new JButton();
         yellowPaw2.setIcon(new ImageIcon("src\\_pawns\\yellowPawn2.png"));
         yellowPaw2.setBounds(yellowPaw2Home);
         this.add(yellowPaw2);
+
+        redPaw1.addActionListener(e -> {
+
+        });
 
 
         ArrayList<JButton> squares = new ArrayList<>();
@@ -182,36 +188,22 @@ public class BoardUI extends JPanel {
             this.add(squares.get(i));
         }
 
-/*
-        JButton redPaw2 = new JButton();
-        redPaw2.setIcon(new ImageIcon("src\\_pawns\\redPawn2.png"));
-        redPaw2.setBounds(200, 0, 50, 50);
-        this.add(redPaw2);
+    }
 
-
-
-
-        this.redSlideStart = new ImageIcon("src\\_slides\\redSlideStart.png").getImage();
-        this.redSlideMedium = new ImageIcon("src\\_slides\\redSlideMedium.png").getImage();
-        this.redSlideEnd = new ImageIcon("src\\_slides\\redSlideEnd.png").getImage();
-
-
-        this.YellowSlideStart = new ImageIcon("src\\_slides\\YellowSlideStart.png").getImage();
-        this.YellowSlideMedium = new ImageIcon("src\\_slides\\YellowSlideMedium.png").getImage();
-        this.YellowSlideEnd = new ImageIcon("src\\_slides\\YellowSlideEnd.png").getImage();
-
-        this.HomeImage = new ImageIcon("src\\view\\images\\Home.png").getImage();
-        this.HomeLabel = new JLabel();
-        this.StartImage = new ImageIcon("src\\view\\images\\Start.png").getImage();
-        this.StartLabel = new JLabel();
-        this.Pawn = new JPanel();
-        this.PawnButton = new JButton();
-        this.PawnImages = new ImageIcon("src\\view\\images\\Pawn.png").getImage();
-        this.FoldButton = new JButton();
-        this.Cards = new JButton();
-        */
+    private void change_turn(Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
+        if(controller.getCurrent_player().getColor().equals("red")) {
+            redPaw1.setEnabled(true);
+            redPaw2.setEnabled(true);
+            yellowPaw1.setEnabled(false);
+            yellowPaw2.setEnabled(false);
+        }
+        else {
+            redPaw1.setEnabled(false);
+            redPaw2.setEnabled(false);
+            yellowPaw1.setEnabled(true);
+            yellowPaw2.setEnabled(true);
+        }
     }
 
 
-    
 }

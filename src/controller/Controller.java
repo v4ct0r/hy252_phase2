@@ -44,7 +44,6 @@ public class Controller {
     }
 
     private Player pick_first_player(Player player1, Player player2) {
-        //doit
         int random = (int) (Math.random() * 2);
         if (random == 0) {
             player1.setTurn(true);
@@ -88,10 +87,6 @@ public class Controller {
     }
     public void play(Pawn p){
         //TODO
-    }
-
-    public card Draw_card(){
-        return deck.draw();
     }
 
     public card[] getCard(Deck deck){

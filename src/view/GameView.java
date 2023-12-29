@@ -24,7 +24,8 @@ public class GameView {
         menu.getToolBar().setBounds(0, 0, backround.getWidth(), 30);
 
         // Create the BoardUI and add it to the Backround
-        BoardUI boardUI = new BoardUI();
+        BoardUI boardUI = new BoardUI(controller, backround);
+
         backround.getLayeredPane().add(boardUI, JLayeredPane.MODAL_LAYER);
         int menuHeight = menu.getToolBar().getHeight();
         boardUI.setBounds(-150, menuHeight , backround.getWidth()-397, backround.getHeight() - menuHeight - 207);
