@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controller;
+import model.card.Number_TwoCard;
 import model.player.Pawn;
 
 import javax.swing.*;
@@ -209,6 +210,9 @@ public class BoardUI extends JLayeredPane {
                 redPawn1.setBounds(redPawn1Home);
             }
             if(backround.getisdrawn()) {
+                if(controller.getRed_pawn1().getPosition()!=controller.player1.getStartPosition())
+                    squares.get(controller.getRed_pawn1().getPosition()).setVisible(true);
+
                 controller.play(controller.getRed_pawn1());
                 bumpingUI(controller.getRed_pawn1() ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
                 set_squares_switch_turn(controller.getRed_pawn1(), squares, redPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround);
@@ -222,6 +226,8 @@ public class BoardUI extends JLayeredPane {
                 redPawn2.setBounds(redPawn2Home);
             }
             if(backround.getisdrawn()) {
+                if(controller.getRed_pawn2().getPosition()!=controller.player1.getStartPosition())
+                    squares.get(controller.getRed_pawn2().getPosition()).setVisible(true);
                 controller.play(controller.getRed_pawn2());
                 bumpingUI(controller.getRed_pawn2() ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
                 set_squares_switch_turn(controller.getRed_pawn2(), squares, redPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround);
@@ -235,6 +241,8 @@ public class BoardUI extends JLayeredPane {
                 yellowPawn1.setBounds(yellowPawn1Home);
             }
             if(backround.getisdrawn()) {
+                if(controller.getYellow_pawn1().getPosition()!=controller.player2.getStartPosition())
+                    squares.get(controller.getYellow_pawn1().getPosition()).setVisible(true);
                 controller.play(controller.getYellow_pawn1());
                 bumpingUI(controller.getYellow_pawn1() ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
                 set_squares_switch_turn(controller.getYellow_pawn1(), squares, yellowPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround);
@@ -248,6 +256,8 @@ public class BoardUI extends JLayeredPane {
                 yellowPawn2.setBounds(yellowPawn2Home);
             }
             if(backround.getisdrawn()) {
+                if(controller.getYellow_pawn2().getPosition()!=controller.player2.getStartPosition())
+                    squares.get(controller.getYellow_pawn2().getPosition()).setVisible(true);
                 controller.play(controller.getYellow_pawn2());
                 bumpingUI(controller.getYellow_pawn2() ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
                 set_squares_switch_turn(controller.getYellow_pawn2(), squares, yellowPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround);
@@ -310,8 +320,10 @@ public class BoardUI extends JLayeredPane {
         }
     }
     private void switch_turn(Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2 , Backround backround) {
-        controller.switch_current_player(controller.player1, controller.player2);
-        DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
+        if(!(controller.getCurrent_card() instanceof Number_TwoCard)) {
+            controller.switch_current_player(controller.player1, controller.player2);
+            DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
+        }
         if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
             backround.InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
         else

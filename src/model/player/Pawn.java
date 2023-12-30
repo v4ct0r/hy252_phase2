@@ -21,6 +21,8 @@ public class Pawn {
     }
 
     public void setPosition(int position) {
+        if(position>71)
+            position = position-72;
         this.position = position;
     }
 

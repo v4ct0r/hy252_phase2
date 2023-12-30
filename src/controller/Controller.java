@@ -106,8 +106,11 @@ public class Controller {
             bumping(p,player1,player2);
         }
         else if(temp instanceof Number_TwoCard){
-
+            Number_TwoCard temp1 = new Number_TwoCard();
+            temp1.two(p,player1,player2);//check if myteam second pawn is in the same square
+            bumping(p,player1,player2);
         }
+
         else if(temp instanceof Simple_Number_Card && ((Simple_Number_Card) temp).getValue() == 3){
 
         }
