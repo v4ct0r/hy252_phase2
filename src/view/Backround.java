@@ -101,6 +101,9 @@ public class Backround extends JFrame{
     }
 
     private void setFold_button(Controller controller, card currentCard) {
+
+        //TODO ITS WRONG
+
        // current players pawns are at the start and the card is not 1 or 2
         if(controller.getCurrent_player().getPawn1().getPosition() == controller.getCurrent_player().getStartPosition() &&
                 controller.getCurrent_player().getPawn2().getPosition() == controller.getCurrent_player().getStartPosition() &&
