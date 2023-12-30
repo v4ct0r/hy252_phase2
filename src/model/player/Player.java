@@ -6,6 +6,7 @@ public class Player {
     private int homePosition;
     private int SafetyZoneStartPosition;
     private int startPosition;
+    private int nextofstartPosition;
     private boolean turn;
 
     public boolean getTurn(){
@@ -17,6 +18,22 @@ public class Player {
 
     private Pawn Pawn1;
     private Pawn Pawn2;
+
+    public Pawn getPawn1() {
+        return Pawn1;
+    }
+
+    public void setPawn1(Pawn pawn1) {
+        Pawn1 = pawn1;
+    }
+
+    public Pawn getPawn2() {
+        return Pawn2;
+    }
+
+    public void setPawn2(Pawn pawn2) {
+        Pawn2 = pawn2;
+    }
 
     public String getColor() {
         return color;
@@ -38,15 +55,24 @@ public class Player {
         return startPosition;
     }
 
+    public int getNextafterstartPosition() {
+        return nextofstartPosition;
+    }
+
+    public void setNextofstartPosition(int nextafterstartPosition) {
+        this.nextofstartPosition = nextafterstartPosition;
+    }
+
     public void setStartPosition(int startPosition) {
         this.startPosition = startPosition;
     }
 
-    public Player(String color,  int safetyZoneStartPosition ,int homePosition, int startPosition, Pawn pawn1, Pawn pawn2) {
+    public Player(String color,  int safetyZoneStartPosition ,int homePosition, int startPosition ,int nextafterstartPosition, Pawn pawn1, Pawn pawn2) {
         this.color = color;
         this.homePosition = homePosition;
         this.SafetyZoneStartPosition = safetyZoneStartPosition;
         this.startPosition = startPosition;
+        this.nextofstartPosition = nextafterstartPosition;
         this.Pawn1 = pawn1;
         this.Pawn2 = pawn2;
     }

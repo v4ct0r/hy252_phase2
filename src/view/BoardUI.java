@@ -1,13 +1,14 @@
 package view;
 
 import controller.Controller;
+import model.player.Pawn;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BoardUI extends JPanel {
+public class BoardUI extends JLayeredPane {
     private JLabel StartLabel;
     private JButton FoldButton;
     private JButton Cards;
@@ -18,48 +19,46 @@ public class BoardUI extends JPanel {
         this.setLayout(null);
         this.setPreferredSize(new Dimension(200, 200));
         this.setBounds(0, 0, 200, 200);
+        this.setOpaque(true);
         this.setBackground(Color.CYAN);
-        this.setVisible(true);
 
         Image logoImage = new ImageIcon("src\\_sorrylogo\\sorryImage.png").getImage();
         //add the logo to the board
         JLabel LogoLabel = new JLabel(new ImageIcon(logoImage));
-        LogoLabel.setBounds(380,300 , logoImage.getWidth(null), logoImage.getHeight(null));
+        LogoLabel.setBounds(390,300 , logoImage.getWidth(null), logoImage.getHeight(null));
         this.add(LogoLabel);
 
         //init red pawns
-        Rectangle redPaw1Home = new Rectangle(335, 75, 50, 50);
-        JButton redPaw1 = new JButton();
-        redPaw1.setIcon(new ImageIcon("src\\_pawns\\redPawn1.png"));
-        redPaw1.setBounds(redPaw1Home);
-        this.add(redPaw1);
 
-        Rectangle redPaw2Home = new Rectangle(390, 75, 50, 50);
-        JButton redPaw2 = new JButton();
-        redPaw2.setIcon(new ImageIcon("src\\_pawns\\redPawn2.png"));
-        redPaw2.setBounds(redPaw2Home);
-        this.add(redPaw2);
+
+        JButton redPawn1 = new JButton();
+        redPawn1.setIcon(new ImageIcon("src\\_pawns\\redPawn1.png"));
+        Rectangle redPawn1Home = new Rectangle(320, 75,redPawn1.getIcon().getIconWidth(),redPawn1.getIcon().getIconHeight());
+        redPawn1.setBounds(redPawn1Home);
+        this.add(redPawn1);
+
+        JButton redPawn2 = new JButton();
+        redPawn2.setIcon(new ImageIcon("src\\_pawns\\redPawn2.png"));
+        Rectangle redPawn2Home = new Rectangle(375, 75, redPawn2.getIcon().getIconWidth(),redPawn2.getIcon().getIconHeight());
+        redPawn2.setBounds(redPawn2Home);
+        this.add(redPawn2);
 
         //init yellow pawns
-        Rectangle yellowPaw1Home = new Rectangle(627, 675, 50, 50);
-        JButton yellowPaw1 = new JButton();
-        yellowPaw1.setIcon(new ImageIcon("src\\_pawns\\yellowPawn1.png"));
-        yellowPaw1.setBounds(yellowPaw1Home);
-        this.add(yellowPaw1);
+        JButton yellowPawn1 = new JButton();
+        yellowPawn1.setIcon(new ImageIcon("src\\_pawns\\yellowPawn1.png"));
+        Rectangle yellowPawn1Home = new Rectangle(627, 675, yellowPawn1.getIcon().getIconWidth(),yellowPawn1.getIcon().getIconHeight());
+        yellowPawn1.setBounds(yellowPawn1Home);
+        this.add(yellowPawn1);
 
-        Rectangle yellowPaw2Home = new Rectangle(682, 675, 50, 50);
-        JButton yellowPaw2 = new JButton();
-        yellowPaw2.setIcon(new ImageIcon("src\\_pawns\\yellowPawn2.png"));
-        yellowPaw2.setBounds(yellowPaw2Home);
-        this.add(yellowPaw2);
-        DisablenotCurrentPlayerPawns(controller, redPaw1, redPaw2, yellowPaw1, yellowPaw2);
+        JButton yellowPawn2 = new JButton();
+        yellowPawn2.setIcon(new ImageIcon("src\\_pawns\\yellowPawn2.png"));
+        Rectangle yellowPawn2Home = new Rectangle(682, 675, yellowPawn2.getIcon().getIconWidth(),yellowPawn2.getIcon().getIconHeight());
+        yellowPawn2.setBounds(yellowPawn2Home);
+        this.add(yellowPawn2);
+        DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
 
-        ActionListener_FoldButton(backround, controller, redPaw1, redPaw2, yellowPaw1, yellowPaw2);
 
-        redPaw1.addActionListener(e -> {
-
-        });
-
+        ActionListener_FoldButton(backround, controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
 
         ArrayList<JButton> squares = new ArrayList<>();
         //init squares
@@ -117,7 +116,7 @@ public class BoardUI extends JPanel {
         RedstartLabel.setBackground(Color.WHITE);
         RedstartLabel.setOpaque(true);
         RedstartLabel.setBorder(new LineBorder(Color.RED, 7));
-        RedstartLabel.setBounds(75 + 5 * 50, 50, 125, 125);
+        RedstartLabel.setBounds(60 + 5 * 50, 50, 125, 125);
         this.add(RedstartLabel);
 
         for (int i = 22; i < 37; i++) {
@@ -191,10 +190,84 @@ public class BoardUI extends JPanel {
             this.add(squares.get(i));
         }
 
+
+        //squares.get(11).addActionListener(e ->{
+        //    controller.switch_current_player(controller.player1, controller.player2);
+        //    DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
+        //    redPawn1.setBounds(squares.get(11).getBounds());
+        //});
+
+        /**
+         * ActionListener of Fold button is in BoardUI because it needs access to Pawns
+         * precondition: the current player must have drawn a card
+         * if the card is not drawen pop up a message
+         * call the move_pawn method in controller
+         * @param controller.getRed_pawn1()
+         */
+        redPawn1.addActionListener(e -> {
+            if(backround.getisdrawn()) {
+                controller.play(controller.getRed_pawn1());
+                bumpingUI(controller.getRed_pawn1() ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
+                set_invalid_squares(controller.getRed_pawn1(), squares, redPawn1);
+                switch_turn();
+            }
+            else
+                JOptionPane.showMessageDialog(backround, "You must draw a card first!");
+        });
+        redPawn2.addActionListener(e -> {
+            if(backround.getisdrawn()) {
+                controller.play(controller.getRed_pawn2());
+                redPawn2.setBounds(squares.get(controller.getRed_pawn2().getPosition()).getBounds());
+            }
+            else
+                JOptionPane.showMessageDialog(backround, "You must draw a card first!");
+        });
+        yellowPawn1.addActionListener(e -> {
+            if(backround.getisdrawn()) {
+                controller.play(controller.getYellow_pawn1());
+                yellowPawn1.setBounds(squares.get(controller.getYellow_pawn1().getPosition()).getBounds());
+            }
+            else
+                JOptionPane.showMessageDialog(backround, "You must draw a card first!");
+        });
+        yellowPawn2.addActionListener(e -> {
+            if(backround.getisdrawn()) {
+                controller.play(controller.getYellow_pawn2());
+                yellowPawn2.setBounds(squares.get(controller.getYellow_pawn2().getPosition()).getBounds());
+            }
+            else
+                JOptionPane.showMessageDialog(backround, "You must draw a card first!");
+        });
+    }
+
+    private void bumpingUI(Pawn myPawn, Pawn enemyPawn1, Pawn enemyPawn2, JButton enemyPawnUI1, JButton enemyPawnUI2) {
+        if(myPawn.getPosition() == enemyPawn1.getPosition()){
+            enemyPawnUI1.setEnabled(true);
+        }
+        else if(myPawn.getPosition() == enemyPawn2.getPosition()){
+            enemyPawnUI2.setEnabled(true);
+        }
+    }
+
+    private void set_invalid_squares(Pawn pawn, ArrayList<JButton> squares, JButton pawnUI) {
+        for(int i=0; i<72; i++){
+            //go to action listener of each square and unable all of them except the current pawn position
+            if(i != pawn.getPosition())
+                squares.get(i).addActionListener(e -> {
+                    JOptionPane.showMessageDialog(this, "You can't move there!");
+                });
+            else {
+                squares.get(i).addActionListener(e -> {
+                    pawnUI.setBounds(squares.get(pawn.getPosition()).getBounds());
+                });
+            }
+        }
     }
 
     private void ActionListener_FoldButton(Backround backround, Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
         backround.Fold.addActionListener(e -> {
+            //TODO YOU MUST DRAW A CARD BEFORE YOU FOLD AND IF CAN'T YOUR PAWNS MOVE YOU MUST FOLD
+            //I FIXED THE CARD PART BUT I MUST FIX THE PAWNS PART
             controller.switch_current_player(controller.player1, controller.player2);
             DisablenotCurrentPlayerPawns(controller, redPaw1, redPaw2, yellowPaw1, yellowPaw2);
         });
@@ -213,6 +286,9 @@ public class BoardUI extends JPanel {
             yellowPaw1.setEnabled(true);
             yellowPaw2.setEnabled(true);
         }
+    }
+    private void switch_turn() {
+
     }
 
 

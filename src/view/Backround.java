@@ -12,6 +12,8 @@ public class Backround extends JFrame{
     JLayeredPane background;
     JButton ReceiveCard;
     JButton Fold;
+
+    private boolean isdrawn = false;
     public Backround(Controller controller){
         super("SORRY!");
 
@@ -60,7 +62,8 @@ public class Backround extends JFrame{
         Fold.setForeground(Color.BLACK);
         Fold.setBorder(new LineBorder(Color.BLACK));
         background.add(Fold, JLayeredPane.PALETTE_LAYER);
-
+        Fold.setEnabled(false);
+        //ActionListener of Fold button is in BoardUI because it needs access to Pawns
 
         JTextArea InfoBox = new JTextArea();
         InfoBox.setBounds(820, 600, 394, 150);
@@ -76,8 +79,9 @@ public class Backround extends JFrame{
         InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n"); //print the number of cards left
 
         ReceiveCard.addActionListener(e -> {
-            card current_card = controller.deck.draw();
-            controller.setCurrent_card(current_card);
+            isdrawn = true;
+            card current_card = controller.draw_card(controller.deck);
+            Fold.setEnabled(true);
             CurrentCardLabel.setIcon(new ImageIcon(card_path(current_card)));
             if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
                 InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
@@ -119,7 +123,13 @@ public class Backround extends JFrame{
         else
             return "src\\_cards\\backCard.png";
     }
+    public boolean getisdrawn() {
+        return isdrawn;
+    }
 
+    public void setiIsdrawn(boolean isdrawn) {
+        this.isdrawn = isdrawn;
+    }
 
     public JLayeredPane getLayeredPane() {
         return background;

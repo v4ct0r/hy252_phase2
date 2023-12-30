@@ -4,13 +4,18 @@ import model.Square.Position;
 
 public class Pawn {
     private int position;
-    public Pawn(int position, String color) {
+    private String color;
+    private int id;
+    public Pawn(int position, String color,int id) {
         this.position = position;
         this.color = color;
+        this.id = id;
     }
 
-    private String color;
 
+    public int getId() {
+        return id;
+    }
     public int getPosition() {
         return position;
     }
@@ -18,6 +23,11 @@ public class Pawn {
     public void setPosition(int position) {
         this.position = position;
     }
+
+    public String getColor() {
+        return color;
+    }
+
 
     @Override
     public String toString() {
