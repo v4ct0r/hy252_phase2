@@ -23,6 +23,10 @@ public class Pawn {
     public void setPosition(int position) {
         if(position>71)
             position = position-72;
+        if(this.color.equals("yellow") && position>2 && position<8)
+            position = position + 6 ;
+        if(this.color.equals("red") && position>38 && position<44)
+            position = position + 6 ;
         this.position = position;
     }
 

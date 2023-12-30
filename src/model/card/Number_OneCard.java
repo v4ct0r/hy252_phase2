@@ -30,10 +30,24 @@ public class Number_OneCard extends Number_Card{
             }
             pawn.setPosition(player2.getNextafterstartPosition());
         }else{
-            if (check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + 1)) {
+            if (check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + getValue())){
                 return;
             }
             pawn.setPosition(pawn.getPosition() + getValue());
+        }
+    }
+    public boolean onebutwithoutmoving(Pawn pawn, Player player1, Player player2){
+        if(pawn.getPosition() == player1.getStartPosition() && Objects.equals(pawn.getColor(), "red")){
+
+            return check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, player1.getNextafterstartPosition());
+
+        }else if(pawn.getPosition() == player2.getStartPosition() && Objects.equals(pawn.getColor(), "yellow")) {
+
+            return check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, player2.getNextafterstartPosition());
+
+        }else{
+
+            return check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + getValue());
         }
     }
 

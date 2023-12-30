@@ -26,13 +26,11 @@ public abstract class card {
         if(p.getColor().equals("red")){
             if(p.getId()==1){
                 if(square==player1.getPawn2().getPosition()){
-                    player1.getPawn2().setPosition(player1.getStartPosition());
                     return true;
                 }
             }
             else if(p.getId()==2){
                 if(square==player1.getPawn1().getPosition()){
-                    player1.getPawn1().setPosition(player1.getStartPosition());
                     return true;
                 }
             }
@@ -40,13 +38,11 @@ public abstract class card {
         else if(p.getColor().equals("yellow")){
             if(p.getId()==1){
                 if(square==player2.getPawn2().getPosition()){
-                    player2.getPawn2().setPosition(player2.getStartPosition());
                     return true;
                 }
             }
             else if(p.getId()==2){
                 if(square==player2.getPawn1().getPosition()){
-                    player2.getPawn1().setPosition(player2.getStartPosition());
                     return true;
                 }
             }

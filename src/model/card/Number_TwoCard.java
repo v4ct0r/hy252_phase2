@@ -32,7 +32,7 @@ public class Number_TwoCard extends Number_Card {
             }
             pawn.setPosition(player2.getNextafterstartPosition());
         } else {
-            if (check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + 1)) {
+            if (check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + getValue())) {
                 return;
             }
             pawn.setPosition(pawn.getPosition() + getValue());
