@@ -46,7 +46,7 @@ public class Controller {
         Yellow_pawn1 = new Pawn(-2, "yellow",1);
         Yellow_pawn2 = new Pawn(-2, "yellow",2);
         player1 = new Player("red",3 ,8,-1 ,10, red_pawn1 ,red_pawn2);
-        player2 = new Player("yellow",39 ,44,-2 ,47,Yellow_pawn1 ,Yellow_pawn2);
+        player2 = new Player("yellow",39 ,44,-2 ,46,Yellow_pawn1 ,Yellow_pawn2);
         //randomly choose who plays first
         current_player = pick_first_player(player1, player2);
     }

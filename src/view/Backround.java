@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class Backround extends JFrame{
     JLayeredPane background;
+    JTextArea InfoBox;
     JButton ReceiveCard;
     JButton Fold;
 
@@ -65,7 +66,7 @@ public class Backround extends JFrame{
         Fold.setEnabled(false);
         //ActionListener of Fold button is in BoardUI because it needs access to Pawns
 
-        JTextArea InfoBox = new JTextArea();
+        InfoBox = new JTextArea();
         InfoBox.setBounds(820, 600, 394, 150);
         InfoBox.setEditable(false);
         InfoBox.setBackground(Color.WHITE);
@@ -91,7 +92,7 @@ public class Backround extends JFrame{
 
             CurrentCardLabel.setVisible(true);
             CurrentCardLabel2.setVisible(true);
-            ReceiveCard.setEnabled(false);
+           ReceiveCard.setEnabled(false);
         });
 
 
