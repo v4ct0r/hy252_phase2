@@ -18,4 +18,12 @@ public class Start_Slide_Square extends Slide_Square{
     void go_to_SlideEnd(Pawn p,String color, int endPosition){
         //TODO
     }
+
+    public int getEndPosition() {
+        return endPosition;
+    }
+
+    public void setEndPosition(int endPosition) {
+        this.endPosition = endPosition;
+    }
 }

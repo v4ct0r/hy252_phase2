@@ -8,4 +8,12 @@ public abstract class Slide_Square extends Square{
         super(position, id);
         this.color = color;
     }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }

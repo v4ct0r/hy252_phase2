@@ -22,7 +22,7 @@ public class Deck {
 
     public Deck() {
         initializeDeck(cards);
-        //shuffle(cards);
+       // shuffle(cards);
     }
 
     /**
@@ -86,8 +86,10 @@ public void shuffle(card[] cards) {
             shuffle(cards);
             cardsLeft = 44;
         }
-      //  cardsLeft--;
-
+        cardsLeft++;
+        if(cardsLeft%8==0){
+                return cards[0];
+            }
         return cards[4];
     }
 

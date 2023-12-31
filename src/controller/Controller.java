@@ -2,6 +2,9 @@ package controller;
 
 import model.Board;
 import model.Square.Home_Square;
+import model.Square.Internal_Slide_Square;
+import model.Square.Slide_Square;
+import model.Square.Start_Slide_Square;
 import model.card.*;
 import model.player.Pawn;
 import model.player.Player;
@@ -17,7 +20,6 @@ public class Controller {
     Pawn red_pawn2 ;
     Pawn Yellow_pawn1;
     Pawn Yellow_pawn2 ;
-
     public Player player1 ;
     public Player player2 ;
     public card current_card ;
@@ -98,16 +100,34 @@ public class Controller {
     public void switch_turn(Player player1, Player player2){
         //TODO
     }
-    public void play(Pawn p){
+
+    public int predict(Pawn p){
         card temp=getCurrent_card() ;
         if(temp instanceof Number_OneCard){
             Number_OneCard temp1 = new Number_OneCard();
-            temp1.one(p,player1,player2);//check if myteam second pawn is in the same square
+            System.out.println("temp1: "+temp1.onebutwithoutmoving(p,player1,player2));
+            return temp1.onebutwithoutmoving(p,player1,player2);
+        }
+        if(temp instanceof Number_TwoCard){
+            Number_TwoCard temp1 = new Number_TwoCard();
+            System.out.println("temp2: "+temp1.twobutwithoutmoving(p,player1,player2));
+            return temp1.twobutwithoutmoving(p,player1,player2);
+        }
+        return 0;
+    }
+
+    public void play(Pawn p,int prediction){
+        card temp=getCurrent_card() ;
+        if(temp instanceof Number_OneCard){
+            //Number_OneCard temp1 = new Number_OneCard();
+            // temp1.one(p,player1,player2);//check if myteam second pawn is in the same square
+            p.setPosition(prediction);
+            System.out.println("prediction: "+prediction);
             bumping(p,player1,player2);
         }
         else if(temp instanceof Number_TwoCard){
-            Number_TwoCard temp1 = new Number_TwoCard();
-            temp1.two(p,player1,player2);//check if myteam second pawn is in the same square
+            p.setPosition(prediction);
+            System.out.println("prediction: "+prediction);
             bumping(p,player1,player2);
         }
 
@@ -142,27 +162,70 @@ public class Controller {
     private void bumping(Pawn p, Player player1, Player player2) {
         if(Objects.equals(p.getColor(), "red")){
             if(p.getPosition()==player2.getPawn1().getPosition()){
-                player2.getPawn1().setPosition(-1);
+                player2.getPawn1().setPosition(player2.getStartPosition());
             }
             else if(p.getPosition()==player2.getPawn2().getPosition()){
-                player2.getPawn2().setPosition(-1);
+                player2.getPawn2().setPosition(player2.getStartPosition());
             }
         }
         else if(Objects.equals(p.getColor(), "yellow")){
             if(p.getPosition()==player1.getPawn1().getPosition()){
-                player1.getPawn1().setPosition(-1);
+                player1.getPawn1().setPosition(player1.getStartPosition());
             }
             else if(p.getPosition()==player1.getPawn2().getPosition()){
-                player1.getPawn2().setPosition(-1);
+                player1.getPawn2().setPosition(player1.getStartPosition());
             }
         }
     }
 
 
-    private Pawn check_if_another_is_already_placed_in_this_square(Pawn p, Player player1, Player player2, Board board) {
-        //TODO
+    public boolean check_for_slide(Pawn p){ //TODO THE END OF THE SLIDE
+        if(Objects.equals(p.getColor(), "red")) {
+            if (board.squares[p.getPosition()] instanceof Start_Slide_Square && !((Start_Slide_Square) board.squares[p.getPosition()]).getColor().equals("red")) {
+                for (int i = p.getPosition(); i <= ((Start_Slide_Square) board.squares[p.getPosition()]).getEndPosition(); i++) {
+                    if(board.squares[i] instanceof Internal_Slide_Square) {
+                        if (i == getYellow_pawn1().getPosition())
+                            getYellow_pawn1().setPosition(player2.getStartPosition());
+                        else if (i == getYellow_pawn2().getPosition())
+                            getYellow_pawn2().setPosition(player2.getStartPosition());
+                    }
+                }
+                p.setPosition(((Start_Slide_Square) board.squares[p.getPosition()]).getEndPosition());
+                return true;
+            }
+        }if(Objects.equals(p.getColor(), "yellow")) {
+            if (board.squares[p.getPosition()] instanceof Start_Slide_Square && !((Start_Slide_Square) board.squares[p.getPosition()]).getColor().equals("yellow")) {
+                for (int i = p.getPosition(); i <= ((Start_Slide_Square) board.squares[p.getPosition()]).getEndPosition(); i++) {
+                    if(board.squares[i] instanceof Internal_Slide_Square) {
+                        if (i == getRed_pawn1().getPosition())
+                            getRed_pawn1().setPosition(player1.getStartPosition());
+                        else if (i == getRed_pawn2().getPosition())
+                            getRed_pawn2().setPosition(player1.getStartPosition());
+                    }
+                }
+                p.setPosition(((Start_Slide_Square) board.squares[p.getPosition()]).getEndPosition());
+                return true;
+            }
+        }
+        return false;
+    }
+    public Pawn get_pawn(String s){
+        if(Objects.equals(s, "redPawn1")){
+            return getRed_pawn1();
+        }
+        else if(Objects.equals(s, "redPawn2")){
+            return getRed_pawn2();
+        }
+        else if(Objects.equals(s, "yellowPawn1")){
+            return getYellow_pawn1();
+        }
+        else if(Objects.equals(s, "yellowPawn2")){
+            return getYellow_pawn2();
+
+        }
         return null;
     }
+
 
     public card[] getCard(Deck deck){
         return deck.getCards();

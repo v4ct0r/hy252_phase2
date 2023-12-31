@@ -38,4 +38,34 @@ public class Number_TwoCard extends Number_Card {
             pawn.setPosition(pawn.getPosition() + getValue());
         }
     }
+
+    public int twobutwithoutmoving(Pawn pawn, Player player1, Player player2){
+        if(pawn.getPosition() == player1.getStartPosition() && Objects.equals(pawn.getColor(), "red")){
+
+            if(!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, player1.getNextafterstartPosition())){
+
+                return player1.getNextafterstartPosition();
+            }
+
+        }else if(pawn.getPosition() == player2.getStartPosition() && Objects.equals(pawn.getColor(), "yellow")) {
+
+            if(!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, player2.getNextafterstartPosition())){
+
+                return player2.getNextafterstartPosition();
+            }
+
+        }else{
+
+            if (!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + getValue())){
+                if(pawn.getPosition() + getValue() > 71)
+                    return pawn.getPosition() + getValue() - 72;
+                if(Objects.equals(pawn.getColor(), "yellow") && pawn.getPosition() + getValue() > 2 && pawn.getPosition() + getValue() < 8)
+                    return pawn.getPosition() + getValue() + 6;
+                if(Objects.equals(pawn.getColor(), "red") && pawn.getPosition() + getValue() > 38 && pawn.getPosition() + getValue() < 44)
+                    return pawn.getPosition() + getValue() + 6;
+                return pawn.getPosition() + getValue();
+            }
+        }
+        return pawn.getPosition();
+    }
 }

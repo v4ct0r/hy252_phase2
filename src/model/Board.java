@@ -3,7 +3,7 @@ package model;
 import model.Square.*;
 
 public class Board {
-    Square [] squares = new Square[72];
+    public Square [] squares = new Square[72];
 
     public Board(){
         initializeSquares(squares);
@@ -30,9 +30,9 @@ public class Board {
             //SLIDES YELLOW
             else if (i == 37)
                 squares[i] = new Start_Slide_Square(i, "yellow", 46);
-            else if (i == 50)
+            else if (i == 51)
                 squares[i] = new Start_Slide_Square(i, "yellow", 55);
-            else if (i == 38 || i == 45 || i > 50 && i < 55)
+            else if (i == 38 || i == 45 || i > 51 && i < 55)
                 squares[i] = new Internal_Slide_Square(i, "yellow");
             else if (i == 46 || i == 55)
                 squares[i] = new End_Slide_Square(i, "yellow");

@@ -101,33 +101,18 @@ public class Backround extends JFrame{
     }
 
     private void setFold_button(Controller controller, card currentCard) {
+        if(!(currentCard instanceof Number_OneCard) && !(currentCard instanceof Number_TwoCard) /*&& !(currentCard instanceof Sorry_Card)*/) {
+            if(controller.current_player.getPawn1().getPosition() == controller.current_player.getPawn2().getPosition() && (controller.current_player.getPawn1().getPosition() == controller.current_player.getStartPosition())) {
+                Fold.setEnabled(true);
+                return;
+            }
+            else
+                Fold.setEnabled(false);
+            return;
+        }
+        Fold.setEnabled(false);
 
-        //TODO ITS WRONG
 
-       // current players pawns are at the start and the card is not 1 or 2
-        if(controller.getCurrent_player().getPawn1().getPosition() == controller.getCurrent_player().getStartPosition() &&
-                controller.getCurrent_player().getPawn2().getPosition() == controller.getCurrent_player().getStartPosition() &&
-                !(currentCard instanceof Number_OneCard || currentCard instanceof Number_TwoCard || currentCard instanceof Sorry_Card)){
-            Fold.setEnabled(true);
-        }
-        //current players pawns are at the start and the card is 1 or 2
-        else if(controller.getCurrent_player().getPawn1().getPosition() == controller.getCurrent_player().getStartPosition() &&
-                controller.getCurrent_player().getPawn2().getPosition() == controller.getCurrent_player().getStartPosition() &&
-                (currentCard instanceof Number_OneCard || currentCard instanceof Number_TwoCard || currentCard instanceof Sorry_Card)){
-            Fold.setEnabled(false);
-        }
-        //current players pawns are not at the start and the card is 1 or 2
-        else if(controller.getCurrent_player().getPawn1().getPosition() != controller.getCurrent_player().getStartPosition() &&
-                controller.getCurrent_player().getPawn2().getPosition() != controller.getCurrent_player().getStartPosition() &&
-                (currentCard instanceof Number_OneCard || currentCard instanceof Number_TwoCard || currentCard instanceof Sorry_Card)){
-            Fold.setEnabled(true);
-        }
-        //current players pawns are not at the start and the card is not 1 or 2
-        else if(controller.getCurrent_player().getPawn1().getPosition() != controller.getCurrent_player().getStartPosition() &&
-                controller.getCurrent_player().getPawn2().getPosition() != controller.getCurrent_player().getStartPosition() &&
-                !(currentCard instanceof Number_OneCard || currentCard instanceof Number_TwoCard || currentCard instanceof Sorry_Card)){
-            Fold.setEnabled(false);
-        }
     }
 
     private String card_path(card s) {
