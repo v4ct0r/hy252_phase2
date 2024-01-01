@@ -111,8 +111,10 @@ public class Backround extends JFrame{
             return;
         }
         Fold.setEnabled(false);
-
-
+        controller.predict(controller.current_player.getPawn1());
+        controller.predict(controller.current_player.getPawn2());
+        if(!controller.current_player.getPawn1().isMoveable() && !controller.current_player.getPawn2().isMoveable())
+            Fold.setEnabled(true);
     }
 
     private String card_path(card s) {

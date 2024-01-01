@@ -1,10 +1,7 @@
 package controller;
 
 import model.Board;
-import model.Square.Home_Square;
-import model.Square.Internal_Slide_Square;
-import model.Square.Slide_Square;
-import model.Square.Start_Slide_Square;
+import model.Square.*;
 import model.card.*;
 import model.player.Pawn;
 import model.player.Player;
@@ -183,7 +180,7 @@ public class Controller {
         if(Objects.equals(p.getColor(), "red")) {
             if (board.squares[p.getPosition()] instanceof Start_Slide_Square && !((Start_Slide_Square) board.squares[p.getPosition()]).getColor().equals("red")) {
                 for (int i = p.getPosition(); i <= ((Start_Slide_Square) board.squares[p.getPosition()]).getEndPosition(); i++) {
-                    if(board.squares[i] instanceof Internal_Slide_Square) {
+                    if((board.squares[i] instanceof Internal_Slide_Square) || (board.squares[i] instanceof End_Slide_Square)) {
                         if (i == getYellow_pawn1().getPosition())
                             getYellow_pawn1().setPosition(player2.getStartPosition());
                         else if (i == getYellow_pawn2().getPosition())
@@ -196,7 +193,7 @@ public class Controller {
         }if(Objects.equals(p.getColor(), "yellow")) {
             if (board.squares[p.getPosition()] instanceof Start_Slide_Square && !((Start_Slide_Square) board.squares[p.getPosition()]).getColor().equals("yellow")) {
                 for (int i = p.getPosition(); i <= ((Start_Slide_Square) board.squares[p.getPosition()]).getEndPosition(); i++) {
-                    if(board.squares[i] instanceof Internal_Slide_Square) {
+                    if(board.squares[i] instanceof Internal_Slide_Square || board.squares[i] instanceof End_Slide_Square) {
                         if (i == getRed_pawn1().getPosition())
                             getRed_pawn1().setPosition(player1.getStartPosition());
                         else if (i == getRed_pawn2().getPosition())
