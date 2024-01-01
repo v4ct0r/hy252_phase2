@@ -4,6 +4,7 @@ public class Pawn {
     private int position;
     private boolean isSafe;
     private Boolean isHome;
+    private boolean isStart;
     private String color;
     private boolean moveable;
     private int id;
@@ -11,6 +12,7 @@ public class Pawn {
         this.position = position;
         this.color = color;
         this.id = id;
+        this.isStart = true;
         this.isSafe = false;
         this.isHome = false;
     }
@@ -45,6 +47,13 @@ public class Pawn {
         else
             this.isSafe = false;
 
+        if(this.color.equals("red")&& position == -1)
+            this.isStart = true;
+        else if(this.color.equals("yellow")&& position == -2)
+            this.isStart = true;
+        else
+            this.isStart = false;
+
         this.position = position;
     }
 
@@ -70,6 +79,14 @@ public class Pawn {
 
     public boolean isMoveable() {
         return moveable;
+    }
+
+    public boolean isStart() {
+        return isStart;
+    }
+
+    public void setStart(boolean start) {
+        isStart = start;
     }
 
     public void setMoveable(boolean moveable) {

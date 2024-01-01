@@ -115,14 +115,17 @@ public class Controller {
 
             return temp1.twobutwithoutmoving(p,player1,player2);
         }
+        if(temp instanceof Simple_Number_Card && ((Simple_Number_Card) temp).getValue() == 3){
+            Simple_Number_Card temp1 = new Simple_Number_Card(3);
+
+            return temp1.simple(p,player1,player2);
+        }
         return 0;
     }
 
     public void play(Pawn p,int prediction){
         card temp=getCurrent_card() ;
         if(temp instanceof Number_OneCard){
-            //Number_OneCard temp1 = new Number_OneCard();
-            // temp1.one(p,player1,player2);//check if myteam second pawn is in the same square
             p.setPosition(prediction);
             bumping(p,player1,player2);
         }
@@ -130,9 +133,9 @@ public class Controller {
             p.setPosition(prediction);
             bumping(p,player1,player2);
         }
-
         else if(temp instanceof Simple_Number_Card && ((Simple_Number_Card) temp).getValue() == 3){
-
+            p.setPosition(prediction);
+            bumping(p,player1,player2);
         }
         else if(temp instanceof Number_FourCard){
 

@@ -2,6 +2,7 @@ package view;
 
 import controller.Controller;
 import model.card.Number_TwoCard;
+import model.card.Simple_Number_Card;
 import model.player.Pawn;
 
 import javax.swing.*;
@@ -256,8 +257,10 @@ public class BoardUI extends JLayeredPane {
 
                 prediction = controller.predict(controller.getRed_pawn1());
 
-                if(prediction == controller.getRed_pawn1().getPosition())
-                    squares.get(prediction).setVisible(false);
+                if(prediction == controller.getRed_pawn1().getPosition()) {
+                    if(prediction>=0)
+                        squares.get(prediction).setVisible(false);
+                }
 
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
@@ -302,8 +305,10 @@ public class BoardUI extends JLayeredPane {
 
                 prediction = controller.predict(controller.getRed_pawn2());
 
-                if(prediction == controller.getRed_pawn2().getPosition())
-                    squares.get(prediction).setVisible(false);
+                if(prediction == controller.getRed_pawn2().getPosition()){
+                    if(prediction>=0)
+                        squares.get(prediction).setVisible(false);
+                }
 
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
@@ -348,8 +353,10 @@ public class BoardUI extends JLayeredPane {
 
                 prediction = controller.predict(controller.getYellow_pawn1());
 
-                if(prediction == controller.getYellow_pawn1().getPosition())
-                    squares.get(prediction).setVisible(false);
+                if(prediction == controller.getYellow_pawn1().getPosition()){
+                    if(prediction>=0)
+                        squares.get(prediction).setVisible(false);
+                }
 
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
@@ -394,8 +401,10 @@ public class BoardUI extends JLayeredPane {
 
                 prediction = controller.predict(controller.getYellow_pawn2());
 
-                if(prediction == controller.getYellow_pawn2().getPosition())
-                    squares.get(prediction).setVisible(false);
+                if(prediction == controller.getYellow_pawn2().getPosition()) {
+                    if(prediction>=0)
+                        squares.get(prediction).setVisible(false);
+                }
 
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
@@ -520,7 +529,6 @@ public class BoardUI extends JLayeredPane {
 
             }
         }
-
     }
 
 
@@ -566,7 +574,7 @@ public class BoardUI extends JLayeredPane {
             yellowPaw2.setEnabled(false);
     }
     private void switch_turn(Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2 , Backround backround) {
-        if(!(controller.getCurrent_card() instanceof Number_TwoCard)) {
+        if(!(controller.getCurrent_card() instanceof Number_TwoCard || controller.getCurrent_card() instanceof Simple_Number_Card)) {
             controller.switch_current_player(controller.player1, controller.player2);
             DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
         }
