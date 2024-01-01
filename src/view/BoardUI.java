@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class BoardUI extends JLayeredPane {
-    private JLabel StartLabel;
-    private JButton Cards;
     private int prev;
     private String prevPawn;
     private int prediction;
