@@ -87,10 +87,10 @@ public void shuffle(card[] cards) {
             cardsLeft = 44;
         }
         cardsLeft++;
-      // if(cardsLeft==34 || cardsLeft==49 ){
-      //         return cards[0];
-      // }
-        return cards[4];
+       if(cardsLeft==2 || cardsLeft==3 || cardsLeft==6 || cardsLeft==7){
+               return cards[5];
+       }
+        return cards[2];
     }
 
     public int getCardsLeft() {

@@ -102,12 +102,12 @@ public class Controller {
         card temp=getCurrent_card() ;
         if(temp instanceof Number_OneCard){
             Number_OneCard temp1 = new Number_OneCard();
-            System.out.println("temp1: "+temp1.onebutwithoutmoving(p,player1,player2));
+
             return temp1.onebutwithoutmoving(p,player1,player2);
         }
         if(temp instanceof Number_TwoCard){
             Number_TwoCard temp1 = new Number_TwoCard();
-            System.out.println("temp2: "+temp1.twobutwithoutmoving(p,player1,player2));
+
             return temp1.twobutwithoutmoving(p,player1,player2);
         }
         return 0;

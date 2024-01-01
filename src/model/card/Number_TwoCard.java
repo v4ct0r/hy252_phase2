@@ -38,7 +38,7 @@ public class Number_TwoCard extends Number_Card {
 
         }else{
 
-            if (!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + getValue())){
+            if (!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + getValue()) || teammate_is_home(pawn,player1,player2)){
                 if(pawn.getPosition() + getValue() > 71)
                     return pawn.getPosition() + getValue() - 72;
                 if(Objects.equals(pawn.getColor(), "yellow") && pawn.getPosition() + getValue() > 2 && pawn.getPosition() + getValue() < 8)
@@ -49,11 +49,28 @@ public class Number_TwoCard extends Number_Card {
                     pawn.setMoveable(false);
                     return pawn.getPosition();
                 }
-                return pawn.getPosition() + getValue();
+                return 7  ;
+                //return pawn.getPosition() + getValue();
             }
         }
         pawn.setMoveable(false);
         return pawn.getPosition();
+    }
+
+    private boolean teammate_is_home(Pawn pawn, Player player1, Player player2) {
+        if(pawn.getColor().equals("reed") && pawn.getId()==1)
+            if(player1.getPawn2().getHome())
+                return true;
+        if(pawn.getColor().equals("reed") && pawn.getId()==2)
+            if(player1.getPawn1().getHome())
+                return true;
+        if(pawn.getColor().equals("yellow") && pawn.getId()==1)
+            if(player2.getPawn2().getHome())
+                return true;
+        if(pawn.getColor().equals("yellow") && pawn.getId()==2)
+            if(player2.getPawn1().getHome())
+                return true;
+        return false;
     }
 
     private boolean pawnSkipsHome(Pawn pawn, Player player1, Player player2) {
