@@ -79,7 +79,12 @@ public class Controller {
         return current.getId();
     }
 
-    public boolean game_has_finished(Board board ,Pawn red_pawn1, Pawn red_pawn2, Pawn Yellow_pawn1, Pawn Yellow_pawn2 , Home_Square red_home, Home_Square yellow_home) {
+    public boolean game_has_finished() {
+        if (player1.getPawn1().getHome() && player1.getPawn2().getHome()) {
+            return true;
+        } else if (player2.getPawn1().getHome() && player2.getPawn2().getHome()) {
+            return true;
+        }
         return false;
     }
     public card draw_card(Deck deck){

@@ -474,6 +474,10 @@ public class BoardUI extends JLayeredPane {
                     if (pawn.getHome())
                         pawnUI.setEnabled(false);
                     cleanSquares(squares);
+                    if(controller.game_has_finished()){
+                        JOptionPane.showMessageDialog(this, "The game has finished!");
+                        System.exit(0);
+                    }
                 });
             }
         }
