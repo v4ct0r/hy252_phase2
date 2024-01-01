@@ -89,7 +89,7 @@ public void shuffle(card[] cards) {
         cardsLeft++;
         if(cardsLeft%8==0){
                 return cards[0];
-            }
+        }
         return cards[4];
     }
 

@@ -219,7 +219,7 @@ public class BoardUI extends JLayeredPane {
         redPawn1.addActionListener(e -> {
 
 
-            if(controller.getCurrent_player().getColor().equals("yellow")){ //if the opponent clicked on the pawn goto home because otherwise he couldn't click on it
+            if(controller.getCurrent_player().getColor().equals("yellow")){ //BUMPING
                 controller.play(controller.get_pawn(prevPawn), prediction);
                 redPawn1.setBorder(null);
                 redPawn1.setBounds(redPawn1Home);
@@ -260,7 +260,7 @@ public class BoardUI extends JLayeredPane {
         });
         redPawn2.addActionListener(e -> {
 
-            if(controller.getCurrent_player().getColor().equals("yellow")){//if the opponent clicked on the pawn goto home because otherwise he couldn't click on it
+            if(controller.getCurrent_player().getColor().equals("yellow")){//BUMPING
                 controller.play(controller.get_pawn(prevPawn), prediction);
 
                 redPawn2.setBorder(null);
@@ -304,7 +304,7 @@ public class BoardUI extends JLayeredPane {
         });
         yellowPawn1.addActionListener(e -> {
 
-            if(controller.getCurrent_player().getColor().equals("red")){//if the opponent clicked on the pawn goto home because otherwise he couldn't click on it
+            if(controller.getCurrent_player().getColor().equals("red")){//BUMPING
 
                 controller.play(controller.get_pawn(prevPawn), prediction);
                 yellowPawn1.setBorder(null);
@@ -345,7 +345,7 @@ public class BoardUI extends JLayeredPane {
         });
         yellowPawn2.addActionListener(e -> {
 
-            if(controller.getCurrent_player().getColor().equals("red")){//if the opponent clicked on the pawn goto home because otherwise he couldn't click on it
+            if(controller.getCurrent_player().getColor().equals("red")){//BUMPING
 
                 controller.play(controller.get_pawn(prevPawn), prediction);
                 yellowPawn2.setBorder(null);
@@ -408,6 +408,10 @@ public class BoardUI extends JLayeredPane {
     }
 
     private void bumpingUI(int prediction, Pawn enemyPawn1, Pawn enemyPawn2, JButton enemyPawnUI1, JButton enemyPawnUI2) {
+        enemyPawnUI1.setEnabled(false);
+        enemyPawnUI2.setEnabled(false);
+        enemyPawnUI1.setBorder(null);
+        enemyPawnUI2.setBorder(null);
         if(prediction == enemyPawn1.getPosition()){
             enemyPawnUI1.setEnabled(true);
             enemyPawnUI1.setBorder(new LineBorder(Color.MAGENTA, 3));
