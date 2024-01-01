@@ -119,12 +119,10 @@ public class Controller {
             //Number_OneCard temp1 = new Number_OneCard();
             // temp1.one(p,player1,player2);//check if myteam second pawn is in the same square
             p.setPosition(prediction);
-            System.out.println("prediction: "+prediction);
             bumping(p,player1,player2);
         }
         else if(temp instanceof Number_TwoCard){
             p.setPosition(prediction);
-            System.out.println("prediction: "+prediction);
             bumping(p,player1,player2);
         }
 
