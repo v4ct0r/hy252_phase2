@@ -249,8 +249,7 @@ public class BoardUI extends JLayeredPane {
             if(backround.getisdrawn()) {
                 prevPawn = "redPawn1";
 
-                if(controller.getRed_pawn1().getPosition()>=0)
-                    prev = controller.getRed_pawn1().getPosition();
+                prev = controller.getRed_pawn1().getPosition();
 
                 cleanSquares(squares);
 
@@ -258,6 +257,10 @@ public class BoardUI extends JLayeredPane {
                     squares.get(controller.predict(controller.getRed_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
 
                 prediction = controller.predict(controller.getRed_pawn1());
+
+                if(prediction == controller.getRed_pawn1().getPosition())
+                    squares.get(prediction).setVisible(false);
+
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
 
@@ -292,8 +295,7 @@ public class BoardUI extends JLayeredPane {
             if(backround.getisdrawn()) {
                 prevPawn = "redPawn2";
 
-                if(controller.getRed_pawn2().getPosition()>=0)
-                    prev = controller.getRed_pawn2().getPosition();
+                prev = controller.getRed_pawn2().getPosition();
 
                 cleanSquares(squares);
 
@@ -301,6 +303,10 @@ public class BoardUI extends JLayeredPane {
                     squares.get(controller.predict(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
 
                 prediction = controller.predict(controller.getRed_pawn2());
+
+                if(prediction == controller.getRed_pawn2().getPosition())
+                    squares.get(prediction).setVisible(false);
+
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
 
@@ -335,8 +341,7 @@ public class BoardUI extends JLayeredPane {
             if(backround.getisdrawn()) {
                 prevPawn = "yellowPawn1";
 
-                if(controller.getYellow_pawn1().getPosition()>=0)
-                    prev = controller.getYellow_pawn1().getPosition();
+                prev = controller.getYellow_pawn1().getPosition();
 
                 cleanSquares(squares);
 
@@ -344,6 +349,10 @@ public class BoardUI extends JLayeredPane {
                     squares.get(controller.predict(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
 
                 prediction = controller.predict(controller.getYellow_pawn1());
+
+                if(prediction == controller.getYellow_pawn1().getPosition())
+                    squares.get(prediction).setVisible(false);
+
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
 
@@ -378,8 +387,7 @@ public class BoardUI extends JLayeredPane {
             if(backround.getisdrawn()) {
                 prevPawn = "yellowPawn2";
 
-                if(controller.getYellow_pawn2().getPosition()>=0)
-                    prev = controller.getYellow_pawn2().getPosition();
+                prev = controller.getYellow_pawn2().getPosition();
 
                 cleanSquares(squares);
 
@@ -387,6 +395,10 @@ public class BoardUI extends JLayeredPane {
                     squares.get(controller.predict(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
 
                 prediction = controller.predict(controller.getYellow_pawn2());
+
+                if(prediction == controller.getYellow_pawn2().getPosition())
+                    squares.get(prediction).setVisible(false);
+
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
 
@@ -457,9 +469,11 @@ public class BoardUI extends JLayeredPane {
                             squares.get(pawn.getPosition()).setBorder(new LineBorder(Color.YELLOW, 7));
                         pawnUI.setBounds(Home);
                     }
-                    squares.get(prev).setVisible(true);
+                    if(prev>=0)
+                        squares.get(prev).setVisible(true);
                     if(!pawn.getHome()){
-                        squares.get(pawn.getPosition()).setVisible(false);
+                        if(pawn.getPosition()>=0)
+                            squares.get(pawn.getPosition()).setVisible(false);
                     }
                     else{
                         this.add(pawnUI, JLayeredPane.PALETTE_LAYER); //pawnUI OVERLAPS the square HOME
@@ -469,15 +483,16 @@ public class BoardUI extends JLayeredPane {
                         refresh_opponent_pawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, squares);
                         pawnUI.setBounds(squares.get(pawn.getPosition()).getBounds());
                     }
+                    if(controller.game_has_finished()){
+                        JOptionPane.showMessageDialog(this, controller.current_player.getColor() + " player has won!");
+                        System.exit(0);
+                    }
 
                     switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
                     if (pawn.getHome())
                         pawnUI.setEnabled(false);
                     cleanSquares(squares);
-                    if(controller.game_has_finished()){
-                        JOptionPane.showMessageDialog(this, "The game has finished!");
-                        System.exit(0);
-                    }
+
                 });
             }
         }
@@ -502,7 +517,9 @@ public class BoardUI extends JLayeredPane {
                 squares.get(i).setVisible(true);
             }
             else {
-                squares.get(i).setVisible(false);
+                if(!(controller.current_player.getPawn1().getHome() || controller.current_player.getPawn2().getHome()))
+                    squares.get(i).setVisible(false);
+
             }
         }
 

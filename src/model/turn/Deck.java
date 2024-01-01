@@ -69,7 +69,6 @@ public class Deck {
 
 
 
-
 public void shuffle(card[] cards) {
     Random rand = new Random();
     for (int i = cards.length - 1; i > 0; i--) {
@@ -87,10 +86,10 @@ public void shuffle(card[] cards) {
             cardsLeft = 44;
         }
         cardsLeft++;
-       if( cardsLeft==7){
-               return cards[4];
-       }
-        return cards[0];
+    //   if( cardsLeft==4 || cardsLeft==6 || cardsLeft==9){
+    //           return cards[0];
+    //   }
+        return cards[4];
     }
 
     public int getCardsLeft() {
