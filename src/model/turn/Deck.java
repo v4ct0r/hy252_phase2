@@ -86,7 +86,7 @@ public void shuffle(card[] cards) {
             cardsLeft = 44;
         }
         cardsLeft++;
-       if( cardsLeft==2){
+       if( cardsLeft==2 || cardsLeft==7|| cardsLeft ==12 || cardsLeft ==15 || cardsLeft ==19){
                return cards[0];
        }
         return cards[8];

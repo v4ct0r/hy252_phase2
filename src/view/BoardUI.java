@@ -14,6 +14,7 @@ import java.util.Objects;
 
 public class BoardUI extends JLayeredPane {
     private int prev;
+    private int Simple_Flag = 0 ;
     private String prevPawn;
     private int prediction;
     JButton redPawn1;
@@ -246,7 +247,12 @@ public class BoardUI extends JLayeredPane {
                 return;
             }
             if(backround.getisdrawn()) {
-                prevPawn = "redPawn1";
+                if(controller.getCurrent_card() instanceof Simple_Number_Card ){
+                    redPawn1.setEnabled(false);
+                    Simple_Flag ++;
+                }
+
+                prevPawn = "redPawn1";// USED FOR BUMPING
 
                 prev = controller.getRed_pawn1().getPosition();
 
@@ -294,7 +300,13 @@ public class BoardUI extends JLayeredPane {
             }
 
             if(backround.getisdrawn()) {
-                prevPawn = "redPawn2";
+                if(controller.getCurrent_card() instanceof Simple_Number_Card ){
+                    redPawn2.setEnabled(false);
+                    Simple_Flag ++;
+                }
+
+                prevPawn = "redPawn2";// USED FOR BUMPING
+
 
                 prev = controller.getRed_pawn2().getPosition();
 
@@ -342,7 +354,12 @@ public class BoardUI extends JLayeredPane {
                 return;
             }
             if(backround.getisdrawn()) {
-                prevPawn = "yellowPawn1";
+                if(controller.getCurrent_card() instanceof Simple_Number_Card ){
+                    yellowPawn1.setEnabled(false);
+                    Simple_Flag ++;
+                }
+
+                prevPawn = "yellowPawn1";// USED FOR BUMPING
 
                 prev = controller.getYellow_pawn1().getPosition();
 
@@ -390,7 +407,13 @@ public class BoardUI extends JLayeredPane {
               return;
             }
             if(backround.getisdrawn()) {
-                prevPawn = "yellowPawn2";
+                if(controller.getCurrent_card() instanceof Simple_Number_Card ){
+                    yellowPawn2.setEnabled(false);
+                    Simple_Flag ++;
+                }
+
+
+                prevPawn = "yellowPawn2"; // USED FOR BUMPING
 
                 prev = controller.getYellow_pawn2().getPosition();
 
@@ -574,17 +597,35 @@ public class BoardUI extends JLayeredPane {
             yellowPaw2.setEnabled(false);
     }
     private void switch_turn(Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2 , Backround backround) {
-        if(!(controller.getCurrent_card() instanceof Number_TwoCard || controller.getCurrent_card() instanceof Simple_Number_Card)) {
+
+        if(controller.getCurrent_card() instanceof Simple_Number_Card) {
+            if(Simple_Flag < 2) {
+                if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
+                    backround.InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
+                else
+                    backround.InfoBox.setText("Info Box\n\nTurn: Player 2 (Yellow)\n");
+                backround.InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n");
+                return;
+            }
+        }
+        Simple_Flag = 0;
+
+
+        if(!(controller.getCurrent_card() instanceof Number_TwoCard) ) {
             controller.switch_current_player(controller.player1, controller.player2);
             DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
         }
+
         if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
             backround.InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
         else
             backround.InfoBox.setText("Info Box\n\nTurn: Player 2 (Yellow)\n");
         backround.InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n");
+
         backround.ReceiveCard.setEnabled(true);
         backround.setiIsdrawn(false);
+
+
     }
 
 
