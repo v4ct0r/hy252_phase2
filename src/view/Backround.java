@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Backround extends JFrame{
     JLayeredPane background;
     JTextArea InfoBox;
-    JButton ReceiveCard;
+    public JButton ReceiveCard;
     JButton Fold;
 
     private boolean isdrawn = false;
@@ -80,7 +80,11 @@ public class Backround extends JFrame{
         InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n"); //print the number of cards left
 
         ReceiveCard.addActionListener(e -> {
+
             isdrawn = true;
+
+            BoardUI.fix_squres_border();
+
             card current_card = controller.draw_card(controller.deck);
             CurrentCardLabel.setIcon(new ImageIcon(card_path(current_card)));
             if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
@@ -91,28 +95,36 @@ public class Backround extends JFrame{
 
             CurrentCardLabel.setVisible(true);
             CurrentCardLabel2.setVisible(true);
-           ReceiveCard.setEnabled(false);
+            if(!(current_card instanceof Simple_Number_Card8_12))
+                ReceiveCard.setEnabled(false);
 
            setFold_button(controller, current_card);
-
         });
 
 
     }
 
     private void setFold_button(Controller controller, card currentCard) {
-        if(!(currentCard instanceof Number_OneCard) && !(currentCard instanceof Number_TwoCard) /*&& !(currentCard instanceof Sorry_Card)*/) {
-            if(controller.current_player.getPawn1().getPosition() == controller.current_player.getPawn2().getPosition() && (controller.current_player.getPawn1().getPosition() == controller.current_player.getStartPosition())) {
-                Fold.setEnabled(true);
-                return;
-            }
-            else
-                Fold.setEnabled(false);
+     //   if(!(currentCard instanceof Number_OneCard) && !(currentCard instanceof Number_TwoCard) /*&& !(currentCard instanceof Sorry_Card)*/) {
+     //       if(controller.current_player.getPawn1().getPosition() == controller.current_player.getPawn2().getPosition() && (controller.current_player.getPawn1().getPosition() == controller.current_player.getStartPosition())) {
+     //           Fold.setEnabled(true);
+     //           return;
+     //       }
+     //       else
+     //           Fold.setEnabled(false);
+     //       return;
+     //   }
+        if(currentCard instanceof Simple_Number_Card8_12) {
+            Fold.setEnabled(false);
             return;
         }
         Fold.setEnabled(false);
         controller.predict(controller.current_player.getPawn1());
         controller.predict(controller.current_player.getPawn2());
+        if(currentCard instanceof Number_TenCard){
+            controller.predict1(controller.current_player.getPawn1());
+            controller.predict1(controller.current_player.getPawn2());
+        }
         if(!controller.current_player.getPawn1().isMoveable() && !controller.current_player.getPawn2().isMoveable())
             Fold.setEnabled(true);
     }
@@ -130,13 +142,13 @@ public class Backround extends JFrame{
             return "src\\_cards\\card5(Custom).png";
         else if (s instanceof Number_SevenCard)
             return "src\\_cards\\card7(Custom).png";
-        else if (s instanceof Simple_Number_Card && ((Simple_Number_Card) s).getValue() == 8)
+        else if (s instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) s).getValue() == 8)
             return "src\\_cards\\card8(Custom).png";
         else if (s instanceof Number_TenCard)
             return "src\\_cards\\card10(Custom).png";
         else if (s instanceof Number_ElevenCard)
             return "src\\_cards\\card11(Custom).png";
-        else if (s instanceof Simple_Number_Card && ((Simple_Number_Card) s).getValue() == 12)
+        else if (s instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) s).getValue() == 12)
             return "src\\_cards\\card12(Custom).png";
         else if (s instanceof Sorry_Card)
             return "src\\_cards\\cardSorry(Custom).png";

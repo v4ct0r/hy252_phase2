@@ -49,4 +49,6 @@ public abstract class card {
         }
         return false;
     }
+
+
 }

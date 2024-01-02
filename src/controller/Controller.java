@@ -102,6 +102,15 @@ public class Controller {
     public void switch_turn(Player player1, Player player2){
         //TODO
     }
+    public int predict1(Pawn p){
+        card temp=getCurrent_card() ;
+        if(temp instanceof Number_TenCard){
+            Number_TenCard temp1 = new Number_TenCard();
+
+            return temp1.ten_1(p,player1,player2);
+        }
+        return 0;
+    }
 
     public int predict(Pawn p){
         card temp=getCurrent_card() ;
@@ -119,6 +128,28 @@ public class Controller {
             Simple_Number_Card temp1 = new Simple_Number_Card(3);
 
             return temp1.simple(p,player1,player2);
+        }
+        if(temp instanceof Simple_Number_Card && ((Simple_Number_Card) temp).getValue() == 5){
+            Simple_Number_Card temp1 = new Simple_Number_Card(5);
+
+            return temp1.simple(p,player1,player2);
+        }
+        if(temp instanceof Number_FourCard){
+            Number_FourCard temp1 = new Number_FourCard();
+
+            return temp1.four(p,player1,player2);
+        }
+        if(temp instanceof Number_TenCard){
+            Number_TenCard temp1 = new Number_TenCard();
+            return temp1.ten(p,player1,player2);
+        }
+        if(temp instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) temp).getValue() == 8){
+            Simple_Number_Card8_12 temp1 = new Simple_Number_Card8_12(8);
+            return temp1.simple8_12(p,player1,player2);
+        }
+        if(temp instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) temp).getValue() == 12){
+            Simple_Number_Card8_12 temp1 = new Simple_Number_Card8_12(12);
+            return temp1.simple8_12(p,player1,player2);
         }
         return 0;
     }
@@ -138,25 +169,30 @@ public class Controller {
             bumping(p,player1,player2);
         }
         else if(temp instanceof Number_FourCard){
-
+            p.setPosition(prediction);
+            bumping(p,player1,player2);
         }
         else if(temp instanceof Simple_Number_Card && ((Simple_Number_Card) temp).getValue() == 5){
-
+            p.setPosition(prediction);
+            bumping(p,player1,player2);
         }
         else if(temp instanceof Number_SevenCard){
 
         }
-        else if(temp instanceof Simple_Number_Card && ((Simple_Number_Card) temp).getValue() == 8){
-
+        else if(temp instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) temp).getValue() == 8){
+            p.setPosition(prediction);
+            bumping(p,player1,player2);
         }
         else if(temp instanceof Number_TenCard){
-
+            p.setPosition(prediction);
+            bumping(p,player1,player2);
         }
         else if(temp instanceof Number_ElevenCard){
 
         }
-        else if(temp instanceof Simple_Number_Card && ((Simple_Number_Card) temp).getValue() == 12){
-
+        else if(temp instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) temp).getValue() == 12){
+            p.setPosition(prediction);
+            bumping(p,player1,player2);
         }
         else if(temp instanceof Sorry_Card){
 
@@ -182,7 +218,7 @@ public class Controller {
     }
 
 
-    public boolean check_for_slide(Pawn p){ //TODO THE END OF THE SLIDE
+    public boolean check_for_slide(Pawn p){
         if(Objects.equals(p.getColor(), "red")) {
             if (board.squares[p.getPosition()] instanceof Start_Slide_Square && !((Start_Slide_Square) board.squares[p.getPosition()]).getColor().equals("red")) {
                 for (int i = p.getPosition(); i <= ((Start_Slide_Square) board.squares[p.getPosition()]).getEndPosition(); i++) {
@@ -191,6 +227,8 @@ public class Controller {
                             getYellow_pawn1().setPosition(player2.getStartPosition());
                         else if (i == getYellow_pawn2().getPosition())
                             getYellow_pawn2().setPosition(player2.getStartPosition());
+                        else if (i == theotherpawn(p).getPosition())
+                            theotherpawn(p).setPosition(player1.getStartPosition());
                     }
                 }
                 p.setPosition(((Start_Slide_Square) board.squares[p.getPosition()]).getEndPosition());
@@ -204,6 +242,8 @@ public class Controller {
                             getRed_pawn1().setPosition(player1.getStartPosition());
                         else if (i == getRed_pawn2().getPosition())
                             getRed_pawn2().setPosition(player1.getStartPosition());
+                        else if (i == theotherpawn(p).getPosition())
+                            theotherpawn(p).setPosition(player2.getStartPosition());
                     }
                 }
                 p.setPosition(((Start_Slide_Square) board.squares[p.getPosition()]).getEndPosition());
@@ -212,6 +252,27 @@ public class Controller {
         }
         return false;
     }
+
+    public Pawn theotherpawn(Pawn p) {
+        if(Objects.equals(p.getColor(), "red")){
+            if(p.getId()==1){
+                return getRed_pawn2();
+            }
+            else if(p.getId()==2){
+                return getRed_pawn1();
+            }
+        }
+        else if(Objects.equals(p.getColor(), "yellow")){
+            if(p.getId()==1){
+                return getYellow_pawn2();
+            }
+            else if(p.getId()==2){
+                return getYellow_pawn1();
+            }
+        }
+        return null;
+    }
+
     public Pawn get_pawn(String s){
         if(Objects.equals(s, "redPawn1")){
             return getRed_pawn1();

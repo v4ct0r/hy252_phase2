@@ -5,19 +5,14 @@ import model.player.Player;
 
 import java.util.Objects;
 
-public class Simple_Number_Card extends Number_Card{
+public class Simple_Number_Card8_12 extends Number_Card
 
-    public Simple_Number_Card(int value) {
+{
+    public Simple_Number_Card8_12(int value) {
         super(value, "simple");
     }
 
-    /**
-     * Move the pawn forward
-     * @param pawn
-     * pre-condition: pawn1 or pawn2 are not in start square , pawn1 or pawn2 can move forward 3 spaces
-     * post-condition: pawn1 or pawn2 move value space forward
-     */
-    public int simple(Pawn pawn, Player player1, Player player2) {
+    public int simple8_12(Pawn pawn, Player player1, Player player2) {
 
         if(pawn.isStart() || pawn.getHome()){
             pawn.setMoveable(false);
@@ -31,11 +26,15 @@ public class Simple_Number_Card extends Number_Card{
                     else
                         return pawn.getPosition() + getValue() - 72 + 6;
                 }else
+                if(pawnSkipsHome(pawn, player1, player2)) {
+                    pawn.setMoveable(false);
+                    return pawn.getPosition();
+                }
                     return pawn.getPosition() + getValue() - 72;
             }
-            if(Objects.equals(pawn.getColor(), "yellow") && pawn.getPosition() + getValue() > 2 && pawn.getPosition() + getValue() < 8)
+            if(Objects.equals(pawn.getColor(), "yellow") && pawn.getPosition() + getValue() > 2 && pawn.getPosition() + getValue() <= 8)
                 return pawn.getPosition() + getValue() + 6;
-            if(Objects.equals(pawn.getColor(), "red") && pawn.getPosition() + getValue() > 38 && pawn.getPosition() + getValue() < 44)
+            if(Objects.equals(pawn.getColor(), "red") && pawn.getPosition() + getValue() > 38 && pawn.getPosition() + getValue() <= 44)
                 return pawn.getPosition() + getValue() + 6;
 
             if(pawnSkipsHome(pawn, player1, player2)) {
@@ -50,8 +49,4 @@ public class Simple_Number_Card extends Number_Card{
         return pawn.getPosition();
     }
 
-
-
-
 }
-

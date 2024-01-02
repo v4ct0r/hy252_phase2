@@ -15,11 +15,11 @@ public class Board {
             //SLIDES RED
             if (i == 1)
                 squares[i] = new Start_Slide_Square(i, "red", 10);
-            else if (i ==16)
-                squares[i] = new Start_Slide_Square(i, "red", 20);
-            else if (i == 2 || i == 9 || i > 15 && i < 20)
+            else if (i ==15)
+                squares[i] = new Start_Slide_Square(i, "red", 19);
+            else if (i == 2 || i == 9 || i > 14 && i < 19)
                 squares[i] = new Internal_Slide_Square(i, "red");
-            else if (i == 10 || i == 20)
+            else if (i == 10 || i == 19)
                 squares[i] = new End_Slide_Square(i, "red");
             //Safety Zone Red
             else if (i > 2 && i<8)
