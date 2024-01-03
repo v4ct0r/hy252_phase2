@@ -38,14 +38,18 @@ public class Pawn {
             this.isHome = true;
         if(this.color.equals("yellow")&& position == 44)
             this.isHome = true;
-        if(this.color.equals("red")&& position > 2 && position < 8)
-            this.isSafe = true;
-        else
-            this.isSafe = false;
-        if(this.color.equals("yellow")&& position > 38 && position < 44)
-            this.isSafe = true;
-        else
-            this.isSafe = false;
+        if(this.color.equals("red")) {
+            if(position > 2 && position < 8)
+                this.isSafe = true;
+            else
+                this.isSafe = false;
+        }
+        if(this.color.equals("yellow")){
+            if(position > 38 && position < 44)
+                this.isSafe = true;
+            else
+                this.isSafe = false;
+        }
 
         if(this.color.equals("red")&& position == -1)
             this.isStart = true;

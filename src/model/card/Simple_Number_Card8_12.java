@@ -19,6 +19,7 @@ public class Simple_Number_Card8_12 extends Number_Card
             return pawn.getPosition();
         }
         if (!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + getValue()) || teammate_is_home(pawn,player1,player2)){
+            pawn.setMoveable(true);
             if(pawn.getPosition() + getValue() > 71){
                 if(Objects.equals(pawn.getColor(), "yellow")) {
                     if (pawn.getPosition() + getValue() - 72 < 3)

@@ -1,10 +1,7 @@
 package view;
 
 import controller.Controller;
-import model.card.Number_TenCard;
-import model.card.Number_TwoCard;
-import model.card.Simple_Number_Card;
-import model.card.Simple_Number_Card8_12;
+import model.card.*;
 import model.player.Pawn;
 
 import javax.swing.*;
@@ -19,7 +16,10 @@ public class BoardUI extends JLayeredPane {
     private int Simple_Flag = 0 ;
     private String prevPawn;
     private int prediction;
-    private int prediction2 = -1;
+    private int prediction10 = -1;
+
+    private int[] prediction7 = new int[7];
+
     static ArrayList<JButton> squares ;
     JButton redPawn1;
     JButton redPawn2;
@@ -258,21 +258,33 @@ public class BoardUI extends JLayeredPane {
                         Simple_Flag ++;
                 }
 
+
                 prevPawn = "redPawn1";// USED FOR BUMPING
 
                 prev = controller.getRed_pawn1().getPosition();
 
                 cleanSquares(squares);
 
+
+                if(controller.getCurrent_card() instanceof Number_SevenCard && controller.getRed_pawn2().isMoveable()){
+                    prediction7 = controller.predict7(controller.getRed_pawn1());
+
+
+
+
+
+
+
+
+                    return;
+                }
+
+
                 if(controller.predict(controller.getRed_pawn2())>=0 && !controller.getRed_pawn2().getHome()) {
                     squares.get(controller.predict(controller.getRed_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
                     //change the border of the square that the other pawn would go to
                 }
 
-                if(controller.getCurrent_card() instanceof Simple_Number_Card8_12 ){
-                    fix_squres_border();
-                    //backround.ReceiveCard.setEnabled(true);
-                }
 
                 prediction = controller.predict(controller.getRed_pawn1());
 
@@ -285,16 +297,16 @@ public class BoardUI extends JLayeredPane {
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
 
                 //CARD 10
-                prediction2 = -1;
+                prediction10 = -1;
                 if (controller.getCurrent_card() instanceof Number_TenCard) {
-                    prediction2 = controller.predict1(controller.getRed_pawn1());
+                    prediction10 = controller.predict1(controller.getRed_pawn1());
 
-                    if (prediction2 == controller.getRed_pawn1().getPosition()) {
-                        if (prediction2 >= 0)
-                            squares.get(prediction2).setVisible(false);
+                    if (prediction10 == controller.getRed_pawn1().getPosition()) {
+                        if (prediction10 >= 0)
+                            squares.get(prediction10).setVisible(false);
                     }
-                    if (prediction2 >= 0)
-                        squares.get(prediction2).setBorder(new LineBorder(Color.MAGENTA, 3));
+                    if (prediction10 >= 0)
+                        squares.get(prediction10).setBorder(new LineBorder(Color.MAGENTA, 3));
                 }
 
                 bumpingUI(prediction ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
@@ -332,12 +344,25 @@ public class BoardUI extends JLayeredPane {
                         Simple_Flag ++;
                 }
 
+
                 prevPawn = "redPawn2";// USED FOR BUMPING
 
 
                 prev = controller.getRed_pawn2().getPosition();
 
                 cleanSquares(squares);
+
+
+                if(controller.getCurrent_card() instanceof Number_SevenCard && controller.getRed_pawn1().isMoveable()){
+                    prediction7 = controller.predict7(controller.getRed_pawn2());
+
+
+
+
+
+                    return;
+                }
+
 
                 if(controller.predict(controller.getRed_pawn1())>=0 && !controller.getRed_pawn1().getHome())
                     squares.get(controller.predict(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
@@ -353,16 +378,16 @@ public class BoardUI extends JLayeredPane {
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
 
                 //CARD 10
-                prediction2 = -1;
+                prediction10 = -1;
                 if (controller.getCurrent_card() instanceof Number_TenCard) {
-                    prediction2 = controller.predict1(controller.getRed_pawn2());
+                    prediction10 = controller.predict1(controller.getRed_pawn2());
 
-                    if (prediction2 == controller.getRed_pawn2().getPosition()) {
-                        if (prediction2 >= 0)
-                            squares.get(prediction2).setVisible(false);
+                    if (prediction10 == controller.getRed_pawn2().getPosition()) {
+                        if (prediction10 >= 0)
+                            squares.get(prediction10).setVisible(false);
                     }
-                    if (prediction2 >= 0)
-                        squares.get(prediction2).setBorder(new LineBorder(Color.MAGENTA, 3));
+                    if (prediction10 >= 0)
+                        squares.get(prediction10).setBorder(new LineBorder(Color.MAGENTA, 3));
                 }
                 bumpingUI(prediction ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
 
@@ -418,16 +443,16 @@ public class BoardUI extends JLayeredPane {
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
 
-                prediction2 = -1;
+                prediction10 = -1;
                 if (controller.getCurrent_card() instanceof Number_TenCard) {
-                    prediction2 = controller.predict1(controller.getYellow_pawn1());
+                    prediction10 = controller.predict1(controller.getYellow_pawn1());
 
-                    if (prediction2 == controller.getYellow_pawn1().getPosition()) {
-                        if (prediction2 >= 0)
-                            squares.get(prediction2).setVisible(false);
+                    if (prediction10 == controller.getYellow_pawn1().getPosition()) {
+                        if (prediction10 >= 0)
+                            squares.get(prediction10).setVisible(false);
                     }
-                    if (prediction2 >= 0)
-                        squares.get(prediction2).setBorder(new LineBorder(Color.MAGENTA, 3));
+                    if (prediction10 >= 0)
+                        squares.get(prediction10).setBorder(new LineBorder(Color.MAGENTA, 3));
                 }
 
                 bumpingUI(prediction ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
@@ -485,16 +510,16 @@ public class BoardUI extends JLayeredPane {
                 if(prediction>=0)
                     squares.get(prediction).setBorder(new LineBorder(Color.MAGENTA, 3));
 
-                prediction2 = -1;
+                prediction10 = -1;
                 if (controller.getCurrent_card() instanceof Number_TenCard) {
-                    prediction2 = controller.predict1(controller.getYellow_pawn2());
+                    prediction10 = controller.predict1(controller.getYellow_pawn2());
 
-                    if (prediction2 == controller.getYellow_pawn2().getPosition()) {
-                        if (prediction2 >= 0)
-                            squares.get(prediction2).setVisible(false);
+                    if (prediction10 == controller.getYellow_pawn2().getPosition()) {
+                        if (prediction10 >= 0)
+                            squares.get(prediction10).setVisible(false);
                     }
-                    if (prediction2 >= 0)
-                        squares.get(prediction2).setBorder(new LineBorder(Color.MAGENTA, 3));
+                    if (prediction10 >= 0)
+                        squares.get(prediction10).setBorder(new LineBorder(Color.MAGENTA, 3));
                 }
 
                 bumpingUI(prediction ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
@@ -551,7 +576,7 @@ public class BoardUI extends JLayeredPane {
 
         for(int i=0; i<72; i++){
             //go to action listener of each square and unable all of them except the current pawn position
-            if(i != prediction && i != prediction2){
+            if(i != prediction && i != prediction10){
                 squares.get(i).addActionListener(e -> {
                     JOptionPane.showMessageDialog(this, "You can't move there!");
                 });
@@ -597,8 +622,8 @@ public class BoardUI extends JLayeredPane {
                         Simple_Flag ++;
                     }
                     if(controller.getCurrent_card() instanceof Number_TenCard ){
-                        if(prediction2>=0)
-                            squares.get(prediction2).setBorder(new LineBorder(Color.BLACK, 2));
+                        if(prediction10>=0)
+                            squares.get(prediction10).setBorder(new LineBorder(Color.BLACK, 2));
                     }
 
 
@@ -614,10 +639,10 @@ public class BoardUI extends JLayeredPane {
                     cleanSquares(squares);
 
                 });
-            }else if(i == prediction2){
+            }else if(i == prediction10){
                 squares.get(i).addActionListener(e -> {
 
-                    controller.play(pawn, prediction2);
+                    controller.play(pawn, prediction10);
                     squares.get(pawn.getPosition()).setBorder(new LineBorder(Color.BLACK, 2));
                     if(!pawn.getHome()) {
                         pawnUI.setBounds(squares.get(pawn.getPosition()).getBounds());
