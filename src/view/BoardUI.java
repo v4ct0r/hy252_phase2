@@ -267,7 +267,7 @@ public class BoardUI extends JLayeredPane {
                 cleanSquares(squares);
 
 
-                if(controller.getCurrent_card() instanceof Number_SevenCard && controller.getRed_pawn2().isMoveable() && flag7 == -1){
+                if(controller.getCurrent_card() instanceof Number_SevenCard && !controller.getRed_pawn2().isStart() && !controller.getRed_pawn2().getHome() && flag7==-1){
                     fix_squres_border();
 
                     prediction7 = controller.predict7(controller.getRed_pawn1());
@@ -294,6 +294,12 @@ public class BoardUI extends JLayeredPane {
 
 
                 prediction = controller.predict(controller.getRed_pawn1());
+
+                if(flag7!=-1){
+
+                    prediction = controller.predictdiff7(controller.getRed_pawn1(),7-flag7);
+
+                }
 
                 if(prediction == controller.getRed_pawn1().getPosition()) {
                     if(prediction>=0)
@@ -360,7 +366,7 @@ public class BoardUI extends JLayeredPane {
                 cleanSquares(squares);
 
 
-                if(controller.getCurrent_card() instanceof Number_SevenCard && controller.getRed_pawn1().isMoveable()){
+                if(controller.getCurrent_card() instanceof Number_SevenCard && !controller.getRed_pawn1().isStart() && !controller.getRed_pawn1().getHome() && flag7==-1){
                     fix_squres_border();
 
                     prediction7 = controller.predict7(controller.getRed_pawn2());
@@ -381,6 +387,7 @@ public class BoardUI extends JLayeredPane {
                 }
 
 
+
                 if(controller.predict(controller.getRed_pawn1())>=0 && !controller.getRed_pawn1().getHome()) {
                     if(controller.predict(controller.getRed_pawn1())!=controller.player1.getHomePosition())
                         squares.get(controller.predict(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
@@ -388,6 +395,13 @@ public class BoardUI extends JLayeredPane {
                         squares.get(controller.predict1(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
                 }
                 prediction = controller.predict(controller.getRed_pawn2());
+
+
+                if(flag7!=-1){
+
+                    prediction = controller.predictdiff7(controller.getRed_pawn2(),7-flag7);
+
+                }
 
                 if(prediction == controller.getRed_pawn2().getPosition()){
                     if(prediction>=0)
@@ -562,6 +576,10 @@ public class BoardUI extends JLayeredPane {
         for(int i=0; i<72; i++){
            if(i != 8 && i !=44)
                 squares.get(i).setBorder(new LineBorder(Color.black, 2));
+           else if(i==8)
+               squares.get(i).setBorder(new LineBorder(Color.RED, 7));
+           else
+               squares.get(i).setBorder(new LineBorder(Color.YELLOW, 7));
         }
     }
 
@@ -669,6 +687,13 @@ public class BoardUI extends JLayeredPane {
                                 pawnUI.setEnabled(false);
                             }
                             cleanSquares(squares);
+                            pawnUI.setEnabled(false);
+
+                            flag7 = finalJ + 1;
+                            if(flag7==7){
+                                flag7=-1;
+                                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                            }
                             fix_squres_border();
                         });
 
@@ -790,6 +815,8 @@ public class BoardUI extends JLayeredPane {
                             squares.get(prediction).setBorder(new LineBorder(Color.BLACK, 2));
                     }
 
+                    flag7=-1;
+
 
                     if(controller.game_has_finished()){
                         JOptionPane.showMessageDialog(this, controller.current_player.getColor() + " player has won!");
@@ -889,6 +916,7 @@ public class BoardUI extends JLayeredPane {
             }
         }
         Simple_Flag = 0;
+        flag7 = -1;
 
 
         if(!(controller.getCurrent_card() instanceof Number_TwoCard) ) {

@@ -120,6 +120,15 @@ public class Controller {
         }
         return null;
     }
+    public int predictdiff7(Pawn p,int value){
+        card temp=getCurrent_card() ;
+        if(temp instanceof Number_SevenCard){
+            Number_SevenCard temp1 = new Number_SevenCard();
+
+            return temp1.seven_7diff(p,player1,player2,value);
+        }
+        return 0;
+    }
 
     public int predict(Pawn p){
         card temp=getCurrent_card() ;
