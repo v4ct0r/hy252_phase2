@@ -22,7 +22,7 @@ public class Deck {
 
     public Deck() {
         initializeDeck(cards);
-        //shuffle(cards);
+      //  shuffle(cards);
     }
 
     /**
@@ -57,13 +57,13 @@ public class Deck {
             cards[i] = new Number_TenCard();
         }
         for (int i = 32; i < 36; i++) {
-            cards[i] = new Number_FourCard();
+            cards[i] = new Number_SevenCard();
         }
         for (int i = 36; i < 40; i++) {
             cards[i] = new Simple_Number_Card8_12(12);
         }
         for (int i = 40; i < 44; i++) {
-            cards[i] = new Number_OneCard();
+            cards[i] = new Number_SevenCard();
         }
     }
 
@@ -86,13 +86,12 @@ public void shuffle(card[] cards) {
             cardsLeft = 44;
         }
         cardsLeft++;
-        if(cardsLeft==2 || cardsLeft==4 || cardsLeft==5 || cardsLeft==6) {
-            return cards[0];
-        }else if(cardsLeft==3 || cardsLeft==7 || cardsLeft==8 || cardsLeft==9) {
-            return cards[0];
-        }
-
-        return cards[21];
+        if(cardsLeft==2 || cardsLeft==3 )
+            return cards[4];
+            //  }else if(cardsLeft==3 || cardsLeft==7 || cardsLeft==8 || cardsLeft==9) {
+            //      return cards[0];
+            //  }
+        return cards[29];
 
     }
 

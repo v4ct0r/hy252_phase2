@@ -46,6 +46,10 @@ public class Number_TenCard extends Number_Card{
                 return pawn.getPosition() + getValue() + 6;
             if(Objects.equals(pawn.getColor(), "red") && pawn.getPosition() + getValue() > 38 && pawn.getPosition() + getValue() <= 44)
                 return pawn.getPosition() + getValue() + 6;
+           if(Objects.equals(pawn.getColor(), "red") && pawn.getPosition() <39 && pawn.getPosition() + getValue() > 44)
+               return pawn.getPosition() + getValue() + 6;
+           if(Objects.equals(pawn.getColor(), "yellow") && pawn.getPosition() <3 && pawn.getPosition() + getValue() > 8)
+               return pawn.getPosition() + getValue() + 6;
             if(pawnSkipsHome(pawn, player1, player2)) {
                 pawn.setMoveable(false);
                 return pawn.getPosition();

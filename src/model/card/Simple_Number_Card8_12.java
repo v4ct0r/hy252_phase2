@@ -26,16 +26,21 @@ public class Simple_Number_Card8_12 extends Number_Card
                         return pawn.getPosition() + getValue() - 72;
                     else
                         return pawn.getPosition() + getValue() - 72 + 6;
-                }else
-                if(pawnSkipsHome(pawn, player1, player2)) {
-                    pawn.setMoveable(false);
-                    return pawn.getPosition();
-                }
+                }else {
+                    if (pawnSkipsHome(pawn, player1, player2)) {
+                        pawn.setMoveable(false);
+                        return pawn.getPosition();
+                    }
                     return pawn.getPosition() + getValue() - 72;
+                }
             }
             if(Objects.equals(pawn.getColor(), "yellow") && pawn.getPosition() + getValue() > 2 && pawn.getPosition() + getValue() <= 8)
                 return pawn.getPosition() + getValue() + 6;
             if(Objects.equals(pawn.getColor(), "red") && pawn.getPosition() + getValue() > 38 && pawn.getPosition() + getValue() <= 44)
+                return pawn.getPosition() + getValue() + 6;
+            if(Objects.equals(pawn.getColor(), "red") && pawn.getPosition() <39 && pawn.getPosition() + getValue() > 44)
+                return pawn.getPosition() + getValue() + 6;
+            if(Objects.equals(pawn.getColor(), "yellow") && pawn.getPosition() <3 && pawn.getPosition() + getValue() > 8)
                 return pawn.getPosition() + getValue() + 6;
 
             if(pawnSkipsHome(pawn, player1, player2)) {

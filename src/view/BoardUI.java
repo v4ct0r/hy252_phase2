@@ -19,6 +19,7 @@ public class BoardUI extends JLayeredPane {
     private int prediction10 = -1;
 
     private int[] prediction7 = new int[7];
+    private int flag7 =-1;
 
     static ArrayList<JButton> squares ;
     JButton redPawn1;
@@ -248,7 +249,7 @@ public class BoardUI extends JLayeredPane {
                 }
 
                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
-
+                fix_squres_border();
                 return;
             }
 
@@ -266,23 +267,29 @@ public class BoardUI extends JLayeredPane {
                 cleanSquares(squares);
 
 
-                if(controller.getCurrent_card() instanceof Number_SevenCard && controller.getRed_pawn2().isMoveable()){
+                if(controller.getCurrent_card() instanceof Number_SevenCard && controller.getRed_pawn2().isMoveable() && flag7 == -1){
+                    fix_squres_border();
+
                     prediction7 = controller.predict7(controller.getRed_pawn1());
-
-
-
-
-
-
-
-
+                    for(int i = 0 ; i < 7 ; i++){
+                        if(prediction7[i] == controller.getRed_pawn1().getPosition()){
+                            if(prediction7[i]>=0)
+                                squares.get(prediction7[i]).setVisible(false);
+                        }
+                        if(prediction7[i]>=0)
+                            squares.get(prediction7[i]).setBorder(new LineBorder(Color.MAGENTA, 3));
+                    }
+                    bumpingUI_for_array(prediction7 ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
+                    set_squares_switch_turn_for_array(controller.getRed_pawn1(), squares, redPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround, prediction7, prev, redPawn1Home);
                     return;
                 }
 
 
                 if(controller.predict(controller.getRed_pawn2())>=0 && !controller.getRed_pawn2().getHome()) {
-                    squares.get(controller.predict(controller.getRed_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
-                    //change the border of the square that the other pawn would go to
+                    if(controller.predict(controller.getRed_pawn2())!=controller.player1.getHomePosition())
+                        squares.get(controller.predict(controller.getRed_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
+                    if(controller.current_card instanceof Number_TenCard)
+                        squares.get(controller.predict1(controller.getRed_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
                 }
 
 
@@ -334,7 +341,7 @@ public class BoardUI extends JLayeredPane {
                 }
 
                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
-
+                fix_squres_border();
                 return;
             }
 
@@ -354,19 +361,32 @@ public class BoardUI extends JLayeredPane {
 
 
                 if(controller.getCurrent_card() instanceof Number_SevenCard && controller.getRed_pawn1().isMoveable()){
+                    fix_squres_border();
+
                     prediction7 = controller.predict7(controller.getRed_pawn2());
+                    for(int i = 0 ; i < 7 ; i++){
+                        if(prediction7[i] == controller.getRed_pawn2().getPosition()){
+                            if(prediction7[i]>=0)
+                                squares.get(prediction7[i]).setVisible(false);
+                        }
+                        if(prediction7[i]>=0)
+                            squares.get(prediction7[i]).setBorder(new LineBorder(Color.MAGENTA, 3));
 
+                    }
+                    bumpingUI_for_array(prediction7 ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
 
-
-
+                    set_squares_switch_turn_for_array(controller.getRed_pawn2(), squares, redPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround, prediction7, prev, redPawn2Home);
 
                     return;
                 }
 
 
-                if(controller.predict(controller.getRed_pawn1())>=0 && !controller.getRed_pawn1().getHome())
-                    squares.get(controller.predict(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
-
+                if(controller.predict(controller.getRed_pawn1())>=0 && !controller.getRed_pawn1().getHome()) {
+                    if(controller.predict(controller.getRed_pawn1())!=controller.player1.getHomePosition())
+                        squares.get(controller.predict(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
+                    if(controller.current_card instanceof Number_TenCard)
+                        squares.get(controller.predict1(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
+                }
                 prediction = controller.predict(controller.getRed_pawn2());
 
                 if(prediction == controller.getRed_pawn2().getPosition()){
@@ -415,7 +435,7 @@ public class BoardUI extends JLayeredPane {
                 }
 
                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
-
+                fix_squres_border();
                 return;
             }
             if(backround.getisdrawn()) {
@@ -430,8 +450,12 @@ public class BoardUI extends JLayeredPane {
 
                 cleanSquares(squares);
 
-                if(controller.predict(controller.getYellow_pawn2())>=0 && !controller.getYellow_pawn2().getHome())
-                    squares.get(controller.predict(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
+                if(controller.predict(controller.getYellow_pawn2())>=0 && !controller.getYellow_pawn2().getHome()){
+                    if(controller.predict(controller.getYellow_pawn2())!=controller.player2.getHomePosition())
+                        squares.get(controller.predict(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
+                    if(controller.current_card instanceof Number_TenCard)
+                        squares.get(controller.predict1(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
+                }
 
                 prediction = controller.predict(controller.getYellow_pawn1());
 
@@ -481,7 +505,7 @@ public class BoardUI extends JLayeredPane {
               }
 
               switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
-
+              fix_squres_border();
               return;
             }
             if(backround.getisdrawn()) {
@@ -497,9 +521,12 @@ public class BoardUI extends JLayeredPane {
 
                 cleanSquares(squares);
 
-                if(controller.predict(controller.getYellow_pawn1())>=0 && !controller.getYellow_pawn1().getHome())
-                    squares.get(controller.predict(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
-
+                if(controller.predict(controller.getYellow_pawn1())>=0 && !controller.getYellow_pawn1().getHome()) {
+                    if (controller.predict(controller.getYellow_pawn1()) != controller.player2.getHomePosition())
+                        squares.get(controller.predict(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
+                    if (controller.current_card instanceof Number_TenCard)
+                        squares.get(controller.predict1(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
+                }
                 prediction = controller.predict(controller.getYellow_pawn2());
 
                 if(prediction == controller.getYellow_pawn2().getPosition()) {
@@ -557,6 +584,21 @@ public class BoardUI extends JLayeredPane {
 
     }
 
+    private void bumpingUI_for_array(int[] prediction7, Pawn yellowPawn1, Pawn yellowPawn2, JButton yellowPawn11, JButton yellowPawn21) {
+        yellowPawn11.setBorder(null);
+        yellowPawn21.setBorder(null);
+        for(int i = 0 ; i < 7 ; i++){
+            if(prediction7[i] == yellowPawn1.getPosition()){
+                yellowPawn11.setEnabled(true);
+                yellowPawn11.setBorder(new LineBorder(Color.MAGENTA, 3));
+            }
+            if(prediction7[i] == yellowPawn2.getPosition()){
+                yellowPawn21.setEnabled(true);
+                yellowPawn21.setBorder(new LineBorder(Color.MAGENTA, 3));
+            }
+        }
+    }
+
     private void bumpingUI(int prediction, Pawn enemyPawn1, Pawn enemyPawn2, JButton enemyPawnUI1, JButton enemyPawnUI2) {
         enemyPawnUI1.setEnabled(false);
         enemyPawnUI2.setEnabled(false);
@@ -569,6 +611,70 @@ public class BoardUI extends JLayeredPane {
         if(prediction == enemyPawn2.getPosition()){
             enemyPawnUI2.setEnabled(true);
             enemyPawnUI2.setBorder(new LineBorder(Color.MAGENTA, 3));
+        }
+    }
+
+    private void set_squares_switch_turn_for_array(Pawn pawn, ArrayList<JButton> squares, JButton pawnUI, Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2, Backround backround, int[] prediction7, int prev, Rectangle Home) {
+        for(int i=0 ; i<72 ;i++){
+            if(i != prediction7[0] && i != prediction7[1] && i != prediction7[2] && i != prediction7[3] && i != prediction7[4] && i != prediction7[5] && i != prediction7[6]){
+                squares.get(i).addActionListener(e -> {
+                    JOptionPane.showMessageDialog(this, "You can't move there!");
+                });
+
+            }
+            else {
+                for (int j = 0; j < 7; j++) {
+                    if(i == prediction7[j]){
+                        int finalJ = j;
+                        squares.get(i).addActionListener(e -> {
+                            controller.play(pawn, prediction7[finalJ]);
+                            squares.get(pawn.getPosition()).setBorder(new LineBorder(Color.BLACK, 2));
+                            if(!pawn.getHome()) {
+                                pawnUI.setBounds(squares.get(pawn.getPosition()).getBounds());
+                            }
+                            else {
+                                if(Objects.equals(pawn.getColor(), "red")) {
+                                    squares.get(pawn.getPosition()).setBorder(new LineBorder(Color.RED, 7));
+                                }
+                                else {
+                                    squares.get(pawn.getPosition()).setBorder(new LineBorder(Color.YELLOW, 7));
+                                }
+                                pawnUI.setBounds(Home);
+                            }
+                            if(prev>=0) {
+                                squares.get(prev).setVisible(true);
+                            }
+                            if(!pawn.getHome()){
+                                if(pawn.getPosition()>=0) {
+                                    squares.get(pawn.getPosition()).setVisible(false);
+                                }
+                            }
+                            else{
+                                this.add(pawnUI, JLayeredPane.PALETTE_LAYER); //pawnUI OVERLAPS the square HOME
+                            }
+
+                            if(controller.check_for_slide(pawn)){
+                                refresh_all_the_pawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, squares);
+                                pawnUI.setBounds(squares.get(pawn.getPosition()).getBounds());
+                            }
+
+
+                            if(controller.game_has_finished()){
+                                JOptionPane.showMessageDialog(this, controller.current_player.getColor() + " player has won!");
+                                System.exit(0);
+                            }
+
+
+                            if (pawn.getHome()) {
+                                pawnUI.setEnabled(false);
+                            }
+                            cleanSquares(squares);
+                            fix_squres_border();
+                        });
+
+                    }
+                }
+            }
         }
     }
 

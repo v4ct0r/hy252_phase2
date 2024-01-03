@@ -49,8 +49,8 @@ public class Number_TwoCard extends Number_Card {
                     pawn.setMoveable(false);
                     return pawn.getPosition();
                 }
-                // return 7;
-                 return pawn.getPosition() + getValue();
+                 return 0;
+               //  return pawn.getPosition() + getValue();
             }
         }
         pawn.setMoveable(false);
