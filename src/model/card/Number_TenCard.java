@@ -83,7 +83,7 @@ public class Number_TenCard extends Number_Card{
                 return 2;
 
             if(pawn.getPosition() ==45)
-                return 39;
+                return 38;
 
             return pawn.getPosition() - 1;
         }

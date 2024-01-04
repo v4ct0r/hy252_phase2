@@ -8,7 +8,7 @@ import javax.smartcardio.Card;
 import static java.lang.System.exit;
 
 public class Deck {
-    private int cardsLeft= 1;
+    private int cardsLeft= 44;
 
     card[] cards= new card[44];
 
@@ -23,7 +23,7 @@ public class Deck {
 
     public Deck() {
         initializeDeck(cards);
-      //  shuffle(cards);
+        shuffle(cards);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Deck {
             cards[i] = new Number_TenCard();
         }
         for (int i = 32; i < 36; i++) {
-            cards[i] = new Number_SevenCard();
+            cards[i] = new Number_ElevenCard();
         }
         for (int i = 36; i < 40; i++) {
             cards[i] = new Simple_Number_Card8_12(12);
@@ -86,13 +86,13 @@ public void shuffle(card[] cards) {
             shuffle(cards);
             cardsLeft = 44;
         }
-        cardsLeft++;
-       if(cardsLeft==2 || cardsLeft==3 || cardsLeft==4 )
-           return cards[0];
-        else if(  cardsLeft==6 ||cardsLeft==7 || cardsLeft==8 || cardsLeft==9){
-            return cards[0];
-        }
-        return cards[17];
+        cardsLeft--;
+     //  if(cardsLeft==2 || cardsLeft==3 || cardsLeft==4 || cardsLeft==5 || cardsLeft==6 || cardsLeft==7)
+     //      return cards[0];
+     //   else if(  cardsLeft==8){
+     //       return cards[4];
+     //   }
+        return cards[cardsLeft];
 
     }
 

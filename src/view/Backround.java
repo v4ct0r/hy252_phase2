@@ -106,15 +106,7 @@ public class Backround extends JFrame{
     }
 
     private void setFold_button(Controller controller, card currentCard) {
-     //   if(!(currentCard instanceof Number_OneCard) && !(currentCard instanceof Number_TwoCard) /*&& !(currentCard instanceof Sorry_Card)*/) {
-     //       if(controller.current_player.getPawn1().getPosition() == controller.current_player.getPawn2().getPosition() && (controller.current_player.getPawn1().getPosition() == controller.current_player.getStartPosition())) {
-     //           Fold.setEnabled(true);
-     //           return;
-     //       }
-     //       else
-     //           Fold.setEnabled(false);
-     //       return;
-     //   }
+
         if(currentCard instanceof Simple_Number_Card8_12) {
             Fold.setEnabled(false);
             return;
@@ -132,6 +124,9 @@ public class Backround extends JFrame{
         if(currentCard instanceof Number_SevenCard && !controller.current_player.getPawn1().isStart() && !controller.current_player.getPawn1().getHome()){
             controller.predict7(controller.current_player.getPawn2());
         }
+        if(currentCard instanceof Number_ElevenCard)
+            Fold.setEnabled(true);
+
         if(!controller.current_player.getPawn1().isMoveable() && !controller.current_player.getPawn2().isMoveable())
             Fold.setEnabled(true);
     }

@@ -173,6 +173,10 @@ public class Controller {
             Number_SevenCard temp1 = new Number_SevenCard();
             return temp1.seven(p,player1,player2);
         }
+        if(temp instanceof Number_ElevenCard){
+            Number_ElevenCard temp1 = new Number_ElevenCard();
+            return temp1.eleven(p,player1,player2);
+        }
         return 0;
     }
 
@@ -211,7 +215,8 @@ public class Controller {
             bumping(p,player1,player2);
         }
         else if(temp instanceof Number_ElevenCard){
-
+            p.setPosition(prediction);
+            bumping(p,player1,player2);
         }
         else if(temp instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) temp).getValue() == 12){
             p.setPosition(prediction);
