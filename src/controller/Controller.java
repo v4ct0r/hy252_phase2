@@ -177,6 +177,10 @@ public class Controller {
             Number_ElevenCard temp1 = new Number_ElevenCard();
             return temp1.eleven(p,player1,player2);
         }
+        if(temp instanceof Sorry_Card){
+            Sorry_Card temp1 = new Sorry_Card();
+            return temp1.sorry(p,player1,player2);
+        }
         return 0;
     }
 
@@ -211,20 +215,44 @@ public class Controller {
             bumping(p,player1,player2);
         }
         else if(temp instanceof Number_TenCard){
+
             p.setPosition(prediction);
             bumping(p,player1,player2);
         }
         else if(temp instanceof Number_ElevenCard){
+            int mypawnpos = p.getPosition();
             p.setPosition(prediction);
-            bumping(p,player1,player2);
+            swap(p,player1,player2,mypawnpos);
         }
         else if(temp instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) temp).getValue() == 12){
             p.setPosition(prediction);
             bumping(p,player1,player2);
         }
         else if(temp instanceof Sorry_Card){
+            p.setPosition(prediction);
+            bumping(p,player1,player2);
+        }
+    }
 
-        }}
+    private void swap(Pawn p, Player player1, Player player2, int mypawnpos) {
+        if(Objects.equals(p.getColor(), "red")){
+            if(p.getPosition()==player2.getPawn1().getPosition()){
+                player2.getPawn1().setPosition(mypawnpos);
+            }
+            else if(p.getPosition()==player2.getPawn2().getPosition()){
+                player2.getPawn2().setPosition(mypawnpos);
+            }
+        }
+        else if(Objects.equals(p.getColor(), "yellow")){
+            if(p.getPosition()==player1.getPawn1().getPosition()){
+                player1.getPawn1().setPosition(mypawnpos);
+            }
+            else if(p.getPosition()==player1.getPawn2().getPosition()){
+                player1.getPawn2().setPosition(mypawnpos);
+            }
+        }
+
+    }
 
     private void bumping(Pawn p, Player player1, Player player2) {
         if(Objects.equals(p.getColor(), "red")){

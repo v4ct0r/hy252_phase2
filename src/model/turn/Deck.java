@@ -3,9 +3,6 @@ import java.util.Random;
 
 import model.card.*;
 
-import javax.smartcardio.Card;
-
-import static java.lang.System.exit;
 
 public class Deck {
     private int cardsLeft= 44;
@@ -64,7 +61,7 @@ public class Deck {
             cards[i] = new Simple_Number_Card8_12(12);
         }
         for (int i = 40; i < 44; i++) {
-            cards[i] = new Number_SevenCard();
+            cards[i] = new Sorry_Card();
         }
     }
 
@@ -87,11 +84,7 @@ public void shuffle(card[] cards) {
             cardsLeft = 44;
         }
         cardsLeft--;
-     //  if(cardsLeft==2 || cardsLeft==3 || cardsLeft==4 || cardsLeft==5 || cardsLeft==6 || cardsLeft==7)
-     //      return cards[0];
-     //   else if(  cardsLeft==8){
-     //       return cards[4];
-     //   }
+
         return cards[cardsLeft];
 
     }

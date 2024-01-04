@@ -237,11 +237,16 @@ public class BoardUI extends JLayeredPane {
 
             if(controller.getCurrent_player().getColor().equals("yellow")){ //BUMPING
                 prediction = controller.getRed_pawn1().getPosition();
+                temp11 = controller.get_pawn(prevPawn).getPosition();
                 controller.play(controller.get_pawn(prevPawn), prediction);
                 redPawn1.setBorder(null);
-                redPawn1.setBounds(redPawn1Start);
-                if(prev>=0)
-                    squares.get(prev).setVisible(true);
+                if(!(controller.getCurrent_card() instanceof Number_ElevenCard))
+                    redPawn1.setBounds(redPawn1Start);
+                else
+                    redPawn1.setBounds(squares.get(temp11).getBounds());
+                if(!(controller.getCurrent_card() instanceof Number_ElevenCard))
+                    if(prev>=0)
+                        squares.get(prev).setVisible(true);
                 prevPawnUI().setBounds(squares.get(controller.get_pawn(prevPawn).getPosition()).getBounds());
                 squares.get(controller.get_pawn(prevPawn).getPosition()).setBorder(new LineBorder(Color.BLACK, 2));
 
@@ -351,6 +356,10 @@ public class BoardUI extends JLayeredPane {
                     if(!controller.getRed_pawn1().isStart())
                         enableEnemy_for_11_Sorry( controller.getYellow_pawn1(), controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
                 }
+                if(controller.getCurrent_card() instanceof Sorry_Card){
+                    if(controller.getRed_pawn1().isStart())
+                        enableEnemy_for_11_Sorry( controller.getYellow_pawn1(), controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
+                }
 
                 bumpingUI(prediction ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
 
@@ -364,16 +373,19 @@ public class BoardUI extends JLayeredPane {
 
             if(controller.getCurrent_player().getColor().equals("yellow")){//BUMPING
                 prediction = controller.getRed_pawn2().getPosition();
-                temp11 = prediction;
+                temp11 = controller.get_pawn(prevPawn).getPosition();
                 controller.play(controller.get_pawn(prevPawn), prediction);
 
                 redPawn2.setBorder(null);
+
                 if(!(controller.getCurrent_card() instanceof Number_ElevenCard))
                     redPawn2.setBounds(redPawn2Start);
-                else
+                else{
                     redPawn2.setBounds(squares.get(temp11).getBounds());
-                if(prev>=0)
-                    squares.get(prev).setVisible(true);
+                }
+                if(!(controller.getCurrent_card() instanceof Number_ElevenCard))
+                    if(prev>=0)
+                        squares.get(prev).setVisible(true);
                 prevPawnUI().setBounds(squares.get(controller.get_pawn(prevPawn).getPosition()).getBounds());
                 squares.get(controller.get_pawn(prevPawn).getPosition()).setBorder(new LineBorder(Color.BLACK, 2));
 
@@ -483,6 +495,10 @@ public class BoardUI extends JLayeredPane {
                     if(!controller.getRed_pawn2().isStart())
                         enableEnemy_for_11_Sorry( controller.getYellow_pawn1(), controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
                 }
+                if(controller.getCurrent_card() instanceof Sorry_Card){
+                    if(controller.getRed_pawn2().isStart())
+                        enableEnemy_for_11_Sorry( controller.getYellow_pawn1(), controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
+                }
 
                 bumpingUI(prediction ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
 
@@ -495,13 +511,17 @@ public class BoardUI extends JLayeredPane {
         yellowPawn1.addActionListener(e -> {
 
             if(controller.getCurrent_player().getColor().equals("red")){//BUMPING
-
-                    prediction = controller.getYellow_pawn1().getPosition();
+                prediction = controller.getYellow_pawn1().getPosition();
+                temp11 = controller.get_pawn(prevPawn).getPosition();
                 controller.play(controller.get_pawn(prevPawn), prediction);
                 yellowPawn1.setBorder(null);
-                yellowPawn1.setBounds(yellowPawn1Start);
-                if(prev>=0)
-                    squares.get(prev).setVisible(true);
+                if(!(controller.getCurrent_card() instanceof Number_ElevenCard))
+                    yellowPawn1.setBounds(yellowPawn1Start);
+                else
+                    yellowPawn1.setBounds(squares.get(temp11).getBounds());
+                if(!(controller.getCurrent_card() instanceof Number_ElevenCard))
+                    if(prev>=0)
+                     squares.get(prev).setVisible(true);
                 prevPawnUI().setBounds(squares.get(controller.get_pawn(prevPawn).getPosition()).getBounds());
                 squares.get(controller.get_pawn(prevPawn).getPosition()).setBorder(new LineBorder(Color.BLACK, 2));
 
@@ -597,6 +617,11 @@ public class BoardUI extends JLayeredPane {
                         enableEnemy_for_11_Sorry( controller.getRed_pawn1(), controller.getRed_pawn2(), redPawn1, redPawn2);
                 }
 
+                if(controller.getCurrent_card() instanceof Sorry_Card){
+                    if(controller.getYellow_pawn1().isStart())
+                        enableEnemy_for_11_Sorry( controller.getRed_pawn1(), controller.getRed_pawn2(), redPawn1, redPawn2);
+                }
+
 
                 bumpingUI(prediction ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
 
@@ -608,13 +633,17 @@ public class BoardUI extends JLayeredPane {
         yellowPawn2.addActionListener(e -> {
 
             if(controller.getCurrent_player().getColor().equals("red")){//BUMPING
-
-                    prediction = controller.getYellow_pawn2().getPosition();
+                prediction = controller.getYellow_pawn2().getPosition();
+                temp11 = controller.get_pawn(prevPawn).getPosition();
                 controller.play(controller.get_pawn(prevPawn), prediction);
                 yellowPawn2.setBorder(null);
-                yellowPawn2.setBounds(yellowPawn2Start);
-                if(prev>=0)
-                    squares.get(prev).setVisible(true);
+                if(!(controller.getCurrent_card() instanceof Number_ElevenCard))
+                    yellowPawn2.setBounds(yellowPawn2Start);
+                else
+                    yellowPawn2.setBounds(squares.get(temp11).getBounds());
+                if(!(controller.getCurrent_card() instanceof Number_ElevenCard))
+                    if(prev>=0)
+                        squares.get(prev).setVisible(true);
                 prevPawnUI().setBounds(squares.get(controller.get_pawn(prevPawn).getPosition()).getBounds());
                 squares.get(controller.get_pawn(prevPawn).getPosition()).setBorder(new LineBorder(Color.BLACK, 2));
 
@@ -647,6 +676,7 @@ public class BoardUI extends JLayeredPane {
                 return;
 
             }
+
             if(backround.getisdrawn()) {
                 if(controller.getCurrent_card() instanceof Simple_Number_Card ){
                     if(controller.getYellow_pawn1().isStart() || controller.getYellow_pawn1().getHome() || !controller.getYellow_pawn1().isMoveable())
@@ -714,6 +744,11 @@ public class BoardUI extends JLayeredPane {
                 }
                 if(controller.getCurrent_card() instanceof Number_ElevenCard){
                     if(!controller.getYellow_pawn2().isStart())
+                        enableEnemy_for_11_Sorry( controller.getRed_pawn1(), controller.getRed_pawn2(), redPawn1, redPawn2);
+                }
+
+                if(controller.getCurrent_card() instanceof Sorry_Card){
+                    if(controller.getYellow_pawn2().isStart())
                         enableEnemy_for_11_Sorry( controller.getRed_pawn1(), controller.getRed_pawn2(), redPawn1, redPawn2);
                 }
 
@@ -1036,6 +1071,7 @@ public class BoardUI extends JLayeredPane {
     private void ActionListener_FoldButton(Backround backround, Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
         backround.Fold.addActionListener(e -> {
 
+            refresh_paws_border(redPaw1, redPaw2, yellowPaw1, yellowPaw2);
             controller.switch_current_player(controller.player1, controller.player2);
             DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
 
@@ -1050,6 +1086,13 @@ public class BoardUI extends JLayeredPane {
             backround.setiIsdrawn(false);
             backround.Fold.setEnabled(false);
         });
+    }
+
+    private void refresh_paws_border(JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
+        redPaw1.setBorder(null);
+        redPaw2.setBorder(null);
+        yellowPaw1.setBorder(null);
+        yellowPaw2.setBorder(null);
     }
 
     private void DisablenotCurrentPlayerPawns(Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
