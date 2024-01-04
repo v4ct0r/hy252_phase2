@@ -161,11 +161,17 @@ public class Number_SevenCard extends Number_Card {
         if (pawn2.isStart() || pawn2.getHome())
             return false;
 
-        if (pawnSkipsHome_Custom(pawn2, player1, player2, k))
+        if (pawnSkipsHome_Custom(pawn2, player1, player2, k)){
             return false;
+        }
 
-        if (arr[i]==seven_7diff(pawn2, player1, player2, k))
+        if (arr[i]==seven_7diff(pawn2, player1, player2, k)) {
+            if(Objects.equals(pawn2.getColor(), "red") && arr[i]==player1.getHomePosition())
+                return true;
+            if(Objects.equals(pawn2.getColor(), "yellow") && arr[i]==player2.getHomePosition())
+                return true;
             return false;
+        }
         return true;
     }
 

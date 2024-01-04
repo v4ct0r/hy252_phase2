@@ -126,10 +126,10 @@ public class Backround extends JFrame{
             controller.predict1(controller.current_player.getPawn1());
             controller.predict1(controller.current_player.getPawn2());
         }
-        if(currentCard instanceof Number_SevenCard && controller.current_player.getPawn2().isSafe() && controller.current_player.getPawn2().getHome()){
+        if(currentCard instanceof Number_SevenCard && !controller.current_player.getPawn2().isStart()&& !controller.current_player.getPawn2().getHome()){
             controller.predict7(controller.current_player.getPawn1());
         }
-        if(currentCard instanceof Number_SevenCard && controller.current_player.getPawn1().isSafe() && controller.current_player.getPawn1().getHome()){
+        if(currentCard instanceof Number_SevenCard && !controller.current_player.getPawn1().isStart() && !controller.current_player.getPawn1().getHome()){
             controller.predict7(controller.current_player.getPawn2());
         }
         if(!controller.current_player.getPawn1().isMoveable() && !controller.current_player.getPawn2().isMoveable())
