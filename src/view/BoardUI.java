@@ -1004,11 +1004,6 @@ public class BoardUI extends JLayeredPane {
 
         if(controller.getCurrent_card() instanceof Simple_Number_Card) {
             if(Simple_Flag < 2) {
-                if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
-                    backround.InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
-                else
-                    backround.InfoBox.setText("Info Box\n\nTurn: Player 2 (Yellow)\n");
-                backround.InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n");
                 return;
             }
         }
