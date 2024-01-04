@@ -61,7 +61,7 @@ public class Number_SevenCard extends Number_Card {
         }
         int[] arr = new int[7];
         for (int i = 0; i < 7; i++) {
-
+            pawn.setMoveable(true);
             if (!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + i + 1) || teammate_is_home(pawn, player1, player2)) {
 
 
@@ -115,17 +115,20 @@ public class Number_SevenCard extends Number_Card {
     }
 
     private void check_if_teammate_is_able_to_move(Pawn p, Player player1, Player player2, int[] arr) {
+        int count = 0;
         if (p.getColor().equals("red")) {
             if (p.getId() == 1) {
                 for (int i = 0; i < arr.length; i++) {
                     if (!able_to_move(player1.getPawn2(), player1, player2, 7 - i - 1 ,arr,i)) {
                         arr[i] = p.getPosition();
+                        count++;
                     }
                 }
             } else if (p.getId() == 2) {
                 for (int i = 0; i < arr.length; i++) {
                     if (!able_to_move(player1.getPawn1(), player1, player2, 7 - i - 1,arr,i)) {
                         arr[i] = p.getPosition();
+                        count++;
                     }
                 }
 
@@ -135,16 +138,22 @@ public class Number_SevenCard extends Number_Card {
                 for (int i = 0; i < arr.length; i++) {
                     if (!able_to_move(player2.getPawn2(), player1, player2, 7 - i - 1,arr,i)) {
                         arr[i] = p.getPosition();
+                        count++;
                     }
                 }
             } else if (p.getId() == 2) {
                 for (int i = 0; i < arr.length; i++) {
                     if (!able_to_move(player2.getPawn1(), player1, player2, 7 - i - 1,arr,i)) {
                         arr[i] = p.getPosition();
+                        count++;
                     }
                 }
             }
         }
+        if(count==7)
+            p.setMoveable(false);
+        else
+            p.setMoveable(true);
 
     }
 
@@ -152,12 +161,11 @@ public class Number_SevenCard extends Number_Card {
         if (pawn2.isStart() || pawn2.getHome())
             return false;
 
-        if (arr[i]==seven_7diff(pawn2, player1, player2, k))
-            return false;
-
         if (pawnSkipsHome_Custom(pawn2, player1, player2, k))
             return false;
 
+        if (arr[i]==seven_7diff(pawn2, player1, player2, k))
+            return false;
         return true;
     }
 

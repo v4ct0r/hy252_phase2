@@ -350,4 +350,24 @@ public class Controller {
     public void setYellow_pawn2(Pawn yellow_pawn2) {
         Yellow_pawn2 = yellow_pawn2;
     }
+
+    public Pawn teammate(Pawn pawn2) {
+        if(Objects.equals(pawn2.getColor(), "red")){
+            if(pawn2.getId()==1){
+                return getRed_pawn2();
+            }
+            else if(pawn2.getId()==2){
+                return getRed_pawn1();
+            }
+        }
+        else if(Objects.equals(pawn2.getColor(), "yellow")){
+            if(pawn2.getId()==1){
+                return getYellow_pawn2();
+            }
+            else if(pawn2.getId()==2){
+                return getYellow_pawn1();
+            }
+        }
+        return null;
+    }
 }
