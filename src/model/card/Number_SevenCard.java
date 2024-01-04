@@ -116,9 +116,14 @@ public class Number_SevenCard extends Number_Card {
 
     private void check_if_teammate_is_able_to_move(Pawn p, Player player1, Player player2, int[] arr) {
         int count = 0;
+
         if (p.getColor().equals("red")) {
             if (p.getId() == 1) {
                 for (int i = 0; i < arr.length; i++) {
+                    if(arr[i]==p.getPosition()) {
+                        count++;
+                        continue;
+                    }
                     if (!able_to_move(player1.getPawn2(), player1, player2, 7 - i - 1 ,arr,i)) {
                         arr[i] = p.getPosition();
                         count++;
@@ -126,6 +131,10 @@ public class Number_SevenCard extends Number_Card {
                 }
             } else if (p.getId() == 2) {
                 for (int i = 0; i < arr.length; i++) {
+                    if(arr[i]==p.getPosition()) {
+                        count++;
+                        continue;
+                    }
                     if (!able_to_move(player1.getPawn1(), player1, player2, 7 - i - 1,arr,i)) {
                         arr[i] = p.getPosition();
                         count++;
@@ -136,6 +145,10 @@ public class Number_SevenCard extends Number_Card {
         } else if (p.getColor().equals("yellow")) {
             if (p.getId() == 1) {
                 for (int i = 0; i < arr.length; i++) {
+                    if(arr[i]==p.getPosition()) {
+                        count++;
+                        continue;
+                    }
                     if (!able_to_move(player2.getPawn2(), player1, player2, 7 - i - 1,arr,i)) {
                         arr[i] = p.getPosition();
                         count++;
@@ -143,6 +156,10 @@ public class Number_SevenCard extends Number_Card {
                 }
             } else if (p.getId() == 2) {
                 for (int i = 0; i < arr.length; i++) {
+                    if(arr[i]==p.getPosition()) {
+                        count++;
+                        continue;
+                    }
                     if (!able_to_move(player2.getPawn1(), player1, player2, 7 - i - 1,arr,i)) {
                         arr[i] = p.getPosition();
                         count++;
