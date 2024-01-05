@@ -247,7 +247,7 @@ public class BoardUI extends JLayeredPane {
 
                 if(controller.check_for_slide(controller.get_pawn(prevPawn))){
                     refresh_all_the_pawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, squares);
-                    redPawn1.setBounds(squares.get(controller.getRed_pawn1().getPosition()).getBounds());
+                    prevPawnUI().setBounds(squares.get(controller.get_pawn(prevPawn).getPosition()).getBounds());
                 }
                 if(flag7_bump){
                     prevPawnUI().setEnabled(false);
@@ -390,7 +390,7 @@ public class BoardUI extends JLayeredPane {
 
                 if(controller.check_for_slide(controller.get_pawn(prevPawn))){
                     refresh_all_the_pawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, squares);
-                    redPawn2.setBounds(squares.get(controller.getRed_pawn2().getPosition()).getBounds());
+                    prevPawnUI().setBounds(squares.get(controller.get_pawn(prevPawn).getPosition()).getBounds());
                 }
                 if(flag7_bump){
                     prevPawnUI().setEnabled(false);
@@ -529,7 +529,7 @@ public class BoardUI extends JLayeredPane {
 
                 if(controller.check_for_slide(controller.get_pawn(prevPawn))){
                     refresh_all_the_pawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, squares);
-                    yellowPawn1.setBounds(squares.get(controller.getYellow_pawn2().getPosition()).getBounds());
+                    prevPawnUI().setBounds(squares.get(controller.get_pawn(prevPawn).getPosition()).getBounds());
                 }
                 if(flag7_bump){
                     prevPawnUI().setEnabled(false);
@@ -656,7 +656,7 @@ public class BoardUI extends JLayeredPane {
 
               if(controller.check_for_slide(controller.get_pawn(prevPawn))){
                   refresh_all_the_pawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, squares);
-                  yellowPawn2.setBounds(squares.get(controller.getYellow_pawn2().getPosition()).getBounds());
+                  prevPawnUI().setBounds(squares.get(controller.get_pawn(prevPawn).getPosition()).getBounds());
               }
               if(flag7_bump){
                     prevPawnUI().setEnabled(false);

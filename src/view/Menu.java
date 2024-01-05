@@ -16,8 +16,7 @@ public class Menu {
         //add action to the button
         newGame.addActionListener(e -> {
             backround.dispose();//shut down the current game
-            Controller controller = new Controller();//start a new game
-            GameView game = new GameView(controller);
+            GameView game = new GameView(new Controller());//start a new game
         });
         toolBar.add(newGame);
         JButton Save_Game = new JButton("Save Game");
