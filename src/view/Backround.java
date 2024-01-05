@@ -17,7 +17,7 @@ public class Backround extends JFrame{
 
     private boolean isdrawn = false;
     public Backround(Controller controller){
-        super("SORRY!");
+        super("Sorry!");
 
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/_background/background.png"));
         JLabel label = new JLabel(imageIcon);
