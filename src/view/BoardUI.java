@@ -316,6 +316,8 @@ public class BoardUI extends JLayeredPane {
                 if(controller.predict(controller.getRed_pawn2())>=0 && !controller.getRed_pawn2().getHome()) {
                     if(controller.predict(controller.getRed_pawn2())!=controller.player1.getHomePosition())
                         squares.get(controller.predict(controller.getRed_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
+                    else
+                        squares.get(controller.predict(controller.getRed_pawn2())).setBorder(new LineBorder(Color.RED, 7));
                     if(controller.current_card instanceof Number_TenCard)
                         squares.get(controller.predict1(controller.getRed_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
                 }
@@ -353,10 +355,12 @@ public class BoardUI extends JLayeredPane {
                 }
 
                 if(controller.getCurrent_card() instanceof Number_ElevenCard){
-                    if(!controller.getRed_pawn1().isStart())
-                        enableEnemy_for_11_Sorry( controller.getYellow_pawn1(), controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
+                    disable_enemy_pawns( yellowPawn1, yellowPawn2);
+                    if((!controller.getRed_pawn1().isStart()) && (!controller.getRed_pawn1().isSafe())){
+                        enableEnemy_for_11_Sorry( controller.getYellow_pawn1(), controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);}
                 }
                 if(controller.getCurrent_card() instanceof Sorry_Card){
+                    disable_enemy_pawns( yellowPawn1, yellowPawn2);
                     if(controller.getRed_pawn1().isStart())
                         enableEnemy_for_11_Sorry( controller.getYellow_pawn1(), controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
                 }
@@ -452,10 +456,11 @@ public class BoardUI extends JLayeredPane {
                 }
 
 
-
                 if(controller.predict(controller.getRed_pawn1())>=0 && !controller.getRed_pawn1().getHome()) {
                     if(controller.predict(controller.getRed_pawn1())!=controller.player1.getHomePosition())
                         squares.get(controller.predict(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
+                    else
+                        squares.get(controller.predict(controller.getRed_pawn1())).setBorder(new LineBorder(Color.RED, 7));
                     if(controller.current_card instanceof Number_TenCard)
                         squares.get(controller.predict1(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
                 }
@@ -492,10 +497,12 @@ public class BoardUI extends JLayeredPane {
                 }
 
                 if(controller.getCurrent_card() instanceof Number_ElevenCard){
-                    if(!controller.getRed_pawn2().isStart())
+                    disable_enemy_pawns( yellowPawn1, yellowPawn2);
+                    if((!controller.getRed_pawn2().isStart()) && (!controller.getRed_pawn2().isSafe()))
                         enableEnemy_for_11_Sorry( controller.getYellow_pawn1(), controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
                 }
                 if(controller.getCurrent_card() instanceof Sorry_Card){
+                    disable_enemy_pawns( yellowPawn1, yellowPawn2);
                     if(controller.getRed_pawn2().isStart())
                         enableEnemy_for_11_Sorry( controller.getYellow_pawn1(), controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
                 }
@@ -579,6 +586,8 @@ public class BoardUI extends JLayeredPane {
                 if(controller.predict(controller.getYellow_pawn2())>=0 && !controller.getYellow_pawn2().getHome()){
                     if(controller.predict(controller.getYellow_pawn2())!=controller.player2.getHomePosition())
                         squares.get(controller.predict(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
+                    else
+                        squares.get(controller.predict(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.YELLOW, 7));
                     if(controller.current_card instanceof Number_TenCard)
                         squares.get(controller.predict1(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
                 }
@@ -613,11 +622,13 @@ public class BoardUI extends JLayeredPane {
 
 
                 if(controller.getCurrent_card() instanceof Number_ElevenCard){
-                    if(!controller.getYellow_pawn1().isStart())
+                    disable_enemy_pawns( redPawn1, redPawn2);
+                    if((!controller.getYellow_pawn1().isStart())&&(!controller.getYellow_pawn1().isSafe()))
                         enableEnemy_for_11_Sorry( controller.getRed_pawn1(), controller.getRed_pawn2(), redPawn1, redPawn2);
                 }
 
                 if(controller.getCurrent_card() instanceof Sorry_Card){
+                    disable_enemy_pawns( redPawn1, redPawn2);
                     if(controller.getYellow_pawn1().isStart())
                         enableEnemy_for_11_Sorry( controller.getRed_pawn1(), controller.getRed_pawn2(), redPawn1, redPawn2);
                 }
@@ -712,6 +723,8 @@ public class BoardUI extends JLayeredPane {
                 if(controller.predict(controller.getYellow_pawn1())>=0 && !controller.getYellow_pawn1().getHome()) {
                     if (controller.predict(controller.getYellow_pawn1()) != controller.player2.getHomePosition())
                         squares.get(controller.predict(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
+                    else
+                        squares.get(controller.predict(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.YELLOW, 7));
                     if (controller.current_card instanceof Number_TenCard)
                         squares.get(controller.predict1(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
                 }
@@ -743,11 +756,13 @@ public class BoardUI extends JLayeredPane {
                     bumpingUI(prediction10 ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
                 }
                 if(controller.getCurrent_card() instanceof Number_ElevenCard){
-                    if(!controller.getYellow_pawn2().isStart())
+                    disable_enemy_pawns( redPawn1, redPawn2);
+                    if((!controller.getYellow_pawn2().isStart())&&(!controller.getYellow_pawn2().isSafe()))
                         enableEnemy_for_11_Sorry( controller.getRed_pawn1(), controller.getRed_pawn2(), redPawn1, redPawn2);
                 }
 
                 if(controller.getCurrent_card() instanceof Sorry_Card){
+                    disable_enemy_pawns( redPawn1, redPawn2);
                     if(controller.getYellow_pawn2().isStart())
                         enableEnemy_for_11_Sorry( controller.getRed_pawn1(), controller.getRed_pawn2(), redPawn1, redPawn2);
                 }
@@ -759,6 +774,13 @@ public class BoardUI extends JLayeredPane {
             else
                 JOptionPane.showMessageDialog(backround, "You must draw a card first!");
         });
+    }
+
+    private void disable_enemy_pawns(JButton enemyPawnUI1, JButton enemyPawnUI2) {
+        enemyPawnUI1.setBorder(null);
+        enemyPawnUI2.setBorder(null);
+        enemyPawnUI1.setEnabled(false);
+        enemyPawnUI2.setEnabled(false);
     }
 
     public static void fix_squres_border() {
@@ -886,6 +908,7 @@ public class BoardUI extends JLayeredPane {
 
                             if(controller.game_has_finished()){
                                 JOptionPane.showMessageDialog(null, controller.current_player.getColor() + " player has won!");
+                                backround.dispose();
                                 new GameView(new Controller());
                             }
 
@@ -970,6 +993,7 @@ public class BoardUI extends JLayeredPane {
 
                     if(controller.game_has_finished()){
                         JOptionPane.showMessageDialog(null, controller.current_player.getColor() + " player has won!");
+                        backround.dispose();
                         GameView game = new GameView(new Controller());
                     }
 
@@ -1028,6 +1052,7 @@ public class BoardUI extends JLayeredPane {
 
                     if(controller.game_has_finished()){
                         JOptionPane.showMessageDialog(null, controller.current_player.getColor() + " player has won!");
+                        backround.dispose();
                         new GameView(new Controller());
                     }
 

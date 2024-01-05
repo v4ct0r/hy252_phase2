@@ -84,7 +84,6 @@ public void shuffle(card[] cards) {
             cardsLeft = 44;
         }
         cardsLeft--;
-
         return cards[cardsLeft];
 
     }
