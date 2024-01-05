@@ -39,12 +39,11 @@ public class BoardUI extends JLayeredPane {
 
 
 
-
     public BoardUI(Controller controller, Backround backround) {
         this.setLayout(null);
         this.setPreferredSize(new Dimension(200, 200));
         this.setBounds(0, 0, 200, 200);
-        this.setOpaque(true);
+        this.setOpaque(true);//make the background visible
         this.setBackground(Color.CYAN);
         Image logoImage = new ImageIcon(getClass().getResource("/_sorrylogo/sorryImage.png")).getImage();
         JLabel LogoLabel = new JLabel(new ImageIcon(logoImage));
