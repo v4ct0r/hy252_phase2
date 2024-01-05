@@ -19,7 +19,7 @@ public class Backround extends JFrame{
     public Backround(Controller controller){
         super("SORRY!");
 
-        ImageIcon imageIcon = new ImageIcon("src\\_background\\background.png");
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/_background/background.png"));
         JLabel label = new JLabel(imageIcon);
 
         label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
@@ -34,7 +34,7 @@ public class Backround extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         ReceiveCard = new JButton();
-        ReceiveCard.setIcon(new ImageIcon("src\\_cards\\backCard.png"));
+        ReceiveCard.setIcon(new ImageIcon(getClass().getResource("/_cards/backCard.png")));
         ReceiveCard.setBounds(820, 180, 180, 270);
         background.add(ReceiveCard, JLayeredPane.PALETTE_LAYER);
 
@@ -43,7 +43,7 @@ public class Backround extends JFrame{
         ReceiveCardLabel.setBounds(850, 445, 180, 50);//under the button
         background.add(ReceiveCardLabel, JLayeredPane.PALETTE_LAYER);
 
-        ImageIcon CurrentCard = new ImageIcon("src\\_cards\\backCard.png");
+        ImageIcon CurrentCard = new ImageIcon(getClass().getResource("/_cards/backCard.png"));
         JLabel CurrentCardLabel = new JLabel(CurrentCard);
         CurrentCardLabel.setBounds(1030, 180, 170, 260);
         background.add(CurrentCardLabel, JLayeredPane.PALETTE_LAYER);
@@ -87,7 +87,7 @@ public class Backround extends JFrame{
             BoardUI.fix_squres_border();
 
             card current_card = controller.draw_card(controller.deck);
-            CurrentCardLabel.setIcon(new ImageIcon(card_path(current_card)));
+            CurrentCardLabel.setIcon(new ImageIcon(getClass().getResource(card_path(current_card))));
             if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
                 InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
             else
@@ -135,29 +135,29 @@ public class Backround extends JFrame{
 
     private String card_path(card s) {
         if (s instanceof Number_OneCard)
-            return "src\\_cards\\card1(Custom).png";
+            return "/_cards/card1(Custom).png";
         else if (s instanceof Number_TwoCard)
-             return "src\\_cards\\card2(Custom).png";
+             return "/_cards/card2(Custom).png";
         else if (s instanceof Simple_Number_Card && ((Simple_Number_Card) s).getValue() == 3)
-            return "src\\_cards\\card3(Custom).png";
+            return "/_cards/card3(Custom).png";
         else if (s instanceof Number_FourCard)
-            return "src\\_cards\\card4(Custom).png";
+            return "/_cards/card4(Custom).png";
         else if (s instanceof Simple_Number_Card && ((Simple_Number_Card) s).getValue() == 5)
-            return "src\\_cards\\card5(Custom).png";
+            return "/_cards/card5(Custom).png";
         else if (s instanceof Number_SevenCard)
-            return "src\\_cards\\card7(Custom).png";
+            return "/_cards/card7(Custom).png";
         else if (s instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) s).getValue() == 8)
-            return "src\\_cards\\card8(Custom).png";
+            return "/_cards/card8(Custom).png";
         else if (s instanceof Number_TenCard)
-            return "src\\_cards\\card10(Custom).png";
+            return "/_cards/card10(Custom).png";
         else if (s instanceof Number_ElevenCard)
-            return "src\\_cards\\card11(Custom).png";
+            return "/_cards/card11(Custom).png";
         else if (s instanceof Simple_Number_Card8_12 && ((Simple_Number_Card8_12) s).getValue() == 12)
-            return "src\\_cards\\card12(Custom).png";
+            return "/_cards/card12(Custom).png";
         else if (s instanceof Sorry_Card)
-            return "src\\_cards\\cardSorry(Custom).png";
+            return "/_cards/cardSorry(Custom).png";
         else
-            return "src\\_cards\\backCard.png";
+            return "/_cards/backCard.png";
     }
     public boolean getisdrawn() {
         return isdrawn;

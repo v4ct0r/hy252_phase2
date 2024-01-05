@@ -41,51 +41,45 @@ public class BoardUI extends JLayeredPane {
 
 
     public BoardUI(Controller controller, Backround backround) {
-        //set the logo in the middle of the screen
         this.setLayout(null);
         this.setPreferredSize(new Dimension(200, 200));
         this.setBounds(0, 0, 200, 200);
         this.setOpaque(true);
         this.setBackground(Color.CYAN);
-
-        Image logoImage = new ImageIcon("src\\_sorrylogo\\sorryImage.png").getImage();
-        //add the logo to the board
+        Image logoImage = new ImageIcon(getClass().getResource("/_sorrylogo/sorryImage.png")).getImage();
         JLabel LogoLabel = new JLabel(new ImageIcon(logoImage));
         LogoLabel.setBounds(390,300 , logoImage.getWidth(null), logoImage.getHeight(null));
         this.add(LogoLabel);
 
         //init red pawns
         redPawn1 = new JButton();
-        redPawn1.setIcon(new ImageIcon("src\\_pawns\\redPawn1.png"));
-        redPawn1.setDisabledIcon(new ImageIcon("src\\_pawns\\redPawn1.png"));
+        redPawn1.setIcon(new ImageIcon(getClass().getResource("/_pawns/redPawn1.png")));
+        redPawn1.setDisabledIcon(new ImageIcon(getClass().getResource("/_pawns/redPawn1.png")));
         redPawn1Start = new Rectangle(320, 75,redPawn1.getIcon().getIconWidth(),redPawn1.getIcon().getIconHeight());
         redPawn1.setBounds(redPawn1Start);
         this.add(redPawn1);
 
         redPawn2 = new JButton();
-        redPawn2.setIcon(new ImageIcon("src\\_pawns\\redPawn2.png"));
-        redPawn2.setDisabledIcon(new ImageIcon("src\\_pawns\\redPawn2.png"));
+        redPawn2.setIcon(new ImageIcon(getClass().getResource("/_pawns/redPawn2.png")));
+        redPawn2.setDisabledIcon(new ImageIcon(getClass().getResource("/_pawns/redPawn2.png")));
         redPawn2Start = new Rectangle(375, 75, redPawn2.getIcon().getIconWidth(),redPawn2.getIcon().getIconHeight());
         redPawn2.setBounds(redPawn2Start);
         this.add(redPawn2);
 
         //init yellow pawns
         yellowPawn1 = new JButton();
-        yellowPawn1.setIcon(new ImageIcon("src\\_pawns\\yellowPawn1.png"));
-        yellowPawn1.setDisabledIcon(new ImageIcon("src\\_pawns\\yellowPawn1.png"));
+        yellowPawn1.setIcon(new ImageIcon(getClass().getResource("/_pawns/yellowPawn1.png")));
+        yellowPawn1.setDisabledIcon(new ImageIcon(getClass().getResource("/_pawns/yellowPawn1.png")));
         yellowPawn1Start = new Rectangle(672, 675, yellowPawn1.getIcon().getIconWidth(),yellowPawn1.getIcon().getIconHeight());
         yellowPawn1.setBounds(yellowPawn1Start);
         this.add(yellowPawn1);
 
         yellowPawn2 = new JButton();
-        yellowPawn2.setIcon(new ImageIcon("src\\_pawns\\yellowPawn2.png"));
-        yellowPawn2.setDisabledIcon(new ImageIcon("src\\_pawns\\yellowPawn2.png"));
+        yellowPawn2.setIcon(new ImageIcon(getClass().getResource("/_pawns/yellowPawn2.png")));
+        yellowPawn2.setDisabledIcon(new ImageIcon(getClass().getResource("/_pawns/yellowPawn2.png")));
         yellowPawn2Start = new Rectangle(727, 675, yellowPawn2.getIcon().getIconWidth(),yellowPawn2.getIcon().getIconHeight());
         yellowPawn2.setBounds(yellowPawn2Start);
         this.add(yellowPawn2);
-
-
-
 
         squares = new ArrayList<>();
         //init squares
@@ -97,13 +91,13 @@ public class BoardUI extends JLayeredPane {
         for (int i = 0; i < 22; i++) {
             if(i==1 || i==2 || i==9 || i==10 || i==15 || i==16 || i==17 || i==18 || i==19){
                 if(i==1 || i==15) {
-                    squares.get(i).setIcon(new ImageIcon("src\\_slides\\redSlideStart.png"));
+                    squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/redSlideStart.png")));
                 }
                     else if( i==2 || i==9 || i==16 || i==17 || i==18 ) {
-                    squares.get(i).setIcon(new ImageIcon("src\\_slides\\redSlideMedium.png"));
+                    squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/redSlideMedium.png")));
                 }
                     else {
-                    squares.get(i).setIcon(new ImageIcon("src\\_slides\\redSlideEnd.png"));
+                    squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/redSlideEnd.png")));
                 }
                 squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
                 squares.get(i).setBounds(150 + k * 50, 0, 50, 50); //top edge
@@ -160,13 +154,13 @@ public class BoardUI extends JLayeredPane {
         for (int i = 37; i < 58; i++) {
             if(i==37 || i==38 || i==45 ||i==46 || i>=51 && i<=55){
                 if(i==37 || i==51) {
-                    squares.get(i).setIcon(new ImageIcon("src\\_slides\\YellowSlideStart.png"));
+                    squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/yellowSlideStart.png")));
                 }
                 else if(i==38 || i==45 || i==52 || i==53 || i==54  ) {
-                    squares.get(i).setIcon(new ImageIcon("src\\_slides\\YellowSlideMedium.png"));
+                    squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/yellowSlideMedium.png")));
                 }
                 else {
-                    squares.get(i).setIcon(new ImageIcon("src\\_slides\\YellowSlideEnd.png"));
+                    squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/yellowSlideEnd.png")));
                 }
                 squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
                 squares.get(i).setBounds( 850 - k * 50, 750, 50, 50);
@@ -232,6 +226,7 @@ public class BoardUI extends JLayeredPane {
          * call the move_pawn method in controller
          * @param controller.getRed_pawn1()
          */
+
         redPawn1.addActionListener(e -> {
 
 
@@ -907,7 +902,7 @@ public class BoardUI extends JLayeredPane {
 
 
                             if(controller.game_has_finished()){
-                                JOptionPane.showMessageDialog(null, controller.current_player.getColor() + " player has won!");
+                                JOptionPane.showMessageDialog(this, controller.current_player.getColor() + " player has won!");
                                 backround.dispose();
                                 new GameView(new Controller());
                             }
@@ -992,7 +987,7 @@ public class BoardUI extends JLayeredPane {
                     flag7=-1;
 
                     if(controller.game_has_finished()){
-                        JOptionPane.showMessageDialog(null, controller.current_player.getColor() + " player has won!");
+                        JOptionPane.showMessageDialog(this, controller.current_player.getColor() + " player has won!");
                         backround.dispose();
                         GameView game = new GameView(new Controller());
                     }
@@ -1051,7 +1046,7 @@ public class BoardUI extends JLayeredPane {
 
 
                     if(controller.game_has_finished()){
-                        JOptionPane.showMessageDialog(null, controller.current_player.getColor() + " player has won!");
+                        JOptionPane.showMessageDialog(this, controller.current_player.getColor() + " player has won!");
                         backround.dispose();
                         new GameView(new Controller());
                     }
