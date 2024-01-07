@@ -2,7 +2,6 @@ package view;
 
 import controller.Controller;
 import model.card.*;
-import model.player.Pawn;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -25,12 +24,12 @@ public class Backround extends JFrame{
         label.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
 
         background = new JLayeredPane();
-        background.setPreferredSize(new Dimension(imageIcon.getIconWidth(), imageIcon.getIconHeight()));
+        background.setPreferredSize(new Dimension(imageIcon.getIconWidth(), imageIcon.getIconHeight()-100));
 
         background.add(label, JLayeredPane.DEFAULT_LAYER);
 
-        setContentPane(background);
-        pack();
+        setContentPane(background);//set it as background
+        pack();//set the size of the frame according to the size of the background
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         ReceiveCard = new JButton();
@@ -84,7 +83,7 @@ public class Backround extends JFrame{
 
             isdrawn = true;
 
-            BoardUI.fix_squres_border();
+            BoardUI.fix_squares_border();
 
             card current_card = controller.draw_card(controller.deck);
             CurrentCardLabel.setIcon(new ImageIcon(getClass().getResource(card_path(current_card))));

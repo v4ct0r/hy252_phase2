@@ -41,8 +41,6 @@ public class BoardUI extends JLayeredPane {
 
     public BoardUI(Controller controller, Backround backround) {
         this.setLayout(null);
-        this.setPreferredSize(new Dimension(200, 200));
-        this.setBounds(0, 0, 200, 200);
         this.setOpaque(true);//make the background visible
         this.setBackground(Color.CYAN);
         Image logoImage = new ImageIcon(getClass().getResource("/_sorrylogo/sorryImage.png")).getImage();
@@ -83,7 +81,6 @@ public class BoardUI extends JLayeredPane {
         squares = new ArrayList<>();
         //init squares
         for (int i = 0; i < 72; i++) {
-            JButton square = new JButton();
             squares.add(new JButton());
         }
         int k= 0;
@@ -256,7 +253,7 @@ public class BoardUI extends JLayeredPane {
                         flag7 = -1;
                         switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
                     }
-                    fix_squres_border();
+                    fix_squares_border();
                     return;
                 }
 
@@ -270,7 +267,7 @@ public class BoardUI extends JLayeredPane {
                 }
 
                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
-                fix_squres_border();
+                fix_squares_border();
                 return;
             }
 
@@ -290,7 +287,7 @@ public class BoardUI extends JLayeredPane {
                 flag7_bump = false;
                 if(controller.getCurrent_card() instanceof Number_SevenCard && !controller.getRed_pawn2().isStart() && !controller.getRed_pawn2().getHome() && flag7==-1){
 
-                    fix_squres_border();
+                    fix_squares_border();
 
                     prediction7 = controller.predict7(controller.getRed_pawn1());
                     for(int i = 0 ; i < 7 ; i++){
@@ -314,6 +311,7 @@ public class BoardUI extends JLayeredPane {
                         squares.get(controller.predict(controller.getRed_pawn2())).setBorder(new LineBorder(Color.RED, 7));
                     if(controller.current_card instanceof Number_TenCard)
                         squares.get(controller.predict1(controller.getRed_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
+                    disable_enemy_pawns( yellowPawn1, yellowPawn2);
                 }
 
 
@@ -399,7 +397,7 @@ public class BoardUI extends JLayeredPane {
                         flag7 = -1;
                         switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
                     }
-                    fix_squres_border();
+                    fix_squares_border();
                     return;
                 }
                 if(controller.getCurrent_card() instanceof Simple_Number_Card){
@@ -410,7 +408,7 @@ public class BoardUI extends JLayeredPane {
                     Simple_Flag++;
                 }
                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
-                fix_squres_border();
+                fix_squares_border();
                 return;
             }
 
@@ -430,7 +428,7 @@ public class BoardUI extends JLayeredPane {
 
                 flag7_bump = false;
                 if(controller.getCurrent_card() instanceof Number_SevenCard && !controller.getRed_pawn1().isStart() && !controller.getRed_pawn1().getHome() && flag7==-1){
-                    fix_squres_border();
+                    fix_squares_border();
 
                     prediction7 = controller.predict7(controller.getRed_pawn2());
                     for(int i = 0 ; i < 7 ; i++){
@@ -457,6 +455,7 @@ public class BoardUI extends JLayeredPane {
                         squares.get(controller.predict(controller.getRed_pawn1())).setBorder(new LineBorder(Color.RED, 7));
                     if(controller.current_card instanceof Number_TenCard)
                         squares.get(controller.predict1(controller.getRed_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
+                    disable_enemy_pawns( yellowPawn1, yellowPawn2);
                 }
                 prediction = controller.predict(controller.getRed_pawn2());
 
@@ -538,12 +537,12 @@ public class BoardUI extends JLayeredPane {
                         flag7 = -1;
                         switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
                     }
-                    fix_squres_border();
+                    fix_squares_border();
                     return;
                 }
 
                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
-                fix_squres_border();
+                fix_squares_border();
                 return;
             }
             if(backround.getisdrawn()) {
@@ -560,7 +559,7 @@ public class BoardUI extends JLayeredPane {
 
                 flag7_bump = false;
                 if(controller.getCurrent_card() instanceof Number_SevenCard && !controller.getYellow_pawn2().isStart() && !controller.getYellow_pawn2().getHome() && flag7==-1){
-                    fix_squres_border();
+                    fix_squares_border();
 
                     prediction7 = controller.predict7(controller.getYellow_pawn1());
                     for(int i = 0 ; i < 7 ; i++){
@@ -577,13 +576,14 @@ public class BoardUI extends JLayeredPane {
                 }
 
 
-                if(controller.predict(controller.getYellow_pawn2())>=0 && !controller.getYellow_pawn2().getHome()){
+                if(controller.predict(controller.getYellow_pawn2())>=0 && !controller.getYellow_pawn2().getHome()){//remove team pawn prediction
                     if(controller.predict(controller.getYellow_pawn2())!=controller.player2.getHomePosition())
                         squares.get(controller.predict(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
                     else
                         squares.get(controller.predict(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.YELLOW, 7));
                     if(controller.current_card instanceof Number_TenCard)
                         squares.get(controller.predict1(controller.getYellow_pawn2())).setBorder(new LineBorder(Color.BLACK, 2));
+                    disable_enemy_pawns( redPawn1, redPawn2);
                 }
 
                 prediction = controller.predict(controller.getYellow_pawn1());
@@ -665,7 +665,7 @@ public class BoardUI extends JLayeredPane {
                         flag7 = -1;
                         switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
                     }
-                  fix_squres_border();
+                  fix_squares_border();
                   return;
               }
               if(controller.getCurrent_card() instanceof Simple_Number_Card) {
@@ -677,7 +677,7 @@ public class BoardUI extends JLayeredPane {
               }
 
                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
-                fix_squres_border();
+                fix_squares_border();
                 return;
 
             }
@@ -698,7 +698,7 @@ public class BoardUI extends JLayeredPane {
                 flag7_bump = false;
 
                 if(controller.getCurrent_card() instanceof Number_SevenCard && !controller.getYellow_pawn1().isStart() && !controller.getYellow_pawn1().getHome() && flag7==-1){
-                    fix_squres_border();
+                    fix_squares_border();
 
                     prediction7 = controller.predict7(controller.getYellow_pawn2());
                     for(int i = 0 ; i < 7 ; i++){
@@ -714,13 +714,14 @@ public class BoardUI extends JLayeredPane {
                     return;
                 }
 
-                if(controller.predict(controller.getYellow_pawn1())>=0 && !controller.getYellow_pawn1().getHome()) {
+                if(controller.predict(controller.getYellow_pawn1())>=0 && !controller.getYellow_pawn1().getHome()) {//remove team pawn prediction
                     if (controller.predict(controller.getYellow_pawn1()) != controller.player2.getHomePosition())
-                        squares.get(controller.predict(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
+                        squares.get(controller.predict(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
                     else
                         squares.get(controller.predict(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.YELLOW, 7));
                     if (controller.current_card instanceof Number_TenCard)
-                        squares.get(controller.predict1(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));//remove team pawn prediction
+                        squares.get(controller.predict1(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
+                    disable_enemy_pawns( redPawn1, redPawn2);
                 }
                 prediction = controller.predict(controller.getYellow_pawn2());
 
@@ -777,7 +778,7 @@ public class BoardUI extends JLayeredPane {
         enemyPawnUI2.setEnabled(false);
     }
 
-    public static void fix_squres_border() {
+    public static void fix_squares_border() {
         //fix pawn border too
         redPawn1.setBorder(null);
         redPawn2.setBorder(null);
@@ -920,7 +921,7 @@ public class BoardUI extends JLayeredPane {
                                 flag7=-1;
                                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
                             }
-                            fix_squres_border();
+                            fix_squares_border();
                         });
 
                     }
@@ -996,7 +997,7 @@ public class BoardUI extends JLayeredPane {
                         pawnUI.setEnabled(false);
                     }
                     cleanSquares(squares);
-                    fix_squres_border();
+                    fix_squares_border();
                 });
             }else if(i == prediction10){
                 squares.get(i).addActionListener(e -> {
@@ -1055,7 +1056,7 @@ public class BoardUI extends JLayeredPane {
                         pawnUI.setEnabled(false);
                     }
                     cleanSquares(squares);
-                    fix_squres_border();
+                    fix_squares_border();
                 });
 
 
