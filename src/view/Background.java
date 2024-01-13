@@ -8,7 +8,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Objects;
 
-public class Backround extends JFrame{
+public class Background extends JFrame{
     JLayeredPane background;
     JTextArea InfoBox;
     public JButton ReceiveCard;
@@ -26,7 +26,7 @@ public class Backround extends JFrame{
      * Creates the info box
      * Sets the action listener of the receive card button
      */
-    public Backround(Controller controller){
+    public Background(Controller controller){
         super("Sorry!");
 
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/_background/background.png"));

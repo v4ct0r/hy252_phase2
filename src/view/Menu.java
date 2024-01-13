@@ -8,7 +8,7 @@ public class Menu {
     JToolBar toolBar;
     /**
      * Constructor of the class
-     * @param backround
+     * @param background
      * Creates the menu bar
      * Creates the new game button
      * Creates the save game button
@@ -19,7 +19,7 @@ public class Menu {
      * Sets the action listener of the continue saved game button
      * Sets the action listener of the exit button
      */
-    public Menu(Backround backround){
+    public Menu(Background background){
         toolBar = new JToolBar("Menu");
         toolBar.setFloatable(false); // this will make the toolbar non-floating
 
@@ -27,7 +27,7 @@ public class Menu {
         JButton newGame = new JButton("New Game");
         //add action to the button
         newGame.addActionListener(e -> {
-            backround.dispose();//shut down the current game
+            background.dispose();//shut down the current game
             GameView game = new GameView(new Controller());//start a new game
         });
         toolBar.add(newGame);

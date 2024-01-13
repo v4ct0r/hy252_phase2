@@ -41,7 +41,7 @@ public class BoardUI extends JLayeredPane {
     /**
      * Constructor of BoardUI
      * @param controller
-     * @param backround
+     * @param background
      * Here is everything that has to do with the board
      * 1)Initialize the board
      * 2)Initialize the pawns
@@ -51,7 +51,7 @@ public class BoardUI extends JLayeredPane {
      * the way it works is when the pawn is clicked the squares that the pawn can move to are highlighted with a magenta border
      * and when the square or the enemy pawn is clicked the pawn moves to that square in graphics and in the parallel board in controller
      */
-    public BoardUI(Controller controller, Backround backround) {
+    public BoardUI(Controller controller, Background background) {
         this.setLayout(null);
         this.setOpaque(true);//make the background visible
         this.setBackground(Color.CYAN);
@@ -225,7 +225,7 @@ public class BoardUI extends JLayeredPane {
 
         DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
 
-        ActionListener_FoldButton(backround, controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
+        ActionListener_FoldButton(background, controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
 
         redPawn1.addActionListener(e -> {
 
@@ -255,7 +255,7 @@ public class BoardUI extends JLayeredPane {
                     flag7 = flag7_help1;
                     if(flag7==7){
                         flag7 = -1;
-                        switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                        switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                     }
                     fix_squares_border();
                     return;
@@ -270,12 +270,12 @@ public class BoardUI extends JLayeredPane {
                     Simple_Flag++;
                 }
 
-                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                 fix_squares_border();
                 return;
             }
 
-            if(backround.getisdrawn()) {
+            if(background.getisdrawn()) {
                 if(controller.getCurrent_card() instanceof Simple_Number_Card ){
                     if(controller.getRed_pawn2().isStart() || controller.getRed_pawn2().getHome() || !controller.getRed_pawn2().isMoveable())
                         Simple_Flag ++;
@@ -303,7 +303,7 @@ public class BoardUI extends JLayeredPane {
                             squares.get(prediction7[i]).setBorder(new LineBorder(Color.MAGENTA, 3));
                     }
                     bumpingUI_for_array(prediction7 ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
-                    set_squares_switch_turn_for_array(controller.getRed_pawn1(), squares, redPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround, prediction7, prev, redPawn1Home);
+                    set_squares_switch_turn_for_array(controller.getRed_pawn1(), squares, redPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background, prediction7, prev, redPawn1Home);
                     return;
                 }
 
@@ -363,10 +363,10 @@ public class BoardUI extends JLayeredPane {
 
                 bumpingUI(prediction ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
 
-                set_squares_switch_turn(controller.getRed_pawn1(), squares, redPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround , prediction, prev, redPawn1Home);
+                set_squares_switch_turn(controller.getRed_pawn1(), squares, redPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background, prediction, prev, redPawn1Home);
             }
             else
-                JOptionPane.showMessageDialog(backround, "You must draw a card first!");
+                JOptionPane.showMessageDialog(background, "You must draw a card first!");
         });
 
         redPawn2.addActionListener(e -> {
@@ -399,7 +399,7 @@ public class BoardUI extends JLayeredPane {
                     flag7 = flag7_help2;
                     if(flag7==7){
                         flag7 = -1;
-                        switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                        switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                     }
                     fix_squares_border();
                     return;
@@ -411,12 +411,12 @@ public class BoardUI extends JLayeredPane {
                     prevPawnUI().setEnabled(false);
                     Simple_Flag++;
                 }
-                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                 fix_squares_border();
                 return;
             }
 
-            if(backround.getisdrawn()) {
+            if(background.getisdrawn()) {
                 if(controller.getCurrent_card() instanceof Simple_Number_Card ){
                     if(controller.getRed_pawn1().isStart() || controller.getRed_pawn1().getHome() || !controller.getRed_pawn1().isMoveable())
                         Simple_Flag ++;
@@ -446,7 +446,7 @@ public class BoardUI extends JLayeredPane {
                     }
                     bumpingUI_for_array(prediction7 ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
 
-                    set_squares_switch_turn_for_array(controller.getRed_pawn2(), squares, redPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround, prediction7, prev, redPawn2Home);
+                    set_squares_switch_turn_for_array(controller.getRed_pawn2(), squares, redPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background, prediction7, prev, redPawn2Home);
 
                     return;
                 }
@@ -506,11 +506,11 @@ public class BoardUI extends JLayeredPane {
 
                 bumpingUI(prediction ,controller.getYellow_pawn1() , controller.getYellow_pawn2(), yellowPawn1, yellowPawn2);
 
-                set_squares_switch_turn(controller.getRed_pawn2(), squares, redPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround, prediction, prev,redPawn2Home);
+                set_squares_switch_turn(controller.getRed_pawn2(), squares, redPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background, prediction, prev,redPawn2Home);
 
             }
             else
-                JOptionPane.showMessageDialog(backround, "You must draw a card first!");
+                JOptionPane.showMessageDialog(background, "You must draw a card first!");
         });
         yellowPawn1.addActionListener(e -> {
 
@@ -539,17 +539,17 @@ public class BoardUI extends JLayeredPane {
                     flag7 = flag7_help1;
                     if(flag7==7){
                         flag7 = -1;
-                        switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                        switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                     }
                     fix_squares_border();
                     return;
                 }
 
-                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                 fix_squares_border();
                 return;
             }
-            if(backround.getisdrawn()) {
+            if(background.getisdrawn()) {
                 if(controller.getCurrent_card() instanceof Simple_Number_Card ){
                     if(controller.getYellow_pawn2().isStart() || controller.getYellow_pawn2().getHome() || !controller.getYellow_pawn2().isMoveable())
                         Simple_Flag ++;
@@ -575,7 +575,7 @@ public class BoardUI extends JLayeredPane {
                             squares.get(prediction7[i]).setBorder(new LineBorder(Color.MAGENTA, 3));
                     }
                     bumpingUI_for_array(prediction7 ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
-                    set_squares_switch_turn_for_array(controller.getYellow_pawn1(), squares, yellowPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround, prediction7, prev, yellowPawn1Home);
+                    set_squares_switch_turn_for_array(controller.getYellow_pawn1(), squares, yellowPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background, prediction7, prev, yellowPawn1Home);
                     return;
                 }
 
@@ -634,10 +634,10 @@ public class BoardUI extends JLayeredPane {
 
                 bumpingUI(prediction ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
 
-                set_squares_switch_turn(controller.getYellow_pawn1(), squares, yellowPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround, prediction, prev, yellowPawn1Home);
+                set_squares_switch_turn(controller.getYellow_pawn1(), squares, yellowPawn1,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background, prediction, prev, yellowPawn1Home);
             }
             else
-                JOptionPane.showMessageDialog(backround, "You must draw a card first!");
+                JOptionPane.showMessageDialog(background, "You must draw a card first!");
         });
         yellowPawn2.addActionListener(e -> {
 
@@ -667,7 +667,7 @@ public class BoardUI extends JLayeredPane {
                     flag7 = flag7_help2;
                     if(flag7==7){
                         flag7 = -1;
-                        switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                        switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                     }
                   fix_squares_border();
                   return;
@@ -680,13 +680,13 @@ public class BoardUI extends JLayeredPane {
                   Simple_Flag++;
               }
 
-                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                 fix_squares_border();
                 return;
 
             }
 
-            if(backround.getisdrawn()) {
+            if(background.getisdrawn()) {
                 if(controller.getCurrent_card() instanceof Simple_Number_Card ){
                     if(controller.getYellow_pawn1().isStart() || controller.getYellow_pawn1().getHome() || !controller.getYellow_pawn1().isMoveable())
                         Simple_Flag ++;
@@ -714,7 +714,7 @@ public class BoardUI extends JLayeredPane {
                             squares.get(prediction7[i]).setBorder(new LineBorder(Color.MAGENTA, 3));
                     }
                     bumpingUI_for_array(prediction7 ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
-                    set_squares_switch_turn_for_array(controller.getYellow_pawn2(), squares, yellowPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround, prediction7, prev, yellowPawn2Home);
+                    set_squares_switch_turn_for_array(controller.getYellow_pawn2(), squares, yellowPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background, prediction7, prev, yellowPawn2Home);
                     return;
                 }
 
@@ -768,10 +768,10 @@ public class BoardUI extends JLayeredPane {
 
                 bumpingUI(prediction ,controller.getRed_pawn1() , controller.getRed_pawn2(), redPawn1, redPawn2);
 
-                set_squares_switch_turn(controller.getYellow_pawn2(), squares, yellowPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2,backround, prediction, prev,yellowPawn2Home);
+                set_squares_switch_turn(controller.getYellow_pawn2(), squares, yellowPawn2,controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background, prediction, prev,yellowPawn2Home);
             }
             else
-                JOptionPane.showMessageDialog(backround, "You must draw a card first!");
+                JOptionPane.showMessageDialog(background, "You must draw a card first!");
         });
     }
 
@@ -916,13 +916,13 @@ public class BoardUI extends JLayeredPane {
      * @param redPawn2
      * @param yellowPawn1
      * @param yellowPawn2
-     * @param backround
+     * @param background
      * @param prediction7
      * @param prev
      * @param Home
      * Every action listener of the squares in the board when card 7 is drawn
      */
-    private void set_squares_switch_turn_for_array(Pawn pawn, ArrayList<JButton> squares, JButton pawnUI, Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2, Backround backround, int[] prediction7, int prev, Rectangle Home) {
+    private void set_squares_switch_turn_for_array(Pawn pawn, ArrayList<JButton> squares, JButton pawnUI, Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2, Background background, int[] prediction7, int prev, Rectangle Home) {
         for(int i=0 ; i<72 ;i++){
             if(i != prediction7[0] && i != prediction7[1] && i != prediction7[2] && i != prediction7[3] && i != prediction7[4] && i != prediction7[5] && i != prediction7[6]){
                 squares.get(i).addActionListener(e -> {
@@ -969,7 +969,7 @@ public class BoardUI extends JLayeredPane {
 
                             if(controller.game_has_finished()){
                                 JOptionPane.showMessageDialog(this, controller.current_player.getColor() + " player has won!");
-                                backround.dispose();
+                                background.dispose();
                                 new GameView(new Controller());
                             }
 
@@ -985,7 +985,7 @@ public class BoardUI extends JLayeredPane {
                             flag7 = finalJ + 1;
                             if(flag7==7){
                                 flag7=-1;
-                                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                             }
                             fix_squares_border();
                         });
@@ -1006,14 +1006,14 @@ public class BoardUI extends JLayeredPane {
      * @param redPawn2
      * @param yellowPawn1
      * @param yellowPawn2
-     * @param backround
+     * @param background
      * @param prediction
      * @param prev
      * @param Home
      * Every action listener of the squares in the board
      */
 
-    private void set_squares_switch_turn(Pawn pawn, ArrayList<JButton> squares, JButton pawnUI, Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2, Backround backround, int prediction, int prev, Rectangle Home) {
+    private void set_squares_switch_turn(Pawn pawn, ArrayList<JButton> squares, JButton pawnUI, Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2, Background background, int prediction, int prev, Rectangle Home) {
 
         for(int i=0; i<72; i++){
             //go to action listener of each square and unable all of them except the current pawn position
@@ -1071,11 +1071,11 @@ public class BoardUI extends JLayeredPane {
 
                     if(controller.game_has_finished()){
                         JOptionPane.showMessageDialog(this, controller.current_player.getColor() + " player has won!");
-                        backround.dispose();
+                        background.dispose();
                         GameView game = new GameView(new Controller());
                     }
 
-                    switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                    switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                     if (pawn.getHome()) {
                         pawnUI.setEnabled(false);
                     }
@@ -1130,11 +1130,11 @@ public class BoardUI extends JLayeredPane {
 
                     if(controller.game_has_finished()){
                         JOptionPane.showMessageDialog(this, controller.current_player.getColor() + " player has won!");
-                        backround.dispose();
+                        background.dispose();
                         new GameView(new Controller());
                     }
 
-                    switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, backround);
+                    switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                     if (pawn.getHome()) {
                         pawnUI.setEnabled(false);
                     }
@@ -1181,7 +1181,7 @@ public class BoardUI extends JLayeredPane {
     }
 
     /**
-     * @param backround
+     * @param background
      * @param controller
      * @param redPaw1
      * @param redPaw2
@@ -1189,24 +1189,24 @@ public class BoardUI extends JLayeredPane {
      * @param yellowPaw2
      * Action listener for the fold button
      */
-    private void ActionListener_FoldButton(Backround backround, Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
-        backround.Fold.addActionListener(e -> {
+    private void ActionListener_FoldButton(Background background, Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
+        background.Fold.addActionListener(e -> {
 
             refresh_paws_border(redPaw1, redPaw2, yellowPaw1, yellowPaw2);
             controller.switch_current_player(controller.player1, controller.player2);
             DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
 
             if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
-                backround.InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
+                background.InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
             else
-                backround.InfoBox.setText("Info Box\n\nTurn: Player 2 (Yellow)\n");
-            backround.InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n");
-            backround.ReceiveCard.setEnabled(true);
+                background.InfoBox.setText("Info Box\n\nTurn: Player 2 (Yellow)\n");
+            background.InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n");
+            background.ReceiveCard.setEnabled(true);
 
 
-            backround.setiIsdrawn(false);
-            backround.Fold.setEnabled(false);
-            backround.Fold.setVisible(false);
+            background.setiIsdrawn(false);
+            background.Fold.setEnabled(false);
+            background.Fold.setVisible(false);
         });
     }
 
@@ -1262,10 +1262,10 @@ public class BoardUI extends JLayeredPane {
      * @param redPawn2
      * @param yellowPawn1
      * @param yellowPawn2
-     * @param backround
+     * @param background
      * Switches the turn of the players
      */
-    private void switch_turn(Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2 , Backround backround) {
+    private void switch_turn(Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2 , Background background) {
 
         if(controller.getCurrent_card() instanceof Simple_Number_Card) {
             if(Simple_Flag < 2) {
@@ -1281,13 +1281,13 @@ public class BoardUI extends JLayeredPane {
         }
         cleanSquares(squares);
         if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
-            backround.InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
+            background.InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
         else
-            backround.InfoBox.setText("Info Box\n\nTurn: Player 2 (Yellow)\n");
-        backround.InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n");
+            background.InfoBox.setText("Info Box\n\nTurn: Player 2 (Yellow)\n");
+        background.InfoBox.append("Cards left: " + controller.deck.getCardsLeft() + "\n");
 
-        backround.ReceiveCard.setEnabled(true);
-        backround.setiIsdrawn(false);
+        background.ReceiveCard.setEnabled(true);
+        background.setiIsdrawn(false);
 
 
     }

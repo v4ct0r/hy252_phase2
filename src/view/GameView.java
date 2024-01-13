@@ -14,24 +14,24 @@ public class GameView {
     public GameView(Controller controller) {
 
 
-        Backround backround = new Backround(controller);
-        Menu menu = new Menu(backround);
+        Background background = new Background(controller);
+        Menu menu = new Menu(background);
 
         // Add the toolbar to the Backround
-        backround.getLayeredPane().add(menu.getToolBar(), JLayeredPane.PALETTE_LAYER);
+        background.getLayeredPane().add(menu.getToolBar(), JLayeredPane.PALETTE_LAYER);
 
 
-        backround.setBounds(0, 0, backround.getPreferredSize().width, backround.getPreferredSize().height);
-        backround.setVisible(true);
+        background.setBounds(0, 0, background.getPreferredSize().width, background.getPreferredSize().height);
+        background.setVisible(true);
 
         // Now set the bounds of the toolbar
-        menu.getToolBar().setBounds(0, 0, backround.getWidth(), 30);
+        menu.getToolBar().setBounds(0, 0, background.getWidth(), 30);
 
         // Create the BoardUI and add it to the Backround
-        BoardUI boardUI = new BoardUI(controller, backround);
-        backround.getLayeredPane().add(boardUI, JLayeredPane.PALETTE_LAYER);
+        BoardUI boardUI = new BoardUI(controller, background);
+        background.getLayeredPane().add(boardUI, JLayeredPane.PALETTE_LAYER);
         int menuHeight = menu.getToolBar().getHeight();
-        boardUI.setBounds(-150, menuHeight , backround.getWidth()-397, backround.getHeight() - menuHeight - 107);
+        boardUI.setBounds(-150, menuHeight , background.getWidth()-397, background.getHeight() - menuHeight - 107);
 
 
     }
