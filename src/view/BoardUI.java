@@ -23,11 +23,32 @@ public class BoardUI extends JLayeredPane {
     private int flag7_help2 ;
     private int temp11;
     private boolean flag7_bump = false;
-    static ArrayList<JButton> squares ;
+    public static ArrayList<JButton> squares ;
     static JButton redPawn1;
     static JButton redPawn2;
     static JButton yellowPawn1;
     static JButton yellowPawn2;
+
+    public String getPrevPawn() {
+        return prevPawn;
+    }
+
+    public static JButton getRedPawn1() {
+        return redPawn1;
+    }
+
+    public static JButton getRedPawn2() {
+        return redPawn2;
+    }
+
+    public static JButton getYellowPawn1() {
+        return yellowPawn1;
+    }
+
+    public static JButton getYellowPawn2() {
+        return yellowPawn2;
+    }
+
     Rectangle redPawn1Start;
     Rectangle redPawn2Start;
     Rectangle yellowPawn1Start;

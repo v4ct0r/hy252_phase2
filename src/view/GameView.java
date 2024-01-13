@@ -6,6 +6,9 @@ import javax.swing.*;
 
 public class GameView {
 
+    public Background background;
+    public BoardUI boardUI;
+
     /**
      * Constructor of the class
      * @param controller
@@ -14,7 +17,7 @@ public class GameView {
     public GameView(Controller controller) {
 
 
-        Background background = new Background(controller);
+        background = new Background(controller);
         Menu menu = new Menu(background);
 
         // Add the toolbar to the Backround
@@ -28,7 +31,7 @@ public class GameView {
         menu.getToolBar().setBounds(0, 0, background.getWidth(), 30);
 
         // Create the BoardUI and add it to the Backround
-        BoardUI boardUI = new BoardUI(controller, background);
+        boardUI = new BoardUI(controller, background);
         background.getLayeredPane().add(boardUI, JLayeredPane.PALETTE_LAYER);
         int menuHeight = menu.getToolBar().getHeight();
         boardUI.setBounds(-150, menuHeight , background.getWidth()-397, background.getHeight() - menuHeight - 107);

@@ -12,7 +12,7 @@ public class Background extends JFrame{
     JLayeredPane background;
     JTextArea InfoBox;
     public JButton ReceiveCard;
-    JButton Fold;
+    public JButton Fold;
 
     private boolean isdrawn = false;
 
@@ -37,7 +37,7 @@ public class Background extends JFrame{
         background = new JLayeredPane();
         background.setPreferredSize(new Dimension(imageIcon.getIconWidth(), imageIcon.getIconHeight()-100));
 
-        background.add(label, JLayeredPane.DEFAULT_LAYER);
+        background.add(label, JLayeredPane.DEFAULT_LAYER);//add the label to the background
 
         setContentPane(background);//set it as background
         pack();//set the size of the frame according to the size of the background
@@ -46,7 +46,7 @@ public class Background extends JFrame{
         ReceiveCard = new JButton();
         ReceiveCard.setIcon(new ImageIcon(getClass().getResource("/_cards/backCard.png")));
         ReceiveCard.setBounds(820, 180, 180, 270);
-        background.add(ReceiveCard, JLayeredPane.PALETTE_LAYER);
+        background.add(ReceiveCard, JLayeredPane.DRAG_LAYER);
 
         JLabel ReceiveCardLabel = new JLabel("Receive Card");
         ReceiveCardLabel.setFont(new Font("Arial", Font.BOLD, 20));
@@ -112,8 +112,6 @@ public class Background extends JFrame{
 
            setFold_button(controller, current_card);
         });
-
-
     }
 
     /**
