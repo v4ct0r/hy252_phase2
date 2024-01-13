@@ -15,8 +15,8 @@ public class Number_ElevenCard extends Number_Card{
      * @param pawn
      * @param player1
      * @param player2
-     * pre-condition:be able to move 11 spaces forward
-     * post-condition: pawn move 11 spaces forward
+     *pre-condition: pawn are not in start square , pawn can move forward 11 space
+     *post-condition: pawn move forward 11 space
      */
     public int eleven(Pawn pawn , Player player1 , Player player2 ) {
 

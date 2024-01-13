@@ -6,7 +6,11 @@ import javax.swing.*;
 
 public class GameView {
 
-
+    /**
+     * Constructor of the class
+     * @param controller
+     * Connect every graphical component of the game
+     */
     public GameView(Controller controller) {
 
 

@@ -12,14 +12,13 @@ public final class Sorry_Card  extends card {
 
     /**
      * Sorry card
-     *
      * @param pawn
      * @param player1
-     * @param player2 post-condition: pawn is in the Start position
-     *                post-condition: pawn can move directly to a position occupied by the pawn of an opponent
-     *                and opponent's pawn is back to its own Start position
+     * @param player2
+     * pre-condition: pawn is in the Start position and opponent's pawn are not safe (start position, home position, safe position)
+     * post-condition: pawn can move directly to a position occupied by the pawn of an opponent
+     * the opponent's pawn is back to its own Start position
      */
-
     public int sorry(Pawn pawn, Player player1, Player player2) {
         pawn.setMoveable(false);
         if (pawn.isStart()) {
@@ -33,7 +32,15 @@ public final class Sorry_Card  extends card {
 
         return pawn.getPosition();
     }
-
+    /**
+     *
+     * @param pawn
+     * @param player1
+     * @param player2
+     * @return
+     * Check if both of the opponent's pawn are safe (start position, home position, safe position)
+     * post-condition: return true if both of the opponent's pawn are safe (start position, home position, safe position)
+     */
     private boolean check_enemys_pawn_are_safe(Pawn pawn, Player player1, Player player2) {
         boolean flag1 = false;
         boolean flag2 = false;

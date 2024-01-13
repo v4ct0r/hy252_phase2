@@ -11,7 +11,14 @@ public class Number_SevenCard extends Number_Card {
         super(7, "seven");
     }
 
-
+    /**
+     * Move the pawn forward 7 spaces
+     * @param pawn
+     * @param player1
+     * @param player2
+     * @pre-condition: the other same team pawn can not move (ether in home or start square)
+     * @post-condition: pawn move forward 7 space
+     */
     public int seven(Pawn pawn, Player player1, Player player2) {
         if (pawn.isStart() || pawn.getHome()) {
             pawn.setMoveable(false);
@@ -52,7 +59,14 @@ public class Number_SevenCard extends Number_Card {
         return pawn.getPosition();
 
     }
-
+    /**
+     * Split 7 moves forward to both pawns
+     * @param pawn
+     * @param player1
+     * @param player2
+     * @pre-condition: both pawns are moveable (not in home or start square)
+     * @post-condition: pawn move forward 7-i spaces , i{1,2,3,4,5,6,7}
+     */
     public int[] seven_7(Pawn pawn, Player player1, Player player2) {
 
         if (pawn.isStart() || pawn.getHome()) {
@@ -113,7 +127,13 @@ public class Number_SevenCard extends Number_Card {
         check_if_teammate_is_able_to_move(pawn, player1, player2, arr);
         return arr;
     }
-
+    /**
+     * check the validity of the move that are in the array
+     * @param p
+     * @param player1
+     * @param player2
+     * @param arr
+     */
     private void check_if_teammate_is_able_to_move(Pawn p, Player player1, Player player2, int[] arr) {
         int count = 0;
 
@@ -173,7 +193,18 @@ public class Number_SevenCard extends Number_Card {
             p.setMoveable(true);
 
     }
-
+    /**
+     * check if the other pawn of the same team is in home
+     * check if the prices of the array are able to skip home and disqualify those
+     * check if the other pawn of the same team able to move considering the move that the first pawn could make
+     * @param pawn2
+     * @param player1
+     * @param player2
+     * @param k
+     * @param arr
+     * @param i
+     * @return
+     */
     private boolean able_to_move(Pawn pawn2, Player player1, Player player2, int k, int[] arr, int i) {
         if (pawn2.isStart() || pawn2.getHome())
             return false;
@@ -206,7 +237,15 @@ public class Number_SevenCard extends Number_Card {
         }
         return false;
     }
-
+    /**
+     * Move the pawn forward 7-i spaces , i{1,2,3,4,5,6,7}
+     * @param pawn
+     * @param player1
+     * @param player2
+     * @param value
+     * @pre-condition: the other same team pawn moved less than 7 spaces
+     * @post-condition: pawn move forward 7-i spaces
+     */
     public int seven_7diff(Pawn pawn, Player player1, Player player2, int value) {
 
         if(pawn.isStart() || pawn.getHome()){

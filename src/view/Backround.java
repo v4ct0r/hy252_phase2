@@ -15,6 +15,17 @@ public class Backround extends JFrame{
     JButton Fold;
 
     private boolean isdrawn = false;
+
+    /**
+     * Constructor of the class
+     * @param controller
+     * Creates the background of the game (the green background that the board and the cards are on)
+     * Creates the receive card button
+     * Creates the current card label
+     * Creates the fold button
+     * Creates the info box
+     * Sets the action listener of the receive card button
+     */
     public Backround(Controller controller){
         super("Sorry!");
 
@@ -64,6 +75,7 @@ public class Backround extends JFrame{
         Fold.setBorder(new LineBorder(Color.BLACK));
         background.add(Fold, JLayeredPane.PALETTE_LAYER);
         Fold.setEnabled(false);
+        Fold.setVisible(false);
         //ActionListener of Fold button is in BoardUI because it needs access to Pawns
 
         InfoBox = new JTextArea();
@@ -84,7 +96,7 @@ public class Backround extends JFrame{
             isdrawn = true;
 
             BoardUI.fix_squares_border();
-
+            BoardUI.getcleanSquares();
             card current_card = controller.draw_card(controller.deck);
             CurrentCardLabel.setIcon(new ImageIcon(getClass().getResource(card_path(current_card))));
             if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
@@ -104,10 +116,18 @@ public class Backround extends JFrame{
 
     }
 
+    /**
+     * @param controller
+     * @param currentCard
+     * the behavior of the fold button is set when the ReceiveCard button is pressed
+     */
     private void setFold_button(Controller controller, card currentCard) {
+
+        BoardUI.getcleanSquares();
 
         if(currentCard instanceof Simple_Number_Card8_12) {
             Fold.setEnabled(false);
+            Fold.setVisible(false);
             return;
         }
         Fold.setEnabled(false);
@@ -126,10 +146,19 @@ public class Backround extends JFrame{
 
         if(!controller.current_player.getPawn1().isMoveable() && !controller.current_player.getPawn2().isMoveable())
             Fold.setEnabled(true);
+
+        if(!Fold.isEnabled())
+            Fold.setVisible(false);
+        else
+            Fold.setVisible(true);
     }
 
 
-
+    /**
+     * @param s
+     * @return the path of the card
+     * This method is used to find the path of the card that is drawn
+     */
     private String card_path(card s) {
         if (s instanceof Number_OneCard)
             return "/_cards/card1(Custom).png";

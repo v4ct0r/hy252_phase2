@@ -12,6 +12,16 @@ public class Simple_Number_Card8_12 extends Number_Card
         super(value, "simple");
     }
 
+    /**
+     * Move the pawn forward 8 or 12 spaces depending on the card
+     * @param pawn
+     * @param player1
+     * @param player2
+     * pre-condition: pawn are not in start square , pawn can move forward 8 or 12 space
+     * post-condition: pawn move forward 8 or 12 space
+     * else the player can re-draw a card so fold button is neven enabled
+     */
+
     public int simple8_12(Pawn pawn, Player player1, Player player2) {
 
         if(pawn.isStart() || pawn.getHome()){

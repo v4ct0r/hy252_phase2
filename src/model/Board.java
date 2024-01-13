@@ -9,6 +9,10 @@ public class Board {
         initializeSquares(squares);
     }
 
+    /**
+     * @param squares
+     * Initialize the squares of the board
+     */
     private void initializeSquares(Square[] squares) {
         for(int i=0;i<72;i++) {
 

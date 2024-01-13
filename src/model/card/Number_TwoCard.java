@@ -15,7 +15,8 @@ public class Number_TwoCard extends Number_Card {
      * @param pawn
      * @param player1
      * @param player2
-
+     * pre-condition: pawn can move forward 2 space
+     * post-condition: pawn move forward 2 space
      */
 
     public int twobutwithoutmoving(Pawn pawn, Player player1, Player player2){

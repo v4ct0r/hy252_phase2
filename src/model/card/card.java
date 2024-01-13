@@ -21,7 +21,6 @@ public abstract class card {
      * @param square
      * @return true if there is another same team pawn in the supposed square
      */
-
     public boolean check_if_there_is_another_same_team_pawn_in_the_supposed_square(Pawn p, Player player1, Player player2, int square){
         if(square>71){
             square=square-72;

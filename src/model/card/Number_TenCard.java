@@ -16,10 +16,8 @@ public class Number_TenCard extends Number_Card{
      * @param pawn
      * @param player1
      * @param player2
-     * pre-condition: pawn1 or pawn2 are not in start square , pawn1 or pawn2 can move forward 10 spaces
-     * post-condition: pawn1 or pawn2 move 10 space forward
-     * pre-condition:if none of a player's pawns can be moved 10 places forward
-     * post-condition: a pawn must necessarily be moved one place backwards
+     *pre-condition: pawn are not in start square , pawn can move forward 10 space
+     *post-condition: pawn move forward 10 space
      */
     public int ten(Pawn pawn , Player player1 , Player player2 ) {
         if(pawn.isStart() || pawn.getHome()){

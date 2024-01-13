@@ -38,7 +38,19 @@ public class BoardUI extends JLayeredPane {
     Rectangle yellowPawn2Home;
 
 
-
+    /**
+     * Constructor of BoardUI
+     * @param controller
+     * @param backround
+     * Here is everything that has to do with the board
+     * 1)Initialize the board
+     * 2)Initialize the pawns
+     * Includes also the ActionListener of the paws , the Fold button and the Squares of the board
+     * ActionListener of the pawns:
+     * The current players pawns are enabled and the others are disabled except if the current player can capture an enemy pawn "Bumping"
+     * the way it works is when the pawn is clicked the squares that the pawn can move to are highlighted with a magenta border
+     * and when the square or the enemy pawn is clicked the pawn moves to that square in graphics and in the parallel board in controller
+     */
     public BoardUI(Controller controller, Backround backround) {
         this.setLayout(null);
         this.setOpaque(true);//make the background visible
@@ -214,14 +226,6 @@ public class BoardUI extends JLayeredPane {
         DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
 
         ActionListener_FoldButton(backround, controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
-
-        /**
-         * ActionListener of Fold button is in BoardUI because it needs access to Pawns
-         * precondition: the current player must have drawn a card
-         * if the card is not drawen pop up a message
-         * call the move_pawn method in controller
-         * @param controller.getRed_pawn1()
-         */
 
         redPawn1.addActionListener(e -> {
 
@@ -771,6 +775,11 @@ public class BoardUI extends JLayeredPane {
         });
     }
 
+    /**
+     * @param enemyPawnUI1
+     * @param enemyPawnUI2
+     * Disables the enemy pawns and resets their border
+     */
     private void disable_enemy_pawns(JButton enemyPawnUI1, JButton enemyPawnUI2) {
         enemyPawnUI1.setBorder(null);
         enemyPawnUI2.setBorder(null);
@@ -778,6 +787,9 @@ public class BoardUI extends JLayeredPane {
         enemyPawnUI2.setEnabled(false);
     }
 
+    /**
+     * Refreshes pawns border and the board
+     */
     public static void fix_squares_border() {
         //fix pawn border too
         redPawn1.setBorder(null);
@@ -793,7 +805,11 @@ public class BoardUI extends JLayeredPane {
                squares.get(i).setBorder(new LineBorder(Color.YELLOW, 7));
         }
     }
-
+    /**
+     * prevPawn is a global variable that is used for bumping
+     * @return the previous pawn that was clicked
+     * (ex. red player can capture yellow player's pawn, so prevPawn is redPawn1 or redPawn2 so when the yellow pawn is clicked to know which pawn captured it)
+     */
     private JButton prevPawnUI() {
         if(Objects.equals(prevPawn, "redPawn1"))
             return redPawn1;
@@ -806,13 +822,33 @@ public class BoardUI extends JLayeredPane {
         return null;
     }
 
-    private void cleanSquares(ArrayList<JButton> squares) {
+    /**
+     * @param squares
+     * removes all the action listeners from the squares
+     */
+
+    private static void cleanSquares(ArrayList<JButton> squares) {
         for(int i=0; i<72; i++)
             for(ActionListener al : squares.get(i).getActionListeners())
                 squares.get(i).removeActionListener(al);
 
     }
 
+    /**
+     * used to call cleanSquares when the new card is drawn
+     */
+    public static void getcleanSquares() {
+        cleanSquares(squares) ;
+    }
+
+    /**
+     * @param prediction7
+     * @param enemyPawn1
+     * @param enemyPawn2
+     * @param enemyPawnUI1
+     * @param enemyPawnUI2
+     * in card 7 if the prediction array contains the enemy pawn position then enable it so the player can bump it
+     */
     private void bumpingUI_for_array(int[] prediction7, Pawn enemyPawn1, Pawn enemyPawn2, JButton enemyPawnUI1, JButton enemyPawnUI2) {
         enemyPawnUI1.setBorder(null);
         enemyPawnUI2.setBorder(null);
@@ -833,6 +869,14 @@ public class BoardUI extends JLayeredPane {
             }
         }
     }
+
+    /**
+     * @param enemyPawn1
+     * @param enemyPawn2
+     * @param enemyPawnUI1
+     * @param enemyPawnUI2
+     * in card 11 and sorry if the enemy pawn is not safe and not in home and not in start then enable it so the player can swap it (11) or capture it (sorry)
+     */
     private void enableEnemy_for_11_Sorry(Pawn enemyPawn1, Pawn enemyPawn2, JButton enemyPawnUI1, JButton enemyPawnUI2) {
         if(!enemyPawn1.isSafe() && !enemyPawn1.getHome() && !enemyPawn1.isStart()){
             enemyPawnUI1.setEnabled(true);
@@ -844,9 +888,16 @@ public class BoardUI extends JLayeredPane {
         }
     }
 
+    /**
+     * @param prediction
+     * @param enemyPawn1
+     * @param enemyPawn2
+     * @param enemyPawnUI1
+     * @param enemyPawnUI2
+     * enables the enemy pawn if the prediction is the enemy pawn position so the player can bump it
+     */
     private void bumpingUI(int prediction, Pawn enemyPawn1, Pawn enemyPawn2, JButton enemyPawnUI1, JButton enemyPawnUI2) {
         if(prediction == enemyPawn1.getPosition()){
-
             enemyPawnUI1.setEnabled(true);
             enemyPawnUI1.setBorder(new LineBorder(Color.MAGENTA, 3));
         }
@@ -856,6 +907,21 @@ public class BoardUI extends JLayeredPane {
         }
     }
 
+    /**
+     * @param pawn
+     * @param squares
+     * @param pawnUI
+     * @param controller
+     * @param redPawn1
+     * @param redPawn2
+     * @param yellowPawn1
+     * @param yellowPawn2
+     * @param backround
+     * @param prediction7
+     * @param prev
+     * @param Home
+     * Every action listener of the squares in the board when card 7 is drawn
+     */
     private void set_squares_switch_turn_for_array(Pawn pawn, ArrayList<JButton> squares, JButton pawnUI, Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2, Backround backround, int[] prediction7, int prev, Rectangle Home) {
         for(int i=0 ; i<72 ;i++){
             if(i != prediction7[0] && i != prediction7[1] && i != prediction7[2] && i != prediction7[3] && i != prediction7[4] && i != prediction7[5] && i != prediction7[6]){
@@ -929,6 +995,23 @@ public class BoardUI extends JLayeredPane {
             }
         }
     }
+
+    /**
+     *
+     * @param pawn
+     * @param squares
+     * @param pawnUI
+     * @param controller
+     * @param redPawn1
+     * @param redPawn2
+     * @param yellowPawn1
+     * @param yellowPawn2
+     * @param backround
+     * @param prediction
+     * @param prev
+     * @param Home
+     * Every action listener of the squares in the board
+     */
 
     private void set_squares_switch_turn(Pawn pawn, ArrayList<JButton> squares, JButton pawnUI, Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2, Backround backround, int prediction, int prev, Rectangle Home) {
 
@@ -1065,6 +1148,16 @@ public class BoardUI extends JLayeredPane {
         }
     }
 
+    /**
+     * @param controller
+     * @param redPawn1
+     * @param redPawn2
+     * @param yellowPawn1
+     * @param yellowPawn2
+     * @param squares
+     * Refreshes all the pawns and squares
+     */
+
     private void refresh_all_the_pawns(Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2, ArrayList<JButton> squares) {
         if(controller.getYellow_pawn1().getPosition() == controller.player2.getStartPosition())
             yellowPawn1.setBounds(yellowPawn1Start);
@@ -1087,7 +1180,15 @@ public class BoardUI extends JLayeredPane {
         }
     }
 
-
+    /**
+     * @param backround
+     * @param controller
+     * @param redPaw1
+     * @param redPaw2
+     * @param yellowPaw1
+     * @param yellowPaw2
+     * Action listener for the fold button
+     */
     private void ActionListener_FoldButton(Backround backround, Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
         backround.Fold.addActionListener(e -> {
 
@@ -1105,9 +1206,17 @@ public class BoardUI extends JLayeredPane {
 
             backround.setiIsdrawn(false);
             backround.Fold.setEnabled(false);
+            backround.Fold.setVisible(false);
         });
     }
 
+    /**
+     * @param redPaw1
+     * @param redPaw2
+     * @param yellowPaw1
+     * @param yellowPaw2
+     * Refreshes the pawns border to null
+     */
     private void refresh_paws_border(JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
         redPaw1.setBorder(null);
         redPaw2.setBorder(null);
@@ -1115,6 +1224,15 @@ public class BoardUI extends JLayeredPane {
         yellowPaw2.setBorder(null);
     }
 
+    /**
+     * @param controller
+     * @param redPaw1
+     * @param redPaw2
+     * @param yellowPaw1
+     * @param yellowPaw2
+     * Disables the pawns that are not the current player's pawns
+     * Also disables the pawns that are in home
+     */
     private void DisablenotCurrentPlayerPawns(Controller controller, JButton redPaw1, JButton redPaw2, JButton yellowPaw1, JButton yellowPaw2) {
         if(controller.getCurrent_player().getColor().equals("red")) {
             redPaw1.setEnabled(true);
@@ -1137,6 +1255,16 @@ public class BoardUI extends JLayeredPane {
         if(controller.getYellow_pawn2().getHome())
             yellowPaw2.setEnabled(false);
     }
+
+    /**
+     * @param controller
+     * @param redPawn1
+     * @param redPawn2
+     * @param yellowPawn1
+     * @param yellowPawn2
+     * @param backround
+     * Switches the turn of the players
+     */
     private void switch_turn(Controller controller, JButton redPawn1, JButton redPawn2, JButton yellowPawn1, JButton yellowPawn2 , Backround backround) {
 
         if(controller.getCurrent_card() instanceof Simple_Number_Card) {
@@ -1147,12 +1275,11 @@ public class BoardUI extends JLayeredPane {
         Simple_Flag = 0;
         flag7 = -1;
 
-
         if(!(controller.getCurrent_card() instanceof Number_TwoCard) ) {
             controller.switch_current_player(controller.player1, controller.player2);
             DisablenotCurrentPlayerPawns(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2);
         }
-
+        cleanSquares(squares);
         if(Objects.equals(controller.getCurrent_player().getColor(), "red"))//return the current player
             backround.InfoBox.setText("Info Box\n\nTurn: Player 1 (Red)\n");
         else
@@ -1164,6 +1291,4 @@ public class BoardUI extends JLayeredPane {
 
 
     }
-
-
 }

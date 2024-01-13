@@ -25,6 +25,10 @@ public class Pawn {
         return position;
     }
 
+    /**
+     * @param position
+     * Updates the position of the pawn and also every other boolean variable that is related to the position
+     */
     public void setPosition(int position) {
         if(position>71)
             position = position-72;

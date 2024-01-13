@@ -66,7 +66,10 @@ public class Deck {
     }
 
 
-
+/**
+ * Shuffle the deck
+ * @param cards
+ */
 public void shuffle(card[] cards) {
     Random rand = new Random();
     for (int i = cards.length - 1; i > 0; i--) {
@@ -76,7 +79,10 @@ public void shuffle(card[] cards) {
         cards[j] = temp;
     }
 }
-
+    /**
+     * Draw a card from the deck
+     * @return the card drawn
+     */
     public card draw() {
         if (cardsLeft == 0) {
             initializeDeck(cards);

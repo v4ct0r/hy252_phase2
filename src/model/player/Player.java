@@ -66,7 +66,16 @@ public class Player {
     public void setStartPosition(int startPosition) {
         this.startPosition = startPosition;
     }
-
+    /**
+     * @param color
+     * @param safetyZoneStartPosition
+     * @param homePosition
+     * @param startPosition
+     * @param nextafterstartPosition
+     * @param pawn1
+     * @param pawn2
+     * This is the constructor of the player class
+     */
     public Player(String color,  int safetyZoneStartPosition ,int homePosition, int startPosition ,int nextafterstartPosition, Pawn pawn1, Pawn pawn2) {
         this.color = color;
         this.homePosition = homePosition;

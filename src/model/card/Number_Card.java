@@ -17,7 +17,12 @@ public abstract class Number_Card extends card {
     public int getValue() {
         return value;
     }
-
+    /**
+     * @param pawn
+     * @param player1
+     * @param player2
+     * @return true the other same team pawn is home
+     */
     public boolean teammate_is_home(Pawn pawn, Player player1, Player player2) {//if teammate is home you can have two pawns in the same square
         if(pawn.getColor().equals("red") && pawn.getId()==1)
             if(player1.getPawn2().getHome())
@@ -34,6 +39,12 @@ public abstract class Number_Card extends card {
         return false;
     }
 
+    /**
+     * @param pawn
+     * @param player1
+     * @param player2
+     * @return true if the pawn skips home
+     */
     public boolean pawnSkipsHome(Pawn pawn, Player player1, Player player2) {
         if(Objects.equals(pawn.getColor(), "red"))
             if(pawn.getPosition()<player1.getHomePosition()) {

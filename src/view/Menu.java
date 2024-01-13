@@ -6,7 +6,19 @@ import javax.swing.*;
 
 public class Menu {
     JToolBar toolBar;
-
+    /**
+     * Constructor of the class
+     * @param backround
+     * Creates the menu bar
+     * Creates the new game button
+     * Creates the save game button
+     * Creates the continue saved game button
+     * Creates the exit button
+     * Sets the action listener of the new game button
+     * Sets the action listener of the save game button
+     * Sets the action listener of the continue saved game button
+     * Sets the action listener of the exit button
+     */
     public Menu(Backround backround){
         toolBar = new JToolBar("Menu");
         toolBar.setFloatable(false); // this will make the toolbar non-floating

@@ -12,10 +12,12 @@ public class Simple_Number_Card extends Number_Card{
     }
 
     /**
-     * Move the pawn forward
+     * Move the pawn forward 3 or 5 spaces depending on the card
      * @param pawn
-     * pre-condition: pawn1 or pawn2 are not in start square , pawn1 or pawn2 can move forward 3 spaces
-     * post-condition: pawn1 or pawn2 move value space forward
+     * @param player1
+     * @param player2
+     * pre-condition: pawn are not in start square , pawn can move forward 3 or 5 space
+     * post-condition: pawn move forward 3 or 5 space
      */
     public int simple(Pawn pawn, Player player1, Player player2) {
 
