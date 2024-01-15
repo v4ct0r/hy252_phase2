@@ -1010,7 +1010,7 @@ public class BoardUI extends JLayeredPane {
                                 fix_squares_border();
                                 return;
                             }
-                            if(controller.current_player.getPawn1().isStart() || controller.current_player.getPawn2().isStart()){
+                            if(controller.teammate(pawn).isStart()){//for the case that the pawn capture the other same color one in controller.check_for_slide(pawn)
                                 flag7=-1;
                                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                             }
