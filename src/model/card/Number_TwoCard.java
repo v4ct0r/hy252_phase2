@@ -21,8 +21,10 @@ public class Number_TwoCard extends Number_Card {
 
     public int twobutwithoutmoving(Pawn pawn, Player player1, Player player2){
         pawn.setMoveable(true);
-        if(pawn.getHome())
+        if(pawn.getHome()){
             pawn.setMoveable(false);
+            return pawn.getPosition();
+        }
         if(pawn.getPosition() == player1.getStartPosition() && Objects.equals(pawn.getColor(), "red")){
 
             if(!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, player1.getNextafterstartPosition())){
@@ -46,6 +48,7 @@ public class Number_TwoCard extends Number_Card {
                     return pawn.getPosition() + getValue() + 6;
                 if(Objects.equals(pawn.getColor(), "red") && pawn.getPosition() + getValue() > 38 && pawn.getPosition() + getValue() < 44)
                     return pawn.getPosition() + getValue() + 6;
+
                 if(pawnSkipsHome(pawn, player1, player2)) {
                     pawn.setMoveable(false);
                     return pawn.getPosition();

@@ -20,8 +20,10 @@ public class Number_OneCard extends Number_Card{
      */
     public int onebutwithoutmoving(Pawn pawn, Player player1, Player player2){
         pawn.setMoveable(true);
-        if(pawn.getHome())
+        if(pawn.getHome()){
             pawn.setMoveable(false);
+            return pawn.getPosition();
+        }
         if(pawn.getPosition() == player1.getStartPosition() && Objects.equals(pawn.getColor(), "red")){
 
             if(!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, player1.getNextafterstartPosition())){
