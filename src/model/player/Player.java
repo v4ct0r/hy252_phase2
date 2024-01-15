@@ -23,16 +23,8 @@ public class Player {
         return Pawn1;
     }
 
-    public void setPawn1(Pawn pawn1) {
-        Pawn1 = pawn1;
-    }
-
     public Pawn getPawn2() {
         return Pawn2;
-    }
-
-    public void setPawn2(Pawn pawn2) {
-        Pawn2 = pawn2;
     }
 
     public String getColor() {
@@ -63,9 +55,6 @@ public class Player {
         this.nextofstartPosition = nextafterstartPosition;
     }
 
-    public void setStartPosition(int startPosition) {
-        this.startPosition = startPosition;
-    }
     /**
      * @param color
      * @param safetyZoneStartPosition

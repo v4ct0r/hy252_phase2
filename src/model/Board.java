@@ -15,7 +15,6 @@ public class Board {
      */
     private void initializeSquares(Square[] squares) {
         for(int i=0;i<72;i++) {
-
             //SLIDES RED
             if (i == 1)
                 squares[i] = new Start_Slide_Square(i, "red", 10);
@@ -29,7 +28,7 @@ public class Board {
             else if (i > 2 && i<8)
                 squares[i] = new Safety_Zone_Square(i, "red");
             //Home Red
-            else if (i ==8)
+            else if (i == 8)
                 squares[i] = new Home_Square(i, "red");
             //SLIDES YELLOW
             else if (i == 37)

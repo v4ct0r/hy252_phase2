@@ -37,7 +37,6 @@ public class Pawn {
         if(this.color.equals("red") && position>38 && position<44)
             position = position + 6 ;
 
-
         if(this.color.equals("red")&& position == 8)
             this.isHome = true;
         if(this.color.equals("yellow")&& position == 44)

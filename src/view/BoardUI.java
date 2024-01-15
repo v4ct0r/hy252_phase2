@@ -135,7 +135,7 @@ public class BoardUI extends JLayeredPane {
             }
             else {
                 if(i==3 || i==4 || i==5 || i==6 || i==7){
-                    squares.get(i).setText(" " + (i) + " ");
+
                     squares.get(i).setBackground(Color.RED);
                     squares.get(i).setOpaque(true);
                     squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
@@ -153,7 +153,7 @@ public class BoardUI extends JLayeredPane {
                     this.add(squares.get(i));
                 }
                 else {
-                    squares.get(i).setText(" " + (i) + " ");
+
                     squares.get(i).setBackground(Color.WHITE);
                     squares.get(i).setOpaque(true);
                     squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
@@ -172,7 +172,7 @@ public class BoardUI extends JLayeredPane {
         this.add(RedstartLabel);
 
         for (int i = 22; i < 37; i++) {
-            squares.get(i).setText(" " + (i) + " ");
+
             squares.get(i).setBackground(Color.WHITE);
             squares.get(i).setOpaque(true);
             squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
@@ -198,7 +198,7 @@ public class BoardUI extends JLayeredPane {
             }
             else {
                 if(i>38 && i<44){ //safe zone
-                    squares.get(i).setText(" " + (i) + " ");
+
                     squares.get(i).setBackground(Color.YELLOW);
                     squares.get(i).setOpaque(true);
                     squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
@@ -216,7 +216,7 @@ public class BoardUI extends JLayeredPane {
                     this.add(squares.get(i));
                 }
                 else {
-                    squares.get(i).setText(" " + (i) + " ");
+
                     squares.get(i).setBackground(Color.WHITE);
                     squares.get(i).setOpaque(true);
                     squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
@@ -236,7 +236,7 @@ public class BoardUI extends JLayeredPane {
         this.add(YellowStart);
 
         for (int i = 58; i < 72; i++) {
-            squares.get(i).setText(" " + (i) + " ");
+
             squares.get(i).setBackground(Color.WHITE);
             squares.get(i).setOpaque(true);
             squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
@@ -746,7 +746,7 @@ public class BoardUI extends JLayeredPane {
                         squares.get(controller.predict(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.YELLOW, 7));
                     if (controller.current_card instanceof Number_TenCard)
                         squares.get(controller.predict1(controller.getYellow_pawn1())).setBorder(new LineBorder(Color.BLACK, 2));
-                    disable_enemy_pawns( redPawn1, redPawn2);
+                    disable_enemy_pawns(redPawn1, redPawn2);
                 }
                 prediction = controller.predict(controller.getYellow_pawn2());
 
@@ -1005,6 +1005,12 @@ public class BoardUI extends JLayeredPane {
 
                             flag7 = finalJ + 1;
                             if(flag7==7){
+                                flag7=-1;
+                                switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
+                                fix_squares_border();
+                                return;
+                            }
+                            if(controller.current_player.getPawn1().isStart() || controller.current_player.getPawn2().isStart()){
                                 flag7=-1;
                                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                             }
@@ -1309,7 +1315,6 @@ public class BoardUI extends JLayeredPane {
 
         background.ReceiveCard.setEnabled(true);
         background.setiIsdrawn(false);
-
 
     }
 }

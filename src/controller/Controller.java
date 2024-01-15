@@ -94,9 +94,6 @@ public class Controller {
         }
     }
 
-    public String Current_card(card current) {
-        return current.getId();
-    }
     /**
      * @return true if the game has finished
      * pre-condition: player1 and player2 are initialized
@@ -257,7 +254,6 @@ public class Controller {
             bumping(p,player1,player2);
         }
         else if(temp instanceof Number_TenCard){
-
             p.setPosition(prediction);
             bumping(p,player1,player2);
         }
@@ -301,7 +297,6 @@ public class Controller {
                 player1.getPawn2().setPosition(mypawnpos);
             }
         }
-
     }
     /**
      * @param p
