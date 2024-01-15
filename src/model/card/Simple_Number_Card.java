@@ -49,7 +49,6 @@ public class Simple_Number_Card extends Number_Card{
             return pawn.getPosition() + getValue();
         }
         //body blocked by teammate
-        pawn.setMoveable(false);
         return pawn.getPosition();
     }
 
