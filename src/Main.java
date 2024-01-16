@@ -4,6 +4,7 @@ import view.GameView;
 
 /**
  * @author Viktoras Sfakianakis
+ * @version 1.0
  */
 public class Main {
     public static Controller controller;
