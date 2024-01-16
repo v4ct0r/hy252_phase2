@@ -15,27 +15,27 @@ public class Number_FourCard extends Number_Card{
      * pre-condition: pawn are not in start square , pawn can move backward 4 space
      * post-condition: pawn move backward 4 space
      */
-    public int  four(Pawn pawn, model.player.Player player1, model.player.Player player2) {
-        if(pawn.isStart() || pawn.getHome()){
+    public int four(Pawn pawn, model.player.Player player1, model.player.Player player2) {
+        if (pawn.isStart() || pawn.getHome()) {
             pawn.setMoveable(false);
             return pawn.getPosition();
         }
-        if (!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, validSquare(pawn.getPosition() , getValue() ,pawn) ) || teammate_is_home(pawn,player1,player2)){
+        if (!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, validSquare(pawn.getPosition(), getValue(), pawn)) || teammate_is_home(pawn, player1, player2)) {
             pawn.setMoveable(true);
-            if(pawn.getPosition() - getValue() < 0)
+            if (pawn.getPosition() - getValue() < 0)
                 return pawn.getPosition() - getValue() + 72;
 
-            if(pawn.getPosition() - getValue() > 2 && pawn.getPosition() - getValue() <= 8){
-                if(pawn.getPosition() ==7)
+            if (pawn.getPosition() - getValue() > 2 && pawn.getPosition() - getValue() <= 8) {
+                if (pawn.getPosition() == 7)
                     return 3;
-                if(pawn.getPosition() - getValue() - 6 < 0)
+                if (pawn.getPosition() - getValue() - 6 < 0)
                     return pawn.getPosition() - getValue() - 6 + 72;
                 else
                     return pawn.getPosition() - getValue() - 6;
             }
 
-            if(pawn.getPosition() - getValue() > 38 && pawn.getPosition() - getValue() <= 44) {
-                if(pawn.getPosition() == 43)
+            if (pawn.getPosition() - getValue() > 38 && pawn.getPosition() - getValue() <= 44) {
+                if (pawn.getPosition() == 43)
                     return 39;
                 return pawn.getPosition() - getValue() - 6;
             }
@@ -45,27 +45,5 @@ public class Number_FourCard extends Number_Card{
 
         pawn.setMoveable(false);
         return pawn.getPosition();
-    }
-    int validSquare(int pos ,int value , Pawn pawn){
-        int result = 0;
-        if(Objects.equals(pawn.getColor(), "red")){
-            if(pos-value>2 && pos-value<=8){
-                result = pos-value-6;
-            }
-            else{
-                result = pos-value;
-            }
-        } else if (Objects.equals(pawn.getColor(), "yellow")) {
-            if (pos - value > 38 && pos - value <= 44) {
-                result = pos - value - 6;
-            } else {
-                result = pos - value;
-            }
-        }
-        if (result < 0) {
-            return result + 72;
-        } else {
-            return result;
-        }
     }
 }

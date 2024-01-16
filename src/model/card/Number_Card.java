@@ -59,4 +59,32 @@ public abstract class Number_Card extends card {
                     return true;
         return false;
     }
+    /**
+     * @param pos
+     * @param value
+     * @param pawn
+     * @return the valid square if the pawn has to move backwards
+     */
+    int validSquare(int pos ,int value , Pawn pawn){
+        int result = 0;
+        if(Objects.equals(pawn.getColor(), "red")){
+            if(pos-value>2 && pos-value<=8){
+                result = pos-value-6;
+            }
+            else{
+                result = pos-value;
+            }
+        } else if (Objects.equals(pawn.getColor(), "yellow")) {
+            if (pos - value > 38 && pos - value <= 44) {
+                result = pos - value - 6;
+            } else {
+                result = pos - value;
+            }
+        }
+        if (result < 0) {
+            return result + 72;
+        } else {
+            return result;
+        }
+    }
 }
