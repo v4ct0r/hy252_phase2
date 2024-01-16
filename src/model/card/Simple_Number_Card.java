@@ -1,5 +1,6 @@
 package model.card;
 
+import controller.Controller;
 import model.player.Pawn;
 import model.player.Player;
 
@@ -25,8 +26,8 @@ public class Simple_Number_Card extends Number_Card{
             pawn.setMoveable(false);
             return pawn.getPosition();
         }
+        pawn.setMoveable(true);
         if (!check_if_there_is_another_same_team_pawn_in_the_supposed_square(pawn, player1, player2, pawn.getPosition() + getValue()) || teammate_is_home(pawn,player1,player2)){
-           pawn.setMoveable(true);
             if(pawn.getPosition() + getValue() > 71){
                 if(Objects.equals(pawn.getColor(), "yellow")) {
                     if (pawn.getPosition() + getValue() - 72 < 3)
@@ -49,7 +50,29 @@ public class Simple_Number_Card extends Number_Card{
             return pawn.getPosition() + getValue();
         }
         //body blocked by teammate
+        if(pawnSkipsHome(teammate(pawn , player1 , player2),player1 ,player2)) { //the only case that the behind pawn gets movable = false is when the front pawn is unmovable - skips home
+            pawn.setMoveable(false);
+        }
         return pawn.getPosition();
+    }
+    public Pawn teammate(Pawn pawn , Player player1 , Player player2){
+        if(Objects.equals(pawn.getColor(), "red")){
+            if(pawn.getId()==1){
+                return player1.getPawn2();
+            }
+            else if(pawn.getId()==2){
+                return player1.getPawn1();
+            }
+        }
+        else if(Objects.equals(pawn.getColor(), "yellow")){
+            if(pawn.getId()==1){
+                return player2.getPawn2();
+            }
+            else if(pawn.getId()==2){
+                return player2.getPawn1();
+            }
+        }
+        return null;
     }
 
 

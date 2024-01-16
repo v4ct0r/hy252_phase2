@@ -565,6 +565,13 @@ public class BoardUI extends JLayeredPane {
                     fix_squares_border();
                     return;
                 }
+                if(controller.getCurrent_card() instanceof Simple_Number_Card){
+                    if( controller.teammate(controller.get_pawn(prevPawn)).isStart() || controller.teammate(controller.get_pawn(prevPawn)).getHome() || !controller.teammate(controller.get_pawn(prevPawn)).isMoveable()) {
+                        Simple_Flag++;
+                    }
+                    prevPawnUI().setEnabled(false);
+                    Simple_Flag++;
+                }
 
                 switch_turn(controller, redPawn1, redPawn2, yellowPawn1, yellowPawn2, background);
                 fix_squares_border();
