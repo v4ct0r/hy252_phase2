@@ -1,6 +1,7 @@
 package model.card;
 
 import model.player.Pawn;
+import model.player.Player;
 
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class Number_FourCard extends Number_Card{
      * pre-condition: pawn are not in start square , pawn can move backward 4 space
      * post-condition: pawn move backward 4 space
      */
-    public int four(Pawn pawn, model.player.Player player1, model.player.Player player2) {
+    public int four(Pawn pawn, Player player1, Player player2) {
         if (pawn.isStart() || pawn.getHome()) {
             pawn.setMoveable(false);
             return pawn.getPosition();
