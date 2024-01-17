@@ -214,7 +214,7 @@ public class Number_SevenCard extends Number_Card {
         }
 
         if (arr[i]==seven_7diff(pawn2, player1, player2, k)) {
-            if(Objects.equals(pawn2.getColor(), "red") && arr[i]==player1.getHomePosition())
+            if(Objects.equals(pawn2.getColor(), "red") && arr[i]==player1.getHomePosition()) //if(arr[i]==player1.getHomePosition() allow this arr[i]==seven_7diff(pawn2, player1, player2, k) to happen
                 return true;
             if(Objects.equals(pawn2.getColor(), "yellow") && arr[i]==player2.getHomePosition())
                 return true;

@@ -23,6 +23,8 @@ public final class Sorry_Card  extends card {
         pawn.setMoveable(false);
         if (pawn.isStart()) {
             pawn.setMoveable(true);
+        }else {
+            return pawn.getPosition();
         }
 
         if (check_enemys_pawn_are_safe(pawn, player1, player2)) {

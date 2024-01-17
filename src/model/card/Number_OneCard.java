@@ -18,7 +18,7 @@ public class Number_OneCard extends Number_Card{
      *pre-condition: pawn can move forward 1 space
      *post-condition: pawn move forward 1 space
      */
-    public int onebutwithoutmoving(Pawn pawn, Player player1, Player player2){
+    public int one(Pawn pawn, Player player1, Player player2){
         pawn.setMoveable(true);
         if(pawn.getHome()){
             pawn.setMoveable(false);

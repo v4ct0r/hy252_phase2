@@ -147,6 +147,7 @@ public class Controller {
     }
     /**
      * @param p
+     * @param value  the value that the pawn is gonna move forward
      * @return How many squares the pawn will move when the current card is 7
      * pre-condition: the other same team pawn move less than 7 squares
      * post-condition: the prediction of the pawn is returned
@@ -162,19 +163,19 @@ public class Controller {
     }
     /**
      * @param p
-     * @return the prediction of the pawn when there is just one option for the pawn to move
+     * @return the prediction of the pawn , if there is more than one option for the player it will need more than one prediction
      */
     public int predict(Pawn p){
         card temp=getCurrent_card() ;
         if(temp instanceof Number_OneCard){
             Number_OneCard temp1 = new Number_OneCard();
 
-            return temp1.onebutwithoutmoving(p,player1,player2);
+            return temp1.one(p,player1,player2);
         }
         if(temp instanceof Number_TwoCard){
             Number_TwoCard temp1 = new Number_TwoCard();
 
-            return temp1.twobutwithoutmoving(p,player1,player2);
+            return temp1.two(p,player1,player2);
         }
         if(temp instanceof Simple_Number_Card && ((Simple_Number_Card) temp).getValue() == 3){
             Simple_Number_Card temp1 = new Simple_Number_Card(3);
@@ -410,42 +411,24 @@ public class Controller {
     }
 
 
-    public card[] getCard(Deck deck){
-        return deck.getCards();
-    }
-
-
     public Pawn getRed_pawn1() {
         return red_pawn1;
     }
 
-    public void setRed_pawn1(Pawn red_pawn1) {
-        this.red_pawn1 = red_pawn1;
-    }
 
     public Pawn getRed_pawn2() {
         return red_pawn2;
     }
 
-    public void setRed_pawn2(Pawn red_pawn2) {
-        this.red_pawn2 = red_pawn2;
-    }
 
     public Pawn getYellow_pawn1() {
         return Yellow_pawn1;
-    }
-
-    public void setYellow_pawn1(Pawn yellow_pawn1) {
-        Yellow_pawn1 = yellow_pawn1;
     }
 
     public Pawn getYellow_pawn2() {
         return Yellow_pawn2;
     }
 
-    public void setYellow_pawn2(Pawn yellow_pawn2) {
-        Yellow_pawn2 = yellow_pawn2;
-    }
 
     /**
      * @param pawn2

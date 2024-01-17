@@ -31,16 +31,9 @@ public class Player {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
 
     public int getHomePosition() {
         return homePosition;
-    }
-
-    public void setHomePosition(int homePosition) {
-        this.homePosition = homePosition;
     }
 
     public int getStartPosition() {
@@ -51,9 +44,6 @@ public class Player {
         return nextofstartPosition;
     }
 
-    public void setNextofstartPosition(int nextafterstartPosition) {
-        this.nextofstartPosition = nextafterstartPosition;
-    }
 
     /**
      * @param color

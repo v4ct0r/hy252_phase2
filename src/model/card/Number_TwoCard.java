@@ -19,7 +19,7 @@ public class Number_TwoCard extends Number_Card {
      * post-condition: pawn move forward 2 space
      */
 
-    public int twobutwithoutmoving(Pawn pawn, Player player1, Player player2){
+    public int two(Pawn pawn, Player player1, Player player2){
         pawn.setMoveable(true);
         if(pawn.getHome()){
             pawn.setMoveable(false);

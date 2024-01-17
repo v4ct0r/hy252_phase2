@@ -5,7 +5,7 @@ import model.card.*;
 
 
 public class Deck {
-    private int cardsLeft= 44;
+    private int cardsLeft=44;
 
     card[] cards= new card[44];
 
@@ -14,9 +14,6 @@ public class Deck {
         return cards;
     }
 
-    public void setCards(card[] cards) {
-        this.cards = cards;
-    }
 
     public Deck() {
         initializeDeck(cards);
@@ -25,10 +22,9 @@ public class Deck {
 
     /**
      * Initialize the deck with the cards
-     *
      * @param cards return: the deck with the cards(4 cards of each type)
      */
-    void initializeDeck(card[] cards) {
+   private void initializeDeck(card[] cards) {
         //4 cards of each kind
         for (int i = 0; i < 4; i++) {
             cards[i] = new Number_OneCard();
@@ -70,7 +66,7 @@ public class Deck {
  * Shuffle the deck
  * @param cards
  */
-public void shuffle(card[] cards) {
+private void shuffle(card[] cards) {
     Random rand = new Random();
     for (int i = cards.length - 1; i > 0; i--) {
         int j = rand.nextInt(i + 1);
@@ -93,8 +89,10 @@ public void shuffle(card[] cards) {
         return cards[cardsLeft];
 
     }
-
     public int getCardsLeft() {
         return cardsLeft;
+    }
+    public void setCard(card card, int index) {
+        cards[index] = card;
     }
 }

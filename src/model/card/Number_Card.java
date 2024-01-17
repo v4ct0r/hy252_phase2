@@ -65,7 +65,7 @@ public abstract class Number_Card extends card {
      * @param pawn
      * @return the valid square if the pawn has to move backwards
      */
-    int validSquare(int pos ,int value , Pawn pawn){
+    public int validSquare(int pos ,int value , Pawn pawn){
         int result = 0;
         if(Objects.equals(pawn.getColor(), "red")){
             if(pos-value>2 && pos-value<=8){

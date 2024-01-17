@@ -80,10 +80,6 @@ public class Pawn {
         return isHome;
     }
 
-    public void setHome(Boolean home) {
-        isHome = home;
-    }
-
     public boolean isMoveable() {
         return moveable;
     }
