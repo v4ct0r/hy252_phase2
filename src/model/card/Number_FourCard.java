@@ -13,6 +13,8 @@ public class Number_FourCard extends Number_Card{
     /**
      * Move the pawn backward 4 spaces
      * @param pawn
+     * @param player1
+     * @param player2
      * pre-condition: pawn are not in start square , pawn can move backward 4 space
      * post-condition: pawn move backward 4 space
      */

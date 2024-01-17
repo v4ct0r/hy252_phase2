@@ -16,7 +16,6 @@ public class GameView {
      */
     public GameView(Controller controller) {
 
-
         background = new Background(controller);
         Menu menu = new Menu(background);
 

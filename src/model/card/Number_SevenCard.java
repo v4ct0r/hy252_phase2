@@ -16,8 +16,8 @@ public class Number_SevenCard extends Number_Card {
      * @param pawn
      * @param player1
      * @param player2
-     * @pre-condition: the other same team pawn can not move (ether in home or start square)
-     * @post-condition: pawn move forward 7 space
+     * pre-condition: the other same team pawn can not move (ether in home or start square)
+     * post-condition: pawn move forward 7 space
      */
     public int seven(Pawn pawn, Player player1, Player player2) {
         if (pawn.isStart() || pawn.getHome()) {
@@ -64,8 +64,8 @@ public class Number_SevenCard extends Number_Card {
      * @param pawn
      * @param player1
      * @param player2
-     * @pre-condition: both pawns are moveable (not in home or start square)
-     * @post-condition: pawn move forward 7-i spaces , i{1,2,3,4,5,6,7}
+     * pre-condition: both pawns are moveable (not in home or start square)
+     * post-condition: pawn move forward 7-i spaces , i{1,2,3,4,5,6,7}
      */
     public int[] seven_7(Pawn pawn, Player player1, Player player2) {
 
@@ -243,8 +243,8 @@ public class Number_SevenCard extends Number_Card {
      * @param player1
      * @param player2
      * @param value
-     * @pre-condition: the other same team pawn moved less than 7 spaces
-     * @post-condition: pawn move forward 7-i spaces
+     * pre-condition: the other same team pawn moved less than 7 spaces
+     * post-condition: pawn move forward 7-i spaces
      */
     public int seven_7diff(Pawn pawn, Player player1, Player player2, int value) {
 
