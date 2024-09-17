@@ -5,7 +5,6 @@ import model.turn.Deck;
 import org.junit.Test;
 import view.BoardUI;
 import view.GameView;
-
 import static org.junit.Assert.*;
 
 public class MainTest {
@@ -145,8 +144,8 @@ public class MainTest {
         else{
             BoardUI.getYellowPawn1().doClick();
             BoardUI.getRedPawn1().doClick();
-            assertEquals(10, Main.controller.player1.getPawn1().getPosition());
-            assertEquals(46, Main.controller.player2.getPawn1().getPosition());
+            assertEquals(10, Main.controller.player2.getPawn1().getPosition());
+            assertEquals(46, Main.controller.player1.getPawn1().getPosition());
         }
     }
     @Test

@@ -1,12 +1,14 @@
 package view;
 
 import controller.Controller;
+import model.Square.*;
 import model.card.*;
 import model.player.Pawn;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -79,7 +81,7 @@ public class BoardUI extends JLayeredPane {
         Image logoImage = new ImageIcon(getClass().getResource("/_sorrylogo/sorryImage.png")).getImage();
         JLabel LogoLabel = new JLabel(new ImageIcon(logoImage));
         LogoLabel.setBounds(390,300 , logoImage.getWidth(null), logoImage.getHeight(null));
-        this.add(LogoLabel);
+        add(LogoLabel);
 
         //init red pawns
         redPawn1 = new JButton();
@@ -87,14 +89,14 @@ public class BoardUI extends JLayeredPane {
         redPawn1.setDisabledIcon(new ImageIcon(getClass().getResource("/_pawns/redPawn1.png")));
         redPawn1Start = new Rectangle(320, 75,redPawn1.getIcon().getIconWidth(),redPawn1.getIcon().getIconHeight());
         redPawn1.setBounds(redPawn1Start);
-        this.add(redPawn1);
+        add(redPawn1);
 
         redPawn2 = new JButton();
         redPawn2.setIcon(new ImageIcon(getClass().getResource("/_pawns/redPawn2.png")));
         redPawn2.setDisabledIcon(new ImageIcon(getClass().getResource("/_pawns/redPawn2.png")));
         redPawn2Start = new Rectangle(375, 75, redPawn2.getIcon().getIconWidth(),redPawn2.getIcon().getIconHeight());
         redPawn2.setBounds(redPawn2Start);
-        this.add(redPawn2);
+        add(redPawn2);
 
         //init yellow pawns
         yellowPawn1 = new JButton();
@@ -102,14 +104,14 @@ public class BoardUI extends JLayeredPane {
         yellowPawn1.setDisabledIcon(new ImageIcon(getClass().getResource("/_pawns/yellowPawn1.png")));
         yellowPawn1Start = new Rectangle(672, 675, yellowPawn1.getIcon().getIconWidth(),yellowPawn1.getIcon().getIconHeight());
         yellowPawn1.setBounds(yellowPawn1Start);
-        this.add(yellowPawn1);
+        add(yellowPawn1);
 
         yellowPawn2 = new JButton();
         yellowPawn2.setIcon(new ImageIcon(getClass().getResource("/_pawns/yellowPawn2.png")));
         yellowPawn2.setDisabledIcon(new ImageIcon(getClass().getResource("/_pawns/yellowPawn2.png")));
         yellowPawn2Start = new Rectangle(727, 675, yellowPawn2.getIcon().getIconWidth(),yellowPawn2.getIcon().getIconHeight());
         yellowPawn2.setBounds(yellowPawn2Start);
-        this.add(yellowPawn2);
+        add(yellowPawn2);
 
         squares = new ArrayList<>();
         //init squares
@@ -172,7 +174,14 @@ public class BoardUI extends JLayeredPane {
         this.add(RedstartLabel);
 
         for (int i = 22; i < 37; i++) {
-
+            if (controller.board.squares[i] instanceof Start_Slide_Square)
+                squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/blueSlideStart.png")));
+            else if(controller.board.squares[i] instanceof Internal_Slide_Square)
+                squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/blueSlideMedium.png")));
+            else if(controller.board.squares[i] instanceof End_Slide_Square)
+                squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/blueSlideEnd.png")));
+            else
+                squares.get(i).setIcon(null);
             squares.get(i).setBackground(Color.WHITE);
             squares.get(i).setOpaque(true);
             squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));
@@ -236,7 +245,14 @@ public class BoardUI extends JLayeredPane {
         this.add(YellowStart);
 
         for (int i = 58; i < 72; i++) {
-
+            if(controller.board.squares[i] instanceof Start_Slide_Square)
+                squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/greenSlideStart.png")));
+            else if(controller.board.squares[i] instanceof Internal_Slide_Square)
+                squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/greenSlideMedium.png")));
+            else if(controller.board.squares[i] instanceof End_Slide_Square)
+                squares.get(i).setIcon(new ImageIcon(getClass().getResource("/_slides/greenSlideEnd.png")));
+            else
+                squares.get(i).setIcon(null);
             squares.get(i).setBackground(Color.WHITE);
             squares.get(i).setOpaque(true);
             squares.get(i).setBorder(new LineBorder(Color.BLACK, 2));

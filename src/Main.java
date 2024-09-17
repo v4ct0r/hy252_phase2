@@ -15,5 +15,4 @@ public class Main {
         game = new GameView(controller);
     }
 
-
 }
